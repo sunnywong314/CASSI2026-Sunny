@@ -9,27 +9,20 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
-      - name: Install pandoc and doxygen
-        run: |
-          sudo apt install pandoc doxygen
-
-      - name: Setup python
-        uses: actions/setup-python@v5
+      - name: Setup Python
+        uses: actions/setup-python@v6
         with:
-          python-version: '3.12'
+          python-version: '3.14'
+          cache: "pip"
 
       - name: Install dependencies
-        run: python3 -m pip install -r ./requirements.txt
-
-      - name: Build Sphinx
         run: |
-            cd docs
-            make html
-            cd ..
-            mkdir -p out
-            mv docs/build/html/* out/
+          pip install -r ./requirements.txt
+
+      - name: Build docs
+        run: ./deploy_docs_action.sh
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v4
