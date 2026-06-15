@@ -38,4 +38,3 @@ Using Array
        }
 
        std::cout << y << std::endl;
-       
