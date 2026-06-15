@@ -6,7 +6,7 @@
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = 'CASSI2026'
+project = 'CASSI-2026'
 copyright = '2026, Sunny Wong'
 author = 'Sunny Wong'
 
