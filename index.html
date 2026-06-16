@@ -53,7 +53,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'index';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Using Array" href="using.html" />
+    <link rel="next" title="Day 1: Installing MESA" href="installing.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -147,7 +147,7 @@
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="using.html">Using Array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installing.html">Day 1: Installing MESA</a></li>
 </ul>
 
     </div>
@@ -351,7 +351,9 @@
 <button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
 </button>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -367,6 +369,17 @@
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">CASSI-2026 documentation</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#working-on-your-own-computer">Working on your own computer</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#using-google-colab">Using Google Colab</a></li>
+</ul>
+
+            </nav>
         </div>
     </div>
 </div>
@@ -378,13 +391,44 @@
                   
   <section id="cassi-2026-documentation">
 <h1>CASSI-2026 documentation<a class="headerlink" href="#cassi-2026-documentation" title="Link to this heading">#</a></h1>
-<p>Add your content using <code class="docutils literal notranslate"><span class="pre">reStructuredText</span></code> syntax. See the
-<a class="reference external" href="https://www.sphinx-doc.org/en/master/usage/restructuredtext/index.html">reStructuredText</a>
-documentation for details.</p>
+<p>These notes document some exercises that I provide to my CASSI 2026 student, for running MESA and
+understanding stellar evolution. The formatting is taken from Mike Zingale’s MESA summer school 2026
+lectures.</p>
+<p>These notes are a collection of Jupyter notebooks.  You can download
+them and work through them on your own laptop or run them in the cloud
+(e.g., with Google Colab):</p>
+</section>
+<section id="working-on-your-own-computer">
+<h1>Working on your own computer<a class="headerlink" href="#working-on-your-own-computer" title="Link to this heading">#</a></h1>
+<p>Clicking on the <svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-download" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.75 14A1.75 1.75 0 0 1 1 12.25v-2.5a.75.75 0 0 1 1.5 0v2.5c0 .138.112.25.25.25h10.5a.25.25 0 0 0 .25-.25v-2.5a.75.75 0 0 1 1.5 0v2.5A1.75 1.75 0 0 1 13.25 14Z"></path><path d="M7.25 7.689V2a.75.75 0 0 1 1.5 0v5.689l1.97-1.969a.749.749 0 1 1 1.06 1.06l-3.25 3.25a.749.749 0 0 1-1.06 0L4.22 6.78a.749.749 0 1 1 1.06-1.06l1.97 1.969Z"></path></svg> icon in the upper right let’s you
+download the raw notebook so you can run it on your local computer.</p>
+<p>You’ll need to install <a class="reference external" href="https://github.com/wmwolf/py_mesa_reader">mesa_reader</a>.
+This can be done via pip as:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>mesa_reader
+</pre></div>
+</div>
+</section>
+<section id="using-google-colab">
+<h1>Using Google Colab<a class="headerlink" href="#using-google-colab" title="Link to this heading">#</a></h1>
+<p>Clicking on the <svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-rocket" viewBox="0 0 16 16" aria-hidden="true"><path d="M14.064 0h.186C15.216 0 16 .784 16 1.75v.186a8.752 8.752 0 0 1-2.564 6.186l-.458.459c-.314.314-.641.616-.979.904v3.207c0 .608-.315 1.172-.833 1.49l-2.774 1.707a.749.749 0 0 1-1.11-.418l-.954-3.102a1.214 1.214 0 0 1-.145-.125L3.754 9.816a1.218 1.218 0 0 1-.124-.145L.528 8.717a.749.749 0 0 1-.418-1.11l1.71-2.774A1.748 1.748 0 0 1 3.31 4h3.204c.288-.338.59-.665.904-.979l.459-.458A8.749 8.749 0 0 1 14.064 0ZM8.938 3.623h-.002l-.458.458c-.76.76-1.437 1.598-2.02 2.5l-1.5 2.317 2.143 2.143 2.317-1.5c.902-.583 1.74-1.26 2.499-2.02l.459-.458a7.25 7.25 0 0 0 2.123-5.127V1.75a.25.25 0 0 0-.25-.25h-.186a7.249 7.249 0 0 0-5.125 2.123ZM3.56 14.56c-.732.732-2.334 1.045-3.005 1.148a.234.234 0 0 1-.201-.064.234.234 0 0 1-.064-.201c.103-.671.416-2.273 1.15-3.003a1.502 1.502 0 1 1 2.12 2.12Zm6.94-3.935c-.088.06-.177.118-.266.175l-2.35 1.521.548 1.783 1.949-1.2a.25.25 0 0 0 .119-.213ZM3.678 8.116 5.2 5.766c.058-.09.117-.178.176-.266H3.309a.25.25 0 0 0-.213.119l-1.2 1.95ZM12 5a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"></path></svg> icon in the upper right (on pages that are notebooks) will allow
+launch the notebook directly in the cloud.</p>
+<p>As with the local install, you’ll need mesa_reader.  These
+can be installed from within Colab by executing</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>!pip<span class="w"> </span>install<span class="w"> </span>mesa_reader
+</pre></div>
+</div>
+<p>(note the <code class="docutils literal notranslate"><span class="pre">!</span></code>) in a cell.</p>
+<p>Some of the notebooks need data files.  These can be uploaded by selecting the
+<svg version="1.1" width="1.0em" height="1.0em" class="sd-octicon sd-octicon-file-directory" viewBox="0 0 16 16" aria-hidden="true"><path d="M0 2.75C0 1.784.784 1 1.75 1H5c.55 0 1.07.26 1.4.7l.9 1.2a.25.25 0 0 0 .2.1h6.75c.966 0 1.75.784 1.75 1.75v8.5A1.75 1.75 0 0 1 14.25 15H1.75A1.75 1.75 0 0 1 0 13.25Zm1.75-.25a.25.25 0 0 0-.25.25v10.5c0 .138.112.25.25.25h12.5a.25.25 0 0 0 .25-.25v-8.5a.25.25 0 0 0-.25-.25H7.5c-.55 0-1.07-.26-1.4-.7l-.9-1.2a.25.25 0 0 0-.2-.1Z"></path></svg> icon on the vertical menu bar on the left.</p>
 <div class="toctree-wrapper compound">
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="using.html">Using Array</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installing.html">Day 1: Installing MESA</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installing.html#prerequisites-for-mesa-sdk">1. Prerequisites for MESA SDK</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installing.html#installing-mesa-sdk">2. Installing MESA SDK</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installing.html#installing-mesa">3. Installing MESA</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </section>
@@ -401,11 +445,11 @@ documentation for details.</p>
                   
 <div class="prev-next-area">
     <a class="right-next"
-       href="using.html"
+       href="installing.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Using Array</p>
+        <p class="prev-next-title">Day 1: Installing MESA</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -415,6 +459,26 @@ documentation for details.</p>
             </div>
             
             
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">CASSI-2026 documentation</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#working-on-your-own-computer">Working on your own computer</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#using-google-colab">Using Google Colab</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
               
             
           </div>

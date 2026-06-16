@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Using Array &#8212; CASSI-2026  documentation</title>
+    <title>Day 1: Installing MESA &#8212; CASSI-2026  documentation</title>
   
   
   
@@ -43,14 +43,14 @@
 <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
     <script src="_static/documentation_options.js?v=9eb32ce0"></script>
-    <script src="_static/doctools.js?v=9bcbadda"></script>
-    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="_static/copybutton.js?v=eaa7b67c"></script>
     <script src="_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
     <script src="_static/design-tabs.js?v=f930bc37"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'using';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'installing';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="prev" title="CASSI-2026 documentation" href="index.html" />
@@ -145,7 +145,7 @@
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Using Array</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Day 1: Installing MESA</a></li>
 </ul>
 
     </div>
@@ -222,7 +222,7 @@
       
       
       
-      <li><a href="https://github.com/sunnywong314/CASSI2026-Sunny/blob/main/docs/source/using.rst?plain=1" target="_blank"
+      <li><a href="https://github.com/sunnywong314/CASSI2026-Sunny/blob/main/docs/source/installing.rst?plain=1" target="_blank"
    class="btn btn-sm btn-source-file-button dropdown-item"
    title="Show source"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -239,7 +239,7 @@
       
       
       
-      <li><a href="https://github.com/sunnywong314/CASSI2026-Sunny/edit/main/docs/source/using.rst" target="_blank"
+      <li><a href="https://github.com/sunnywong314/CASSI2026-Sunny/edit/main/docs/source/installing.rst" target="_blank"
    class="btn btn-sm btn-source-edit-button dropdown-item"
    title="Suggest edit"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -256,7 +256,7 @@
       
       
       
-      <li><a href="https://github.com/sunnywong314/CASSI2026-Sunny/issues/new?title=Issue%20on%20page%20%2Fusing.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/sunnywong314/CASSI2026-Sunny/issues/new?title=Issue%20on%20page%20%2Finstalling.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -286,7 +286,7 @@
       
       
       
-      <li><a href="_sources/using.rst" target="_blank"
+      <li><a href="_sources/installing.rst" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -349,7 +349,9 @@
 <button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
 </button>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -360,11 +362,21 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Using Array</h1>
+    <h1>Day 1: Installing MESA</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites-for-mesa-sdk">1. Prerequisites for MESA SDK</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-mesa-sdk">2. Installing MESA SDK</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-mesa">3. Installing MESA</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -374,43 +386,84 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="using-array">
-<h1>Using Array<a class="headerlink" href="#using-array" title="Link to this heading">#</a></h1>
-<p><code class="docutils literal notranslate"><span class="pre">Array.H</span></code> provides a simple 2-d contiguous array.  We can use it as:</p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
-
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;array.H&quot;</span>
-
-<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-
-<span class="w">    </span><span class="c1">// create a 10x10 array</span>
-
-<span class="w">    </span><span class="n">Array</span><span class="w"> </span><span class="n">x</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">);</span>
-
-<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="kt">size_t</span><span class="w"> </span><span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">x</span><span class="p">.</span><span class="n">nrows</span><span class="p">();</span><span class="w"> </span><span class="o">++</span><span class="n">row</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="kt">size_t</span><span class="w"> </span><span class="n">col</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">x</span><span class="p">.</span><span class="n">ncols</span><span class="p">();</span><span class="w"> </span><span class="o">++</span><span class="n">col</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="n">x</span><span class="p">(</span><span class="n">row</span><span class="p">,</span><span class="w"> </span><span class="n">col</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="p">(</span><span class="mi">10</span><span class="o">*</span><span class="n">row</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">100</span><span class="o">*</span><span class="n">col</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">13</span><span class="p">);</span>
-<span class="w">        </span><span class="p">}</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-
-<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;x.min() = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">x</span><span class="p">.</span><span class="n">min</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-
-<span class="w">    </span><span class="c1">// create a 4x3 array but fill it by looping over a flattened</span>
-<span class="w">    </span><span class="c1">// view</span>
-
-<span class="w">    </span><span class="n">Array</span><span class="w"> </span><span class="n">y</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">);</span>
-
-<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">c</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
-<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="o">&amp;</span><span class="n">e</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">y</span><span class="p">.</span><span class="n">flat</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">e</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">c</span><span class="p">;</span>
-<span class="w">        </span><span class="n">c</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
-
-<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+  <section id="day-1-installing-mesa">
+<h1>Day 1: Installing MESA<a class="headerlink" href="#day-1-installing-mesa" title="Link to this heading">#</a></h1>
+<p>The following set of instructions are specific to CASSI 2026, where a Mac laptop is provided,
+and Carnegie’s Observatories High-Performance Computing (OBS HPC) are available. A more
+complete set of instructions are available on the MESA
+<a class="reference external" href="https://docs.mesastar.org/en/latest/installation.html#installing-mesa">documentation</a>.</p>
+<section id="prerequisites-for-mesa-sdk">
+<h2>1. Prerequisites for MESA SDK<a class="headerlink" href="#prerequisites-for-mesa-sdk" title="Link to this heading">#</a></h2>
+<p>The MESA SDK (documentation <a class="reference external" href="https://docs.mesastar.org/en/latest/installation.html#install-the-mesa-sdk">here</a>)
+provides a set of compilers and libraries for running MESA.
+Before installing the MESA SDK, you would need to install a set of prerequisites.</p>
+<p>If you are on a MAC, you would first need to install Xcode. On your terminal,</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>xcode-select<span class="w"> </span>--install
 </pre></div>
 </div>
+<p>You would also need to install Xquartz from <a class="reference external" href="https://www.xquartz.org/">here</a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you are on OBS HPC, I believe the prerequisites for installing the MESA SDK are
+satisfied. Otherwise, following Rich Townsend’s <a class="reference external" href="http://user.astro.wisc.edu/~townsend/static.php?ref=mesasdk">instructions</a>.</p>
+</div>
+</section>
+<section id="installing-mesa-sdk">
+<h2>2. Installing MESA SDK<a class="headerlink" href="#installing-mesa-sdk" title="Link to this heading">#</a></h2>
+<p>Now you’re ready to install the MESA SDK.</p>
+<p>First, go to Rich Townsend’s <a class="reference external" href="http://user.astro.wisc.edu/~townsend/static.php?ref=mesasdk">website</a>.</p>
+<p>Next, go to the operating system corresponding to your machine (MAC OS or Linux),
+and download the MESA SDK.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you have OBS HPC, after downloading the MESA SDK, you need to unpack the file.
+On your terminal, do:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>tar<span class="w"> </span>xvfz<span class="w"> </span>package_name<span class="w"> </span>-C<span class="w"> </span>~/
+</pre></div>
+</div>
+</div>
+<p>If everything goes well, on your terminal:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>open<span class="w"> </span>-e<span class="w"> </span>~/.bash_profile
+</pre></div>
+</div>
+<p>This will open up the <cite>.bash_profile</cite>, which is a configuration script
+that is executed automatically everytime you open a terminal.</p>
+<p>Now, let’s add the following lines to your <cite>.bash_profile</cite>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">MESASDK_ROOT</span><span class="o">=</span>/Applications/mesasdk
+<span class="nb">source</span><span class="w"> </span><span class="nv">$MESASDK_ROOT</span>/bin/mesasdk_init.sh
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you have an Ubuntu machine, like on OBS HPC, open up your <cite>.bash_profile</cite> by</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gedit<span class="w"> </span>~/.bash_profile
+</pre></div>
+</div>
+<p>Then add:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">MESASDK_ROOT</span><span class="o">=</span>~/mesasdk
+<span class="nb">source</span><span class="w"> </span><span class="nv">$MESASDK_ROOT</span>/bin/mesasdk_init.sh
+</pre></div>
+</div>
+<p>to your <cite>.bash_profile</cite>.</p>
+</div>
+<p>If all goes well, open up a new terminal, or refresh the instructions on your terminal:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>~/.bash_profile
+</pre></div>
+</div>
+<p>you should be able to check whether the installation
+went well by running on your terminal:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gfortran<span class="w"> </span>--version
+</pre></div>
+</div>
+<p>You should get something like:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>GNU<span class="w"> </span>Fortran<span class="w"> </span><span class="o">(</span>GCC<span class="o">)</span><span class="w"> </span><span class="m">15</span>.2.0
+</pre></div>
+</div>
+</section>
+<section id="installing-mesa">
+<h2>3. Installing MESA<a class="headerlink" href="#installing-mesa" title="Link to this heading">#</a></h2>
+<p>Now you are ready to download and install MESA.</p>
+</section>
 </section>
 
 
@@ -439,6 +492,25 @@
             </div>
             
             
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites-for-mesa-sdk">1. Prerequisites for MESA SDK</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-mesa-sdk">2. Installing MESA SDK</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-mesa">3. Installing MESA</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
