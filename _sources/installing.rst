@@ -51,12 +51,16 @@ If everything goes well, on your terminal:
 
 .. code:: bash
 
-    open -e ~/.bash_profile
+    open -e ~/.zprofile
 
-This will open up the `.bash_profile`, which is a configuration script 
+This will open up the `.zprofile`, which is a configuration script 
 that is executed automatically everytime you open a terminal. 
 
-Now, let's add the following lines to your `.bash_profile`:
+.. note::
+
+    If you have an Ubuntu system (like on OBS HPC), use the `.bash_profile` instead.
+
+Now, let's add the following lines to your `.zprofile`:
 
 .. code:: bash
 
@@ -84,9 +88,11 @@ If all goes well, open up a new terminal, or refresh the instructions on your te
 
 .. code:: bash
     
-    source ~/.bash_profile
+    source ~/.zprofile
 
-you should be able to check whether the installation 
+or `.bash_profile` if you have an Ubuntu system. 
+
+You should be able to check whether the installation 
 went well by running on your terminal:
 
 .. code:: bash
@@ -104,5 +110,61 @@ You should get something like:
 ===================
 
 Now you are ready to download and install MESA. 
+
+Go to `Zenodo <https://zenodo.org/records/19722306>`_, and download the MESA source code. 
+
+Next, unzip the file:
+
+.. code:: bash
+
+    unzip mesa-26.04.1.zip
+
+Now note where you put your MESA directory. You may also move your MESA directory using 
+the `mv` command. I'll call this `<path>`. 
+
+Edit your `.zprofile` or `.bash_profile` (e.g., `open -e ~/.zprofile` or 
+`gedit ~/.bash_profile`) to add the following:
+
+.. code:: bash
+
+    export MESA_DIR=<path>
+    export OMP_NUM_THREADS=2
+
+where `OMP_NUM_THREADS` should be the number of threads on your machine. 
+
+Then either update your terminal with 
+
+.. code:: bash
+
+    source ~/.zprofile
+
+(or `source ~/.bash_profile`), or open a new terminal. 
+
+If you did this correctly, you should be able to change directory into the MESA directory via 
+
+.. code:: bash
+
+    cd $MESA_DIR
+
+After you go to `$MESA_DIR` via the above command, you should be able to start installing MESA:
+
+.. code:: bash
+
+    ./install
+
+If all goes well, you should see the following:
+
+.. code:: bash
+
+    ************************************************
+    ************************************************
+    ************************************************
+
+    MESA installation was successful
+
+    ************************************************
+    ************************************************
+    ************************************************
+
 
 

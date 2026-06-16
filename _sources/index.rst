@@ -48,7 +48,13 @@ Some of the notebooks need data files.  These can be uploaded by selecting the
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
+   :caption: Progress:
 
    installing
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Useful:
+
+   commands
 
