@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Day 1: Installing MESA &#8212; CASSI-2026  documentation</title>
+    <title>Fortran Basics &#8212; CASSI-2026  documentation</title>
   
   
   
@@ -50,11 +50,12 @@
     <script src="_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
     <script src="_static/design-tabs.js?v=f930bc37"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'installing';</script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'fortran_basics';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Useful Commands" href="commands.html" />
-    <link rel="prev" title="CASSI-2026 documentation" href="index.html" />
+    <link rel="prev" title="Useful Commands" href="commands.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -145,13 +146,13 @@
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Progress:</span></p>
-<ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Day 1: Installing MESA</a></li>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="installing.html">Day 1: Installing MESA</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Useful:</span></p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="commands.html">Useful Commands</a></li>
-<li class="toctree-l1"><a class="reference internal" href="fortran_basics.html">Fortran Basics</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Fortran Basics</a></li>
 </ul>
 
     </div>
@@ -228,7 +229,7 @@
       
       
       
-      <li><a href="https://github.com/sunnywong314/CASSI2026-Sunny/blob/main/docs/source/installing.rst?plain=1" target="_blank"
+      <li><a href="https://github.com/sunnywong314/CASSI2026-Sunny/blob/main/docs/source/fortran_basics.rst?plain=1" target="_blank"
    class="btn btn-sm btn-source-file-button dropdown-item"
    title="Show source"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -245,7 +246,7 @@
       
       
       
-      <li><a href="https://github.com/sunnywong314/CASSI2026-Sunny/edit/main/docs/source/installing.rst" target="_blank"
+      <li><a href="https://github.com/sunnywong314/CASSI2026-Sunny/edit/main/docs/source/fortran_basics.rst" target="_blank"
    class="btn btn-sm btn-source-edit-button dropdown-item"
    title="Suggest edit"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -262,7 +263,7 @@
       
       
       
-      <li><a href="https://github.com/sunnywong314/CASSI2026-Sunny/issues/new?title=Issue%20on%20page%20%2Finstalling.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/sunnywong314/CASSI2026-Sunny/issues/new?title=Issue%20on%20page%20%2Ffortran_basics.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -292,7 +293,7 @@
       
       
       
-      <li><a href="_sources/installing.rst" target="_blank"
+      <li><a href="_sources/fortran_basics.rst" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -368,7 +369,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Day 1: Installing MESA</h1>
+    <h1>Fortran Basics</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -378,9 +379,10 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites-for-mesa-sdk">1. Prerequisites for MESA SDK</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-mesa-sdk">2. Installing MESA SDK</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-mesa">3. Installing MESA</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comment">1. Comment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#declaring-and-assigning-variables">2. Declaring and Assigning Variables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#if-then-else">3. If-Then-Else</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#miscellaneous">4. Miscellaneous</a></li>
 </ul>
             </nav>
         </div>
@@ -392,125 +394,64 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="day-1-installing-mesa">
-<h1>Day 1: Installing MESA<a class="headerlink" href="#day-1-installing-mesa" title="Link to this heading">#</a></h1>
-<p>The following set of instructions are specific to CASSI 2026, where a Mac laptop is provided,
-and Carnegie’s Observatories High-Performance Computing (OBS HPC) are available. A more
-complete set of instructions are available on the MESA
-<a class="reference external" href="https://docs.mesastar.org/en/latest/installation.html#installing-mesa">documentation</a>.</p>
-<section id="prerequisites-for-mesa-sdk">
-<h2>1. Prerequisites for MESA SDK<a class="headerlink" href="#prerequisites-for-mesa-sdk" title="Link to this heading">#</a></h2>
-<p>The MESA SDK (documentation <a class="reference external" href="https://docs.mesastar.org/en/latest/installation.html#install-the-mesa-sdk">here</a>)
-provides a set of compilers and libraries for running MESA.
-Before installing the MESA SDK, you would need to install a set of prerequisites.</p>
-<p>If you are on a MAC, you would first need to install Xcode. On your terminal,</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>xcode-select<span class="w"> </span>--install
-</pre></div>
-</div>
-<p>You would also need to install Xquartz from <a class="reference external" href="https://www.xquartz.org/">here</a>.</p>
+  <section id="fortran-basics">
+<h1>Fortran Basics<a class="headerlink" href="#fortran-basics" title="Link to this heading">#</a></h1>
+<p>Here we go through a few basic Fortran syntaxes.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>If you are on OBS HPC, I believe the prerequisites for installing the MESA SDK are
-satisfied. Otherwise, following Rich Townsend’s <a class="reference external" href="http://user.astro.wisc.edu/~townsend/static.php?ref=mesasdk">instructions</a>.</p>
+<p>Fortran does not care about capitalization. For instance, <code class="docutils literal notranslate"><span class="pre">Msun</span></code> and <code class="docutils literal notranslate"><span class="pre">msun</span></code> are the
+same.</p>
+</div>
+<section id="comment">
+<h2>1. Comment<a class="headerlink" href="#comment" title="Link to this heading">#</a></h2>
+<p>Fortran comment starts with a <code class="docutils literal notranslate"><span class="pre">!</span></code>.</p>
+</section>
+<section id="declaring-and-assigning-variables">
+<h2>2. Declaring and Assigning Variables<a class="headerlink" href="#declaring-and-assigning-variables" title="Link to this heading">#</a></h2>
+<p>In Fortran, all variables need to be declared their types. This is done near the top
+of each program, subroutine, or function. For instance,</p>
+<div class="highlight-fortran notranslate"><div class="highlight"><pre><span></span><span class="c">! declaring variables</span>
+<span class="kt">integer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">ierr</span>
+<span class="kt">real</span><span class="p">(</span><span class="n">dp</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">Rsun</span>
+<span class="kt">logical</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">need_to_save_profiles_now</span>
+<span class="kt">real</span><span class="p">(</span><span class="n">dp</span><span class="p">),</span><span class="w"> </span><span class="k">dimension</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">T</span>
+
+<span class="c">! assigning values</span>
+<span class="n">ierr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="n">Rsun</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">6.957d10</span><span class="w"> </span><span class="c">! solar radius in cm</span>
+<span class="n">need_to_save_profiles_now</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">.</span><span class="n">true</span><span class="p">.</span><span class="w"> </span><span class="c">! or .false.</span>
+<span class="n">T</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="n">d29</span>
+<span class="n">T</span><span class="p">(</span><span class="mi">2</span><span class="p">:</span><span class="mi">10</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="n">d28</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">real</span></code> is a floating-point number. <code class="docutils literal notranslate"><span class="pre">dp</span></code> is technically a MESA definition.
+It stands for double precision (8-bytes), as opposed to single precision.</p>
+<p>You can use scientific notation for <code class="docutils literal notranslate"><span class="pre">real</span></code> variables.
+<code class="docutils literal notranslate"><span class="pre">1e10</span></code> gives <span class="math notranslate nohighlight">\(10^{10}\)</span> in single precision, whereas <code class="docutils literal notranslate"><span class="pre">1d10</span></code> gives the same
+quantity but in double precision. In MESA, always use double precision.</p>
+<p>In this example, <code class="docutils literal notranslate"><span class="pre">T</span></code> is an array of length 10 for double-precision float-point numbers.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The first element of a Fortran array is given by 1, i.e. <code class="docutils literal notranslate"><span class="pre">T(1)</span></code> is the first element
+of the <code class="docutils literal notranslate"><span class="pre">T</span></code> array. Python instead starts with 0.</p>
 </div>
 </section>
-<section id="installing-mesa-sdk">
-<h2>2. Installing MESA SDK<a class="headerlink" href="#installing-mesa-sdk" title="Link to this heading">#</a></h2>
-<p>Now you’re ready to install the MESA SDK.</p>
-<p>First, go to Rich Townsend’s <a class="reference external" href="http://user.astro.wisc.edu/~townsend/static.php?ref=mesasdk">website</a>.</p>
-<p>Next, go to the operating system corresponding to your machine (MAC OS or Linux),
-and download the MESA SDK.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>If you have OBS HPC, after downloading the MESA SDK, you need to unpack the file.
-On your terminal, do:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>tar<span class="w"> </span>xvfz<span class="w"> </span>package_name<span class="w"> </span>-C<span class="w"> </span>~/
-</pre></div>
-</div>
-</div>
-<p>If everything goes well, on your terminal:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>open<span class="w"> </span>-e<span class="w"> </span>~/.zprofile
-</pre></div>
-</div>
-<p>This will open up the <cite>.zprofile</cite>, which is a configuration script
-that is executed automatically everytime you open a terminal.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>If you have an Ubuntu system (like on OBS HPC), use the <cite>.bash_profile</cite> instead.</p>
-</div>
-<p>Now, let’s add the following lines to your <cite>.zprofile</cite>:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">MESASDK_ROOT</span><span class="o">=</span>/Applications/mesasdk
-<span class="nb">source</span><span class="w"> </span><span class="nv">$MESASDK_ROOT</span>/bin/mesasdk_init.sh
-</pre></div>
-</div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>If you have an Ubuntu machine, like on OBS HPC, open up your <cite>.bash_profile</cite> by</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gedit<span class="w"> </span>~/.bash_profile
-</pre></div>
-</div>
-<p>Then add:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">MESASDK_ROOT</span><span class="o">=</span>~/mesasdk
-<span class="nb">source</span><span class="w"> </span><span class="nv">$MESASDK_ROOT</span>/bin/mesasdk_init.sh
-</pre></div>
-</div>
-<p>to your <cite>.bash_profile</cite>.</p>
-</div>
-<p>If all goes well, open up a new terminal, or refresh the instructions on your terminal:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>~/.zprofile
-</pre></div>
-</div>
-<p>or <cite>.bash_profile</cite> if you have an Ubuntu system.</p>
-<p>You should be able to check whether the installation
-went well by running on your terminal:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gfortran<span class="w"> </span>--version
-</pre></div>
-</div>
-<p>You should get something like:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>GNU<span class="w"> </span>Fortran<span class="w"> </span><span class="o">(</span>GCC<span class="o">)</span><span class="w"> </span><span class="m">15</span>.2.0
+<section id="if-then-else">
+<h2>3. If-Then-Else<a class="headerlink" href="#if-then-else" title="Link to this heading">#</a></h2>
+<div class="highlight-fortran notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">mass</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">100</span><span class="n">d0</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="k">    write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="s2">&quot;mass greater than 100&quot;</span>
+<span class="k">else if</span><span class="w"> </span><span class="p">((</span><span class="n">mass</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">100</span><span class="n">d0</span><span class="p">)</span><span class="w"> </span><span class="p">.</span><span class="nb">and</span><span class="p">.</span><span class="w"> </span><span class="p">(</span><span class="n">mass</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">10</span><span class="n">d0</span><span class="p">))</span><span class="w"> </span><span class="k">then</span>
+<span class="k">    write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="s2">&quot;mass between 10 and 100&quot;</span>
+<span class="k">else</span>
+<span class="k">    write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="s2">&quot;mass less than 10&quot;</span>
+<span class="k">end if</span>
 </pre></div>
 </div>
 </section>
-<section id="installing-mesa">
-<h2>3. Installing MESA<a class="headerlink" href="#installing-mesa" title="Link to this heading">#</a></h2>
-<p>Now you are ready to download and install MESA.</p>
-<p>Go to <a class="reference external" href="https://zenodo.org/records/19722306">Zenodo</a>, and download the MESA source code.</p>
-<p>Next, unzip the file:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>unzip<span class="w"> </span>mesa-26.04.1.zip
-</pre></div>
-</div>
-<p>Now note where you put your MESA directory. You may also move your MESA directory using
-the <cite>mv</cite> command. I’ll call this <cite>&lt;path&gt;</cite>.</p>
-<p>Edit your <cite>.zprofile</cite> or <cite>.bash_profile</cite> (e.g., <cite>open -e ~/.zprofile</cite> or
-<cite>gedit ~/.bash_profile</cite>) to add the following:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">MESA_DIR</span><span class="o">=</span>&lt;path&gt;
-<span class="nb">export</span><span class="w"> </span><span class="nv">OMP_NUM_THREADS</span><span class="o">=</span><span class="m">2</span>
-</pre></div>
-</div>
-<p>where <cite>OMP_NUM_THREADS</cite> should be the number of threads on your machine.</p>
-<p>Then either update your terminal with</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>~/.zprofile
-</pre></div>
-</div>
-<p>(or <cite>source ~/.bash_profile</cite>), or open a new terminal.</p>
-<p>If you did this correctly, you should be able to change directory into the MESA directory via</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span><span class="nv">$MESA_DIR</span>
-</pre></div>
-</div>
-<p>After you go to <cite>$MESA_DIR</cite> via the above command, you should be able to start installing MESA:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./install
-</pre></div>
-</div>
-<p>If all goes well, you should see the following:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>************************************************
-************************************************
-************************************************
-
-MESA<span class="w"> </span>installation<span class="w"> </span>was<span class="w"> </span>successful
-
-************************************************
-************************************************
-************************************************
+<section id="miscellaneous">
+<h2>4. Miscellaneous<a class="headerlink" href="#miscellaneous" title="Link to this heading">#</a></h2>
+<p>You can print values out on the terminal like this:</p>
+<div class="highlight-fortran notranslate"><div class="highlight"><pre><span></span><span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="s2">&quot;hello world&quot;</span>
 </pre></div>
 </div>
 </section>
@@ -528,22 +469,13 @@ MESA<span class="w"> </span>installation<span class="w"> </span>was<span class="
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="index.html"
+       href="commands.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">CASSI-2026 documentation</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="commands.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title">Useful Commands</p>
       </div>
-      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>
@@ -563,9 +495,10 @@ MESA<span class="w"> </span>installation<span class="w"> </span>was<span class="
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites-for-mesa-sdk">1. Prerequisites for MESA SDK</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-mesa-sdk">2. Installing MESA SDK</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-mesa">3. Installing MESA</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comment">1. Comment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#declaring-and-assigning-variables">2. Declaring and Assigning Variables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#if-then-else">3. If-Then-Else</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#miscellaneous">4. Miscellaneous</a></li>
 </ul>
   </nav></div>
 
