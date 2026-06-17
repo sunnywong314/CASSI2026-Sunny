@@ -389,6 +389,7 @@
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kap">kap</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#changing-inlists">4. Changing Inlists</a></li>
 </ul>
             </nav>
         </div>
@@ -511,6 +512,12 @@ default values.</p>
 <section id="controls">
 <h3>controls<a class="headerlink" href="#controls" title="Link to this heading">#</a></h3>
 <p>contains options that answer questions like:</p>
+<table class="hlist"><tr><td><ul class="simple">
+<li><p>what physics, e.g., convection, or angular momentum transport, and their related parameters, should MESA consider?</p></li>
+<li><p>what numerical tolerances should MESA’s solvers use?</p></li>
+<li><p>when should MESA stop evolving the model?</p></li>
+</ul>
+</td></tr></table>
 <p>See the documentation <a class="reference external" href="https://docs.mesastar.org/en/26.4.1/reference/controls.html">here</a>.</p>
 </section>
 <section id="eos">
@@ -528,8 +535,9 @@ that answer questions like:</p>
 </section>
 <section id="kap">
 <h3>kap<a class="headerlink" href="#kap" title="Link to this heading">#</a></h3>
-<p>kap stands for <span class="math notranslate nohighlight">\(\kappa\)</span> (kappa), which is the opacity. It dictates how quickly heat is transported
-out of the star through radiation or electron conduction, and whether convection happens.</p>
+<p>kap stands for <span class="math notranslate nohighlight">\(\kappa\)</span> (kappa), which is the opacity.
+A higher opacity means that the material is more opaque, so that it takes longer
+for heat to get transported out.</p>
 <p>The MESA opacity is made of several component opacity tables.
 The <code class="docutils literal notranslate"><span class="pre">kap</span></code> inlist section contains options that answer questions like:</p>
 <table class="hlist"><tr><td><ul class="simple">
@@ -538,6 +546,26 @@ The <code class="docutils literal notranslate"><span class="pre">kap</span></cod
 </td></tr></table>
 <p>See the documentation <a class="reference external" href="https://docs.mesastar.org/en/26.4.1/reference/kap.html">here</a>.</p>
 </section>
+</section>
+<section id="changing-inlists">
+<h2>4. Changing Inlists<a class="headerlink" href="#changing-inlists" title="Link to this heading">#</a></h2>
+<p>Now we’re ready to change our inlists.</p>
+<p>You’ll notice that in <code class="docutils literal notranslate"><span class="pre">inlist</span></code> of your current work directory, it actually points
+to other inlists. The <code class="docutils literal notranslate"><span class="pre">star_job</span></code>, <code class="docutils literal notranslate"><span class="pre">controls</span></code>, <code class="docutils literal notranslate"><span class="pre">kap</span></code> and <code class="docutils literal notranslate"><span class="pre">eos</span></code> sections point to
+<code class="docutils literal notranslate"><span class="pre">inlist_project</span></code>, whereas the <code class="docutils literal notranslate"><span class="pre">pgstar</span></code> section points to <code class="docutils literal notranslate"><span class="pre">inlist_pgstar</span></code>, via e.g.,</p>
+<div class="highlight-fortran notranslate"><div class="highlight"><pre><span></span><span class="p">&amp;</span><span class="n">star_job</span>
+
+<span class="n">read_extra_star_job_inlist</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">.</span><span class="n">true</span><span class="p">.</span>
+<span class="n">extra_star_job_inlist_name</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;inlist_project&#39;</span>
+
+<span class="o">/</span><span class="w"> </span><span class="c">! end of star_job namelist</span>
+</pre></div>
+</div>
+<p>Now let’s edit <code class="docutils literal notranslate"><span class="pre">inlist_project</span></code>.</p>
+<p>This MESA run evolves a star from the pre-main sequence to the start of the
+main sequence. This is achieved with the <code class="docutils literal notranslate"><span class="pre">star_job</span></code> option
+<code class="docutils literal notranslate"><span class="pre">create_pre_main_sequence_model</span> <span class="pre">=</span> <span class="pre">.true.</span></code>.</p>
+<p>First, change the initial mass of the star to</p>
 </section>
 </section>
 
@@ -579,6 +607,7 @@ The <code class="docutils literal notranslate"><span class="pre">kap</span></cod
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kap">kap</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#changing-inlists">4. Changing Inlists</a></li>
 </ul>
   </nav></div>
 

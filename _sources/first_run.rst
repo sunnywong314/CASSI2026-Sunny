@@ -142,8 +142,7 @@ contains options that answer questions like:
 .. hlist::
     :columns: 1 
 
-    * what physics, e.g., convection, or angular momentum transport, and their related parameters, 
-    should MESA consider? 
+    * what physics, e.g., convection, or angular momentum transport, and their related parameters, should MESA consider? 
     * what numerical tolerances should MESA's solvers use?
     * when should MESA stop evolving the model?
 
@@ -169,8 +168,9 @@ See the documentation `here <https://docs.mesastar.org/en/26.4.1/reference/eos.h
 kap
 ---
 
-kap stands for :math:`\kappa` (kappa), which is the opacity. It dictates how quickly heat is transported 
-out of the star through radiation or electron conduction, and whether convection happens. 
+kap stands for :math:`\kappa` (kappa), which is the opacity. 
+A higher opacity means that the material is more opaque, so that it takes longer 
+for heat to get transported out. 
 
 The MESA opacity is made of several component opacity tables. 
 The ``kap`` inlist section contains options that answer questions like:
@@ -182,7 +182,31 @@ The ``kap`` inlist section contains options that answer questions like:
 
 See the documentation `here <https://docs.mesastar.org/en/26.4.1/reference/kap.html>`_. 
 
+4. Changing Inlists
+========================
 
+Now we're ready to change our inlists. 
+
+You'll notice that in ``inlist`` of your current work directory, it actually points 
+to other inlists. The ``star_job``, ``controls``, ``kap`` and ``eos`` sections point to 
+``inlist_project``, whereas the ``pgstar`` section points to ``inlist_pgstar``, via e.g., 
+
+.. code-block:: fortran
+
+    &star_job
+
+    read_extra_star_job_inlist(1) = .true.
+    extra_star_job_inlist_name(1) = 'inlist_project'
+
+    / ! end of star_job namelist
+
+Now let's edit ``inlist_project``. 
+
+This MESA run evolves a star from the pre-main sequence to the start of the 
+main sequence. This is achieved with the ``star_job`` option 
+``create_pre_main_sequence_model = .true.``. 
+
+First, change the initial mass of the star to 
 
 
 
