@@ -23,3 +23,19 @@ Here is a list of useful commands that you may run into over and over.
    * - ``mkdir`` <name>
      - Creates a new directory called <name>
 
+
+
+****************************
+Occasionally Useful Commands
+****************************
+
+.. list-table:: 
+   :widths: 20 50
+   :header-rows: 1
+
+   * - Commands
+     - Explanation
+   * - ``pwd``
+     - Tells you your current path
+   * - ``blah``
+     - 

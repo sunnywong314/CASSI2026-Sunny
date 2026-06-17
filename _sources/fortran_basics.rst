@@ -7,12 +7,12 @@ Here we go through a few basic Fortran syntaxes.
 .. note:: 
 
     Fortran does not care about capitalization. For instance, ``Msun`` and ``msun`` are the 
-    same. 
+    same in Fortran. They are not the same in Python. 
 
 1. Comment
 ============
 
-Fortran comment starts with a ``!``. 
+Fortran comment starts with a ``!`` (as opposed to Python which uses ``#``). 
 
 2. Declaring and Assigning Variables
 ====================================
@@ -71,7 +71,72 @@ You can print values out on the terminal like this:
 
     write(*,*) "hello world"
 
+    
+5. Quick Fortran program example
+====================================
+
+In this example, we'll write a short Fortran program just as an . 
+Using a text editor, create a file called ``example.f90`` and add the following:
+
+.. code-block:: fortran
+
+    program example
+
+        implicit none
+
+        Rsun = 7d10
+        write(*,*) Rsun
+
+    end program example
+
+Now on your terminal, do the following:
+
+.. code-block:: bash
+
+    gfortran example.f90 -o example
+
+This uses the ``gfortran`` compilter, to compile the ``example.f90`` 
+from the human-readable Fortran language into a machine-readable 
+program, and creates an executable called ``example``. 
+
+You should see an error message like the following:
+
+.. code-block:: bash
+
+    example.f90:7:8:
+
+        7 |     Rsun = 7d10
+        |        1
+    Error: Symbol 'rsun' at (1) has no IMPLICIT type
+
+It is telling you that you have not assigned the variable type to ``Rsun`` yet. 
+You will likely run into errors like this when running MESA, so it's good to get a 
+sense of how to fix this. 
+
+In this case, we simply have to declare the variable type of ``Rsun``:
 
 
-    
-    
+.. code-block:: fortran
+
+    program example
+
+        implicit none
+
+        integer, parameter :: dp = selected_real_kind(p=15)  ! real64
+        real(dp) :: Rsun
+
+        Rsun = 7d10
+        write(*,*) Rsun
+
+    end program example
+
+where ``dp`` is defined within MESA and we copied it here for consistency. 
+Now we're ready to compile again:
+
+.. code-block:: bash
+
+    gfortran example.f90 -o example
+
+    ./example
+
+

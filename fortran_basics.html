@@ -152,6 +152,7 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Useful:</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="commands.html">Useful Commands</a></li>
+
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Fortran Basics</a></li>
 </ul>
 
@@ -383,6 +384,7 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#declaring-and-assigning-variables">2. Declaring and Assigning Variables</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#if-then-else">3. If-Then-Else</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#miscellaneous">4. Miscellaneous</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-fortran-program-example">5. Quick Fortran program example</a></li>
 </ul>
             </nav>
         </div>
@@ -400,11 +402,11 @@
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Fortran does not care about capitalization. For instance, <code class="docutils literal notranslate"><span class="pre">Msun</span></code> and <code class="docutils literal notranslate"><span class="pre">msun</span></code> are the
-same.</p>
+same in Fortran. They are not the same in Python.</p>
 </div>
 <section id="comment">
 <h2>1. Comment<a class="headerlink" href="#comment" title="Link to this heading">#</a></h2>
-<p>Fortran comment starts with a <code class="docutils literal notranslate"><span class="pre">!</span></code>.</p>
+<p>Fortran comment starts with a <code class="docutils literal notranslate"><span class="pre">!</span></code> (as opposed to Python which uses <code class="docutils literal notranslate"><span class="pre">#</span></code>).</p>
 </section>
 <section id="declaring-and-assigning-variables">
 <h2>2. Declaring and Assigning Variables<a class="headerlink" href="#declaring-and-assigning-variables" title="Link to this heading">#</a></h2>
@@ -455,6 +457,60 @@ of the <code class="docutils literal notranslate"><span class="pre">T</span></co
 </pre></div>
 </div>
 </section>
+<section id="quick-fortran-program-example">
+<h2>5. Quick Fortran program example<a class="headerlink" href="#quick-fortran-program-example" title="Link to this heading">#</a></h2>
+<p>In this example, we’ll write a short Fortran program just as an .
+Using a text editor, create a file called <code class="docutils literal notranslate"><span class="pre">example.f90</span></code> and add the following:</p>
+<div class="highlight-fortran notranslate"><div class="highlight"><pre><span></span><span class="k">program </span><span class="n">example</span>
+
+<span class="w">    </span><span class="k">implicit none</span>
+
+<span class="k">    </span><span class="n">Rsun</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">7</span><span class="n">d10</span>
+<span class="w">    </span><span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="n">Rsun</span>
+
+<span class="k">end program </span><span class="n">example</span>
+</pre></div>
+</div>
+<p>Now on your terminal, do the following:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gfortran<span class="w"> </span>example.f90<span class="w"> </span>-o<span class="w"> </span>example
+</pre></div>
+</div>
+<p>This uses the <code class="docutils literal notranslate"><span class="pre">gfortran</span></code> compilter, to compile the <code class="docutils literal notranslate"><span class="pre">example.f90</span></code>
+from the human-readable Fortran language into a machine-readable
+program, and creates an executable called <code class="docutils literal notranslate"><span class="pre">example</span></code>.</p>
+<p>You should see an error message like the following:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>example.f90:7:8:
+
+<span class="w">    </span><span class="m">7</span><span class="w"> </span><span class="p">|</span><span class="w">     </span><span class="nv">Rsun</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>7d10
+<span class="w">    </span><span class="p">|</span><span class="w">        </span><span class="m">1</span>
+Error:<span class="w"> </span>Symbol<span class="w"> </span><span class="s1">&#39;rsun&#39;</span><span class="w"> </span>at<span class="w"> </span><span class="o">(</span><span class="m">1</span><span class="o">)</span><span class="w"> </span>has<span class="w"> </span>no<span class="w"> </span>IMPLICIT<span class="w"> </span><span class="nb">type</span>
+</pre></div>
+</div>
+<p>It is telling you that you have not assigned the variable type to <code class="docutils literal notranslate"><span class="pre">Rsun</span></code> yet.
+You will likely run into errors like this when running MESA, so it’s good to get a
+sense of how to fix this.</p>
+<p>In this case, we simply have to declare the variable type of <code class="docutils literal notranslate"><span class="pre">Rsun</span></code>:</p>
+<div class="highlight-fortran notranslate"><div class="highlight"><pre><span></span><span class="k">program </span><span class="n">example</span>
+
+<span class="w">    </span><span class="k">implicit none</span>
+
+<span class="k">    </span><span class="kt">integer</span><span class="p">,</span><span class="w"> </span><span class="k">parameter</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">dp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">selected_real_kind</span><span class="p">(</span><span class="n">p</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span><span class="w">  </span><span class="c">! real64</span>
+<span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="n">dp</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">Rsun</span>
+
+<span class="w">    </span><span class="n">Rsun</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">7</span><span class="n">d10</span>
+<span class="w">    </span><span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="n">Rsun</span>
+
+<span class="k">end program </span><span class="n">example</span>
+</pre></div>
+</div>
+<p>where <code class="docutils literal notranslate"><span class="pre">dp</span></code> is defined within MESA and we copied it here for consistency.
+Now we’re ready to compile again:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gfortran<span class="w"> </span>example.f90<span class="w"> </span>-o<span class="w"> </span>example
+
+./example
+</pre></div>
+</div>
+</section>
 </section>
 
 
@@ -499,6 +555,7 @@ of the <code class="docutils literal notranslate"><span class="pre">T</span></co
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#declaring-and-assigning-variables">2. Declaring and Assigning Variables</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#if-then-else">3. If-Then-Else</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#miscellaneous">4. Miscellaneous</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-fortran-program-example">5. Quick Fortran program example</a></li>
 </ul>
   </nav></div>
 
