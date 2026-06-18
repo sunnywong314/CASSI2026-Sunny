@@ -59,52 +59,54 @@ Let's take a look at ``inlist`` in your work directory.
 
 will open up the contents of ``inlist`` on your terminal. And you should see
 
-.. code-block:: fortran
+.. dropdown:: Click to expand
 
-    ! This is the first inlist file that MESA reads when it starts.
+    .. code-block:: fortran
 
-    ! This file tells MESA to go look elsewhere for its configuration
-    ! info. This makes changing between different inlists easier, by
-    ! allowing you to easily change the name of the file that gets read.
+        ! This is the first inlist file that MESA reads when it starts.
 
-    &star_job
+        ! This file tells MESA to go look elsewhere for its configuration
+        ! info. This makes changing between different inlists easier, by
+        ! allowing you to easily change the name of the file that gets read.
 
-    read_extra_star_job_inlist(1) = .true.
-    extra_star_job_inlist_name(1) = 'inlist_project'
+        &star_job
 
-    / ! end of star_job namelist
+        read_extra_star_job_inlist(1) = .true.
+        extra_star_job_inlist_name(1) = 'inlist_project'
 
-
-    &eos
-
-    read_extra_eos_inlist(1) = .true.
-    extra_eos_inlist_name(1) = 'inlist_project'
-
-    / ! end of eos namelist
+        / ! end of star_job namelist
 
 
-    &kap
+        &eos
 
-    read_extra_kap_inlist(1) = .true.
-    extra_kap_inlist_name(1) = 'inlist_project'
+        read_extra_eos_inlist(1) = .true.
+        extra_eos_inlist_name(1) = 'inlist_project'
 
-    / ! end of kap namelist
-
-
-    &controls
-
-    read_extra_controls_inlist(1) = .true.
-    extra_controls_inlist_name(1) = 'inlist_project'
-
-    / ! end of controls namelist
+        / ! end of eos namelist
 
 
-    &pgstar
+        &kap
 
-    read_extra_pgstar_inlist(1) = .true.
-    extra_pgstar_inlist_name(1) = 'inlist_pgstar'
+        read_extra_kap_inlist(1) = .true.
+        extra_kap_inlist_name(1) = 'inlist_project'
 
-    / ! end of pgstar namelist
+        / ! end of kap namelist
+
+
+        &controls
+
+        read_extra_controls_inlist(1) = .true.
+        extra_controls_inlist_name(1) = 'inlist_project'
+
+        / ! end of controls namelist
+
+
+        &pgstar
+
+        read_extra_pgstar_inlist(1) = .true.
+        extra_pgstar_inlist_name(1) = 'inlist_pgstar'
+
+        / ! end of pgstar namelist
 
 3. Understanding Inlists
 ========================
@@ -206,9 +208,42 @@ This MESA run evolves a star from the pre-main sequence to the start of the
 main sequence. This is achieved with the ``star_job`` option 
 ``create_pre_main_sequence_model = .true.``. 
 
-First, change the initial mass of the star to 
+Next, change the following runtime parameters:
 
+* Change the initial mass of the model to :math:`1 M_{\odot}`. 
+* Change the stopping conditions so that the model does not stop at the zero age main sequence (ZAMS), but instead when the central hydrogen mass fraction drops below 1e-5. 
 
+.. dropdown:: Hint (Click to expand)
+   
+   The initial mass of the model (when creating a pre-main sequence model) and stopping conditions are both in the ``controls`` section of an inlist. The documentation is `here <https://docs.mesastar.org/en/26.4.1/reference/controls.html>`_.
+
+.. dropdown:: Partial solution (Click to expand)
+   
+   In the ``controls`` section of ``inlist_project``, set
+
+   .. code-block:: fortran
+
+        initial_mass = 1d0
+
+        stop_near_zams = .false.
+
+        xa_central_lower_limit_species(1) = 'h1'
+        xa_central_lower_limit(1) = 1d-5
+
+Now run the model again:
+
+.. code-block:: bash
+
+    ./rn
+
+5. On-screen Plotting
+========================
+
+As the model is running, let's add some more things. 
+MESA's ``pgstar`` is a super useful plotting tool, and allows you to see what the 
+model is doing in real time. 
+
+We can add some more useful plots. 
 
 
 
