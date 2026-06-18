@@ -393,6 +393,8 @@
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#changing-inlists">4. Changing Inlists</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#on-screen-plotting">5. On-screen Plotting</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#changing-pgstar-and-history-colunns">6. Changing pgstar and history_colunns</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stellar-evolution-i">7. Stellar Evolution I</a></li>
 </ul>
             </nav>
         </div>
@@ -595,7 +597,15 @@ main sequence. This is achieved with the <code class="docutils literal notransla
 </pre></div>
 </div>
 </div>
-</details><p>Now run the model again:</p>
+</details><p>In the <code class="docutils literal notranslate"><span class="pre">pgstar</span></code> section of <code class="docutils literal notranslate"><span class="pre">inlist_pgstar</span></code>, set</p>
+<div class="highlight-fortran notranslate"><div class="highlight"><pre><span></span><span class="n">HR_logT_min</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">3.5</span>
+<span class="n">HR_logT_max</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">4.0</span>
+<span class="n">HR_logL_min</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="mf">1.0</span>
+<span class="n">HR_logL_max</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">3.0</span>
+</pre></div>
+</div>
+<p>This adjusts the x and y-axis limits on the HR diagram.</p>
+<p>Now run the model again:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./rn
 </pre></div>
 </div>
@@ -605,7 +615,66 @@ main sequence. This is achieved with the <code class="docutils literal notransla
 <p>As the model is running, let’s add some more things.
 MESA’s <code class="docutils literal notranslate"><span class="pre">pgstar</span></code> is a super useful plotting tool, and allows you to see what the
 model is doing in real time.</p>
-<p>We can add some more useful plots.</p>
+<p>We can add some more useful plots. In your <code class="docutils literal notranslate"><span class="pre">inlist_pgstar</span></code>, add the following:</p>
+<div class="highlight-fortran notranslate"><div class="highlight"><pre><span></span><span class="n">abundance_win_flag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">.</span><span class="n">true</span><span class="p">.</span>
+</pre></div>
+</div>
+<p>This opens up a new pgstar window, that shows the mass fractions of different isotopes within the star.</p>
+<p>After running for a while, let’s kill the run by doing <code class="docutils literal notranslate"><span class="pre">ctrl+c</span></code> on the terminal.</p>
+</section>
+<section id="changing-pgstar-and-history-colunns">
+<h2>6. Changing pgstar and history_colunns<a class="headerlink" href="#changing-pgstar-and-history-colunns" title="Link to this heading">#</a></h2>
+<p>Now we’ll try to combine the different pgstar plots into one, and also change the output quantities
+from MESA.</p>
+<p>First, edit your <code class="docutils literal notranslate"><span class="pre">inlist_pgstar</span></code>, and set</p>
+<div class="highlight-fortran notranslate"><div class="highlight"><pre><span></span><span class="n">HR_win_flag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">.</span><span class="n">false</span><span class="p">.</span>
+
+<span class="n">TRho_Profile_win_flag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">.</span><span class="n">false</span><span class="p">.</span>
+
+<span class="n">abundance_win_flag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">.</span><span class="n">false</span><span class="p">.</span>
+
+<span class="n">grid2_win_flag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">.</span><span class="n">true</span><span class="p">.</span>
+</pre></div>
+</div>
+<p>The first three options turn off the HR diagram plot, the TRho profile plot, and the
+abundance plot. The last option instead turn on a new plot called grid2, and you’ll see
+that it combines several different plots into one single grid.</p>
+<p>Next, edit your <code class="docutils literal notranslate"><span class="pre">inlist_project</span></code>, and set <code class="docutils literal notranslate"><span class="pre">disable_pgstar_during_relax_flag</span> <span class="pre">=</span> <span class="pre">.false.</span></code>
+in the <code class="docutils literal notranslate"><span class="pre">&amp;star_job</span></code> section. This turns on the pgstar plot in the beginning, while MESA is
+‘relaxing’ the model.</p>
+<p>If you do <code class="docutils literal notranslate"><span class="pre">./rn</span></code> now, you’ll get the error message:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ERROR:<span class="w"> </span>failed<span class="w"> </span>to<span class="w"> </span>find<span class="w"> </span>log_center_Rho<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="nb">history</span><span class="w"> </span>data
+
+ERROR:<span class="w"> </span>failed<span class="w"> </span>to<span class="w"> </span>find<span class="w"> </span>log_center_T<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="nb">history</span><span class="w"> </span>data
+</pre></div>
+</div>
+<p>This error message occurs because the <code class="docutils literal notranslate"><span class="pre">grid2</span></code> plot tries to grab the values of
+<code class="docutils literal notranslate"><span class="pre">log_center_Rho</span></code> and <code class="docutils literal notranslate"><span class="pre">log_center_T</span></code>, but isn’t able to find them in MESA’s history file.</p>
+<p>To change what MESA outputs in its history file, we need to do the following:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cp<span class="w"> </span><span class="nv">$MESA_DIR</span>/star/defaults/history_columns.list<span class="w"> </span>.
+</pre></div>
+</div>
+<p>Then edit this file:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>open<span class="w"> </span>-e<span class="w"> </span>history_columns.list
+</pre></div>
+</div>
+<p>and uncomment the lines (do a <code class="docutils literal notranslate"><span class="pre">cmd+F</span></code> to search for these two terms, and remove the <code class="docutils literal notranslate"><span class="pre">!</span></code> to uncomment):</p>
+<div class="highlight-fortran notranslate"><div class="highlight"><pre><span></span><span class="n">log_center_T</span>
+<span class="n">log_center_Rho</span>
+</pre></div>
+</div>
+<p>You can also uncomment other items to have MESA output these quantities. We’ll get to this in the future.</p>
+<p>Now if you run again (<code class="docutils literal notranslate"><span class="pre">./rn</span></code>), you should be able to run MESA smoothly and see a new
+plot that combines the abundance, TRho profile, and HR diagram plots.</p>
+</section>
+<section id="stellar-evolution-i">
+<h2>7. Stellar Evolution I<a class="headerlink" href="#stellar-evolution-i" title="Link to this heading">#</a></h2>
+<p>While the model is running, observe the pgstar plot and answer the following:</p>
+<ul class="simple">
+<li><p>How does the star move on the HR diagram during the pre-main sequence evolution?</p></li>
+<li><p>How does its central density and temperature change during the pre-main sequence evolution, and on the main sequence, respectively?</p></li>
+<li><p>On the main sequence, how do the central abundances change? Pay particular attention to H, He, C, N and O.</p></li>
+</ul>
 </section>
 </section>
 
@@ -667,6 +736,8 @@ model is doing in real time.</p>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#changing-inlists">4. Changing Inlists</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#on-screen-plotting">5. On-screen Plotting</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#changing-pgstar-and-history-colunns">6. Changing pgstar and history_colunns</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stellar-evolution-i">7. Stellar Evolution I</a></li>
 </ul>
   </nav></div>
 
