@@ -51,7 +51,7 @@ Some of the notebooks need data files.  These can be uploaded by selecting the
    :caption: Progress:
 
    installing
-   .. first_run
+   first_run
 
 .. toctree::
    :maxdepth: 2
