@@ -325,6 +325,8 @@ You can also uncomment other items to have MESA output these quantities. We'll g
 Now if you run again (``./rn``), you should be able to run MESA smoothly and see a new 
 plot that combines the abundance, TRho profile, and HR diagram plots. 
 
+There are a lot more options for pgstar plots `here <https://docs.mesastar.org/en/26.4.1/reference/pgstar.html>`_.
+
 7. Stellar Evolution I
 ======================
 
