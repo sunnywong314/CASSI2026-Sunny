@@ -230,6 +230,17 @@ Next, change the following runtime parameters:
         xa_central_lower_limit_species(1) = 'h1'
         xa_central_lower_limit(1) = 1d-5
 
+In the ``pgstar`` section of ``inlist_pgstar``, set 
+
+.. code-block:: fortran
+
+    HR_logT_min = 3.5
+    HR_logT_max = 4.0
+    HR_logL_min = -1.0
+    HR_logL_max = 3.0
+
+This adjusts the x and y-axis limits on the HR diagram. 
+
 Now run the model again:
 
 .. code-block:: bash
@@ -237,14 +248,91 @@ Now run the model again:
     ./rn
 
 5. On-screen Plotting
-========================
+======================
 
 As the model is running, let's add some more things. 
 MESA's ``pgstar`` is a super useful plotting tool, and allows you to see what the 
 model is doing in real time. 
 
-We can add some more useful plots. 
+We can add some more useful plots. In your ``inlist_pgstar``, add the following:
 
+.. code-block:: fortran
+
+    abundance_win_flag = .true.
+
+This opens up a new pgstar window, that shows the mass fractions of different isotopes within the star. 
+
+After running for a while, let's kill the run by doing ``ctrl+c`` on the terminal. 
+
+6. Changing pgstar and history_colunns
+======================================
+
+Now we'll try to combine the different pgstar plots into one, and also change the output quantities 
+from MESA. 
+
+First, edit your ``inlist_pgstar``, and set 
+
+.. code-block:: fortran
+
+    HR_win_flag = .false.
+
+    TRho_Profile_win_flag = .false.
+
+    abundance_win_flag = .false.
+
+    grid2_win_flag = .true.
+
+The first three options turn off the HR diagram plot, the TRho profile plot, and the 
+abundance plot. The last option instead turn on a new plot called grid2, and you'll see 
+that it combines several different plots into one single grid. 
+
+Next, edit your ``inlist_project``, and set ``disable_pgstar_during_relax_flag = .false.`` 
+in the ``&star_job`` section. This turns on the pgstar plot in the beginning, while MESA is 
+'relaxing' the model. 
+
+If you do ``./rn`` now, you'll get the error message:
+
+.. code-block:: bash
+
+    ERROR: failed to find log_center_Rho in history data
+
+    ERROR: failed to find log_center_T in history data
+
+This error message occurs because the ``grid2`` plot tries to grab the values of 
+``log_center_Rho`` and ``log_center_T``, but isn't able to find them in MESA's history file. 
+
+To change what MESA outputs in its history file, we need to do the following:
+
+.. code-block:: bash
+
+    cp $MESA_DIR/star/defaults/history_columns.list .
+
+Then edit this file:
+
+.. code-block:: bash
+
+    open -e history_columns.list
+
+and uncomment the lines (do a ``cmd+F`` to search for these two terms, and remove the ``!`` to uncomment):
+
+.. code-block:: fortran
+
+    log_center_T
+    log_center_Rho
+
+You can also uncomment other items to have MESA output these quantities. We'll get to this in the future. 
+
+Now if you run again (``./rn``), you should be able to run MESA smoothly and see a new 
+plot that combines the abundance, TRho profile, and HR diagram plots. 
+
+7. Stellar Evolution I
+======================
+
+While the model is running, observe the pgstar plot and answer the following:
+
+* How does the star move on the HR diagram during the pre-main sequence evolution? 
+* How does its central density and temperature change during the pre-main sequence evolution, and on the main sequence, respectively? 
+* On the main sequence, how do the central abundances change? Pay particular attention to H, He, C, N and O. 
 
 
 
