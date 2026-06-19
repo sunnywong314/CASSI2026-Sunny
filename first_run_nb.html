@@ -417,8 +417,10 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#history-file">history file</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hr-diagram">HR diagram</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#luminosity-evolution">Luminosity evolution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#detour-on-kelvin-helmholtz-contraction">Detour on Kelvin-Helmholtz contraction</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#profile">Profile</a></li>
 </ul>
             </nav>
         </div>
@@ -432,8 +434,10 @@
                   
   <section class="tex2jax_ignore mathjax_ignore" id="day-3-analyzing-mesa-outputs">
 <h1>Day 3: Analyzing MESA Outputs<a class="headerlink" href="#day-3-analyzing-mesa-outputs" title="Link to this heading">#</a></h1>
-<p>In this notebook, we’ll take a quick look at the MESA outputs.</p>
+<p>In this notebook, we’ll take a quick look at the MESA outputs. By default, MESA saves these in a directory called “LOGS”. If you do “ls -s” on your terminal (assuming you’re in the first_run directory), you should see a LOGS folder.</p>
 <p>You can run this on Google colab or download this as a Jupyter notebook and run it on your laptop locally.</p>
+<p>You may need to install mesa_reader on Google Colab or on your Jupyter notebook, by running a cell with
+“!pip install mesa_reader”</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># this cell imports all the necessary libraries</span>
@@ -465,6 +469,30 @@
 </div>
 </div>
 <p>Let’s take a look at the contents in the history data:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">myh</span><span class="o">.</span><span class="n">header_names</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;version_number&#39;,
+ &#39;compiler&#39;,
+ &#39;build&#39;,
+ &#39;MESA_SDK_version&#39;,
+ &#39;math_backend&#39;,
+ &#39;date&#39;,
+ &#39;burn_min1&#39;,
+ &#39;burn_min2&#39;,
+ &#39;msun&#39;,
+ &#39;rsun&#39;,
+ &#39;lsun&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>The headers give very basic information like the MESA version and compiler version used for your run.</p>
+<p>To get the actually important information:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">myh</span><span class="o">.</span><span class="n">bulk_names</span>
@@ -597,22 +625,12 @@
 <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">invert_xaxis</span><span class="p">()</span>
 
 <span class="c1"># axis labels</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;$\log_</span><span class="si">{10}</span><span class="s1">(T_{</span><span class="se">\\</span><span class="s1">rm eff}/</span><span class="se">\\</span><span class="s1">rm</span><span class="si">{K}</span><span class="s1">)$&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;$\log_</span><span class="si">{10}</span><span class="s1">(L/L_{\odot})$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\log_</span><span class="si">{10}</span><span class="s1">(T_{\rm eff}/\rm</span><span class="si">{K}</span><span class="s1">)$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\log_</span><span class="si">{10}</span><span class="s1">(L/L_{\odot})$&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;&gt;:8: SyntaxWarning: &quot;\l&quot; is an invalid escape sequence. Such sequences will not work in the future. Did you mean &quot;\\l&quot;? A raw string is also an option.
-&lt;&gt;:9: SyntaxWarning: &quot;\l&quot; is an invalid escape sequence. Such sequences will not work in the future. Did you mean &quot;\\l&quot;? A raw string is also an option.
-&lt;&gt;:8: SyntaxWarning: &quot;\l&quot; is an invalid escape sequence. Such sequences will not work in the future. Did you mean &quot;\\l&quot;? A raw string is also an option.
-&lt;&gt;:9: SyntaxWarning: &quot;\l&quot; is an invalid escape sequence. Such sequences will not work in the future. Did you mean &quot;\\l&quot;? A raw string is also an option.
-/tmp/ipykernel_2455/742417610.py:8: SyntaxWarning: &quot;\l&quot; is an invalid escape sequence. Such sequences will not work in the future. Did you mean &quot;\\l&quot;? A raw string is also an option.
-  plt.xlabel(&#39;$\log_{10}(T_{\\rm eff}/\\rm{K})$&#39;)
-/tmp/ipykernel_2455/742417610.py:9: SyntaxWarning: &quot;\l&quot; is an invalid escape sequence. Such sequences will not work in the future. Did you mean &quot;\\l&quot;? A raw string is also an option.
-  plt.ylabel(&#39;$\log_{10}(L/L_{\odot})$&#39;)
-</pre></div>
-</div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;$\\log_{10}(L/L_{\\odot})$&#39;)
 </pre></div>
 </div>
@@ -625,9 +643,9 @@
 <p>We can also look at how the surface luminosity of the star (power output that the star radiates) compares to its nuclear burning luminosity (power output from nuclear burning), at different ages.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">myh</span><span class="o">.</span><span class="n">star_age</span><span class="p">,</span><span class="n">myh</span><span class="o">.</span><span class="n">log_L</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;$\log L$&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">myh</span><span class="o">.</span><span class="n">star_age</span><span class="p">,</span><span class="n">myh</span><span class="o">.</span><span class="n">log_L</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$\log L$&#39;</span><span class="p">)</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">myh</span><span class="o">.</span><span class="n">star_age</span><span class="p">,</span><span class="n">myh</span><span class="o">.</span><span class="n">log_Lnuc</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;$\log L_{</span><span class="se">\\</span><span class="s1">rm nuc}$&#39;</span><span class="p">,</span><span class="n">ls</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">myh</span><span class="o">.</span><span class="n">star_age</span><span class="p">,</span><span class="n">myh</span><span class="o">.</span><span class="n">log_Lnuc</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$\log L_{\rm nuc}$&#39;</span><span class="p">,</span><span class="n">ls</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
 
 <span class="c1"># add legend</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
@@ -637,26 +655,12 @@
 <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mf">1e5</span><span class="p">,</span><span class="mf">1e10</span><span class="p">)</span>
 
 <span class="c1"># add axis labels</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Star Age [yr]&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;$\log_</span><span class="si">{10}</span><span class="s1">(L/L_{\odot})$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Star Age [yr]&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\log_</span><span class="si">{10}</span><span class="s1">(L/L_{\odot})$&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;&gt;:1: SyntaxWarning: &quot;\l&quot; is an invalid escape sequence. Such sequences will not work in the future. Did you mean &quot;\\l&quot;? A raw string is also an option.
-&lt;&gt;:3: SyntaxWarning: &quot;\l&quot; is an invalid escape sequence. Such sequences will not work in the future. Did you mean &quot;\\l&quot;? A raw string is also an option.
-&lt;&gt;:14: SyntaxWarning: &quot;\l&quot; is an invalid escape sequence. Such sequences will not work in the future. Did you mean &quot;\\l&quot;? A raw string is also an option.
-&lt;&gt;:1: SyntaxWarning: &quot;\l&quot; is an invalid escape sequence. Such sequences will not work in the future. Did you mean &quot;\\l&quot;? A raw string is also an option.
-&lt;&gt;:3: SyntaxWarning: &quot;\l&quot; is an invalid escape sequence. Such sequences will not work in the future. Did you mean &quot;\\l&quot;? A raw string is also an option.
-&lt;&gt;:14: SyntaxWarning: &quot;\l&quot; is an invalid escape sequence. Such sequences will not work in the future. Did you mean &quot;\\l&quot;? A raw string is also an option.
-/tmp/ipykernel_2455/2504010263.py:1: SyntaxWarning: &quot;\l&quot; is an invalid escape sequence. Such sequences will not work in the future. Did you mean &quot;\\l&quot;? A raw string is also an option.
-  plt.plot(myh.star_age,myh.log_L,label=&#39;$\log L$&#39;)
-/tmp/ipykernel_2455/2504010263.py:3: SyntaxWarning: &quot;\l&quot; is an invalid escape sequence. Such sequences will not work in the future. Did you mean &quot;\\l&quot;? A raw string is also an option.
-  plt.plot(myh.star_age,myh.log_Lnuc,label=&#39;$\log L_{\\rm nuc}$&#39;,ls=&#39;--&#39;)
-/tmp/ipykernel_2455/2504010263.py:14: SyntaxWarning: &quot;\l&quot; is an invalid escape sequence. Such sequences will not work in the future. Did you mean &quot;\\l&quot;? A raw string is also an option.
-  plt.ylabel(&#39;$\log_{10}(L/L_{\odot})$&#39;)
-</pre></div>
-</div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;$\\log_{10}(L/L_{\\odot})$&#39;)
 </pre></div>
 </div>
@@ -666,6 +670,217 @@
 <p>You can see that the star starts nuclear burning after <span class="math notranslate nohighlight">\(\sim 10^{7}~\)</span>yrs, and continues nuclear burning for the next <span class="math notranslate nohighlight">\(\sim 10^{10}~\)</span>yrs. This is the main sequence lifetime of the Sun.</p>
 <p>During this time, the star remains in thermal equilibrium: it radiates as much energy at its surface as nuclear burning generates at its core.</p>
 </section>
+<section id="detour-on-kelvin-helmholtz-contraction">
+<h3>Detour on Kelvin-Helmholtz contraction<a class="headerlink" href="#detour-on-kelvin-helmholtz-contraction" title="Link to this heading">#</a></h3>
+<p>Prior to the main sequence, the star is radiating way too much energy than nuclear burning provides.</p>
+<p>This energy has to come from somewhere. The star instead taps into its gravitational potential energy: as it contracts, it releases gravitational potential energy that gets radiated away.</p>
+<p>We call this “Kelvin-Helmholtz contraction”.</p>
+<p>How long does this phase last? We can do an order-of-magnitude estimate. What that means is that we only care about an accuracy within a factor of 10.</p>
+<p>The timescale is given by</p>
+<p><span class="math notranslate nohighlight">\(
+\large
+t_{\rm KH} 
+\sim \frac{ \rm{available\,energy} }{ \rm{how\,quickly\,energy\,is\,lost} } 
+\sim \frac{ G M^{2} / R }{ L } 
+\)</span></p>
+<p>where <span class="math notranslate nohighlight">\(GM^{2}/R\)</span> is the gravitational potential energy of the star, and <span class="math notranslate nohighlight">\(L\)</span> is the rate of energy loss by radiation (units of energy per time).</p>
+<p>We can estimate this quickly:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># We&#39;ll use cgs units</span>
+<span class="n">G</span> <span class="o">=</span> <span class="mf">7e-8</span> <span class="c1"># gravitational constant in cgs units, cm^3/g/s^2</span>
+<span class="n">Msun</span> <span class="o">=</span> <span class="mf">2e33</span> <span class="c1"># g</span>
+<span class="n">Rsun</span> <span class="o">=</span> <span class="mf">7e10</span> <span class="c1"># cm</span>
+<span class="n">Lsun</span> <span class="o">=</span> <span class="mf">4e33</span> <span class="c1"># erg/s</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t_kh</span> <span class="o">=</span> <span class="n">G</span><span class="o">*</span><span class="n">Msun</span><span class="o">*</span><span class="n">Msun</span><span class="o">/</span><span class="n">Rsun</span><span class="o">/</span><span class="n">Lsun</span> <span class="c1"># in sec</span>
+<span class="n">t_kh</span> <span class="o">=</span> <span class="n">t_kh</span> <span class="o">/</span> <span class="p">(</span><span class="mf">3e7</span><span class="p">)</span> <span class="c1"># sec to yrs</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The Kelvin-Helmholtz timescale of the Sun is about </span><span class="si">{:.0e}</span><span class="s1"> yrs&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">t_kh</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The Kelvin-Helmholtz timescale of the Sun is about 3e+07 yrs
+</pre></div>
+</div>
+</div>
+</div>
+<p>This is way shorter than the lifetime of the Sun (4.6 billion years). That was one of the first clues that made people realize that something other than gravitationanl contraction must be powering the Sun.</p>
+<p>In astronomy, you’ll encounter this kind of order-of-magnitude estimate over and over again.</p>
+</section>
+</section>
+<section id="profile">
+<h2>Profile<a class="headerlink" href="#profile" title="Link to this heading">#</a></h2>
+<p>Now let’s take a look at the very last profile of your first run. You can download this  here <a class="reference download internal" download="" href="_downloads/26da0b971356bd95004e5fdd6ffa265d/profile8.data"><code class="xref download docutils literal notranslate"><span class="pre">first_run/profile8.data</span></code></a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># load profile</span>
+<span class="n">myp</span> <span class="o">=</span> <span class="n">mr</span><span class="o">.</span><span class="n">MesaData</span><span class="p">(</span><span class="s1">&#39;first_run/profile8.data&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Again, we can take a look at the header information:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">myp</span><span class="o">.</span><span class="n">header_names</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;model_number&#39;,
+ &#39;num_zones&#39;,
+ &#39;initial_mass&#39;,
+ &#39;initial_z&#39;,
+ &#39;star_age&#39;,
+ &#39;time_step&#39;,
+ &#39;Teff&#39;,
+ &#39;photosphere_L&#39;,
+ &#39;photosphere_r&#39;,
+ &#39;center_eta&#39;,
+ &#39;center_h1&#39;,
+ &#39;center_he3&#39;,
+ &#39;center_he4&#39;,
+ &#39;center_c12&#39;,
+ &#39;center_n14&#39;,
+ &#39;center_o16&#39;,
+ &#39;center_ne20&#39;,
+ &#39;star_mass&#39;,
+ &#39;star_mdot&#39;,
+ &#39;star_mass_h1&#39;,
+ &#39;star_mass_he3&#39;,
+ &#39;star_mass_he4&#39;,
+ &#39;star_mass_c12&#39;,
+ &#39;star_mass_n14&#39;,
+ &#39;star_mass_o16&#39;,
+ &#39;star_mass_ne20&#39;,
+ &#39;he_core_mass&#39;,
+ &#39;co_core_mass&#39;,
+ &#39;fe_core_mass&#39;,
+ &#39;neutron_rich_core_mass&#39;,
+ &#39;dynamic_time&#39;,
+ &#39;kh_timescale&#39;,
+ &#39;nuc_timescale&#39;,
+ &#39;power_nuc_burn&#39;,
+ &#39;power_h_burn&#39;,
+ &#39;power_he_burn&#39;,
+ &#39;power_neu&#39;,
+ &#39;burn_min1&#39;,
+ &#39;burn_min2&#39;,
+ &#39;time_seconds&#39;,
+ &#39;version_number&#39;,
+ &#39;compiler&#39;,
+ &#39;build&#39;,
+ &#39;MESA_SDK_version&#39;,
+ &#39;math_backend&#39;,
+ &#39;date&#39;,
+ &#39;msun&#39;,
+ &#39;rsun&#39;,
+ &#39;lsun&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>The headers of a profile actually give more information, like the age and model number of this particular profile:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Age of profile is: </span><span class="si">{:.2e}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">myp</span><span class="o">.</span><span class="n">star_age</span><span class="p">)</span> <span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Model number of profile is: </span><span class="si">{:d}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">myp</span><span class="o">.</span><span class="n">model_number</span><span class="p">)</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Age of profile is: 9.57e+09
+Model number of profile is: 315
+</pre></div>
+</div>
+</div>
+</div>
+<p>At model number 315, what does the star look like? We can take a look at what profile quantities are available:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">myp</span><span class="o">.</span><span class="n">bulk_names</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&#39;zone&#39;,
+ &#39;mass&#39;,
+ &#39;logR&#39;,
+ &#39;logT&#39;,
+ &#39;logRho&#39;,
+ &#39;logP&#39;,
+ &#39;x_mass_fraction_H&#39;,
+ &#39;y_mass_fraction_He&#39;,
+ &#39;z_mass_fraction_metals&#39;,
+ &#39;pp&#39;,
+ &#39;cno&#39;,
+ &#39;tri_alpha&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here we have the zone number, mass enclosed, radius, etc., of each shell within the star, at model number 315.</p>
+<p>In MESA, zone 1 refers to the very surface, and the zone with the largest number refers to the center.</p>
+<p>Note that Fortran arrays are use 1-based indexing, whereas Python arrays use 0-based indexing. So zone 1 in MESA would be have a python index of 0: myp.zone[0].</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">myp</span><span class="o">.</span><span class="n">zone</span><span class="p">,</span><span class="n">myp</span><span class="o">.</span><span class="n">logT</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">myp</span><span class="o">.</span><span class="n">zone</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">myp</span><span class="o">.</span><span class="n">logT</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="s1">&#39;Surface&#39;</span><span class="p">)</span> <span class="c1"># 0 index in python gives surface</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">myp</span><span class="o">.</span><span class="n">zone</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="n">myp</span><span class="o">.</span><span class="n">logT</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="s1">&#39;Center&#39;</span><span class="p">)</span> <span class="c1"># -1 index in python gives center</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\log_</span><span class="si">{10}</span><span class="s1">(T/\rm</span><span class="si">{K}</span><span class="s1">)$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Zone Number&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 0, &#39;Zone Number&#39;)
+</pre></div>
+</div>
+<img alt="_images/6dee657677f20e740d8f38f07825ed9f504d45a1c7b39be056abe0dd78918c91.png" src="_images/6dee657677f20e740d8f38f07825ed9f504d45a1c7b39be056abe0dd78918c91.png" />
+</div>
+</div>
+<p>From the plot we can see that the center has a temperature about <span class="math notranslate nohighlight">\(10^{7}~\)</span>K. This is roughly the temperature needed for hydrogen burning.</p>
+<p>We can also print this out:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;T = </span><span class="si">{:.2e}</span><span class="s1"> K&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="n">myp</span><span class="o">.</span><span class="n">logT</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>T = 1.89e+07 K
+</pre></div>
+</div>
+</div>
+</div>
+<p>We’ll plot one last thing: the pressure profile of the star as a function of the mass enclosed.</p>
+<p>The mass enclosed is just what you’d guess: imagine slicing the star into shells of different radii. The mass that is within each spherical shell yields the mass enclosed. At the center, the mass enclosed is zero.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">myp</span><span class="o">.</span><span class="n">mass</span><span class="p">,</span><span class="n">myp</span><span class="o">.</span><span class="n">logP</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Mass Enclosed [$M_{\odot}$]&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\log_</span><span class="si">{10}</span><span class="s1"> (P / \rm</span><span class="si">{dyn}</span><span class="s1">\,\rm</span><span class="si">{cm}</span><span class="s1">^</span><span class="si">{2}</span><span class="s1">)$&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;$\\log_{10} (P / \\rm{dyn}\\,\\rm{cm}^{2})$&#39;)
+</pre></div>
+</div>
+<img alt="_images/e4e64dd2b64f6fa13de987b87c8b47fbc932f57e972ba3aa124082219c4239ee.png" src="_images/e4e64dd2b64f6fa13de987b87c8b47fbc932f57e972ba3aa124082219c4239ee.png" />
+</div>
+</div>
+<p>The pressure is highest at the center, and decreases towards the surface.</p>
+<p>This difference in pressure, or the <em>pressure gradient</em>, creates an outward force that opposes the inward pull of gravity. When a star is in such balance, we say that it is in <em>hydrostatic equilibrium/balance</em>.</p>
 </section>
 </section>
 
@@ -719,8 +934,10 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#history-file">history file</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hr-diagram">HR diagram</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#luminosity-evolution">Luminosity evolution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#detour-on-kelvin-helmholtz-contraction">Detour on Kelvin-Helmholtz contraction</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#profile">Profile</a></li>
 </ul>
   </nav></div>
 
