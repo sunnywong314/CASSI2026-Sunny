@@ -7,7 +7,9 @@ Now let's make a second run. The instructions here will be brief, just so you ge
 1. Task List
 ================
 
-Start from a clean MESA work directory (see :doc:`first_run`), name your new work directory ``zams_model``, and gradually modify it. 
+.. admonition:: Task
+    
+    Start from a clean MESA work directory (see :doc:`first_run`), name your new work directory ``zams_model``, and gradually modify it. 
 
 **Inlist parameters** wanted:
 
