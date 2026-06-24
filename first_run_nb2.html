@@ -1,0 +1,1072 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Day 4: Analyzing MESA Outputs II &#8212; CASSI-2026  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=eaa7b67c"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'first_run_nb2';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Useful Commands" href="commands.html" />
+    <link rel="prev" title="Day 3: Analyzing MESA Outputs" href="first_run_nb.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">CASSI 2026</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Week 1:</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="installing.html">Day 1: Installing MESA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="first_run.html">Day 2: First MESA run</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Week 2:</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="first_run_nb.html">Day 3: Analyzing MESA Outputs</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Day 4: Analyzing MESA Outputs II</a></li>
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Useful:</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="commands.html">Useful Commands</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="fortran_basics.html">Fortran Basics</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/sunnywong314/CASSI2026-Sunny/blob/main/docs/source/first_run_nb2.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/sunnywong314/CASSI2026-Sunny" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/sunnywong314/CASSI2026-Sunny/blob/main/docs/source/first_run_nb2.ipynb?plain=1" target="_blank"
+   class="btn btn-sm btn-source-file-button dropdown-item"
+   title="Show source"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-code"></i>
+  </span>
+<span class="btn__text-container">Show source</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/sunnywong314/CASSI2026-Sunny/edit/main/docs/source/first_run_nb2.ipynb" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/sunnywong314/CASSI2026-Sunny/issues/new?title=Issue%20on%20page%20%2Ffirst_run_nb2.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/first_run_nb2.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Day 4: Analyzing MESA Outputs II</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Day 4: Analyzing MESA Outputs II</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#astropy">Astropy</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#numerical-derivative">Numerical derivative</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hydrostatic-balance">Hydrostatic Balance</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#your-task">Your task:</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#derivation-of-equation-of-hydrostatic-equilibrium">Derivation of equation of hydrostatic equilibrium</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="day-4-analyzing-mesa-outputs-ii">
+<h1>Day 4: Analyzing MESA Outputs II<a class="headerlink" href="#day-4-analyzing-mesa-outputs-ii" title="Link to this heading">#</a></h1>
+<p>In this notebook, we’ll introduce two astropy modules that may be useful – units and constants. We will walk through computing numerical derivatives. We will also walk through hydrostatic equilibrium again.</p>
+<p>Note: you may need to install mesa_reader on Google Colab or on your Jupyter notebook, by running a cell with
+“!pip install mesa_reader”</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># this cell imports all the necessary libraries</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">matplotlib</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">mesa_reader</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">mr</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="astropy">
+<h2>Astropy<a class="headerlink" href="#astropy" title="Link to this heading">#</a></h2>
+<p>Here we will introduce two useful astropy modules: units and constants.</p>
+<p>As you can guess, units is useful for unit conversions, whereas constants gives you useful physical constants.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import these as u and const</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">astropy.units</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">u</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">astropy.constants</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">const</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># import these as u and const</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="kn">import</span><span class="w"> </span><span class="nn">astropy.units</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">u</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">import</span><span class="w"> </span><span class="nn">astropy.constants</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">const</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;astropy&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>For example, you can access the gravitational constant G:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">const</span><span class="o">.</span><span class="n">G</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">const</span><span class="o">.</span><span class="n">G</span>
+
+<span class="ne">NameError</span>: name &#39;const&#39; is not defined
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here the value is given in SI units. However, the annoying thing with astronomy is that most people use CGS units – lengths in cm, mass in grams, etc.</p>
+<p>We can use the astropy units module to convert units.</p>
+<p>For example, the gravitational constant has units of <span class="math notranslate nohighlight">\(\rm{m}^{3} \, \rm{kg} \, \rm{s}^{-2}\)</span>. In CGS, meters (<span class="math notranslate nohighlight">\(\rm{m}\)</span>) would be in centimeters (<span class="math notranslate nohighlight">\(\rm{cm}\)</span>), and kilograms (<span class="math notranslate nohighlight">\(\rm{kg}\)</span>) would be in grams (<span class="math notranslate nohighlight">\(\rm{g}\)</span>).</p>
+<p>We use the .to() function to convert to other units. You would need to supply your desired units. In CGS, this would be <span class="math notranslate nohighlight">\(\rm{cm}^{3} \, \rm{g} \, \rm{s}^{-2}\)</span>. So the following gives you the conversion of the gravitational constant to CGS:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">const</span><span class="o">.</span><span class="n">G</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="o">**</span><span class="mi">3</span><span class="o">/</span><span class="n">u</span><span class="o">.</span><span class="n">g</span><span class="o">/</span><span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">const</span><span class="o">.</span><span class="n">G</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="o">**</span><span class="mi">3</span><span class="o">/</span><span class="n">u</span><span class="o">.</span><span class="n">g</span><span class="o">/</span><span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;const&#39; is not defined
+</pre></div>
+</div>
+</div>
+</div>
+<p>You can access its value like this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">const</span><span class="o">.</span><span class="n">G</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="o">**</span><span class="mi">3</span><span class="o">/</span><span class="n">u</span><span class="o">.</span><span class="n">g</span><span class="o">/</span><span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">value</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">const</span><span class="o">.</span><span class="n">G</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="o">**</span><span class="mi">3</span><span class="o">/</span><span class="n">u</span><span class="o">.</span><span class="n">g</span><span class="o">/</span><span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">value</span>
+
+<span class="ne">NameError</span>: name &#39;const&#39; is not defined
+</pre></div>
+</div>
+</div>
+</div>
+<p>This is quite a mouthful, so we can actually do something even faster:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">const</span><span class="o">.</span><span class="n">G</span><span class="o">.</span><span class="n">cgs</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">const</span><span class="o">.</span><span class="n">G</span><span class="o">.</span><span class="n">cgs</span>
+
+<span class="ne">NameError</span>: name &#39;const&#39; is not defined
+</pre></div>
+</div>
+</div>
+</div>
+<p>or to access its value:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">const</span><span class="o">.</span><span class="n">G</span><span class="o">.</span><span class="n">cgs</span><span class="o">.</span><span class="n">value</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">7</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">const</span><span class="o">.</span><span class="n">G</span><span class="o">.</span><span class="n">cgs</span><span class="o">.</span><span class="n">value</span>
+
+<span class="ne">NameError</span>: name &#39;const&#39; is not defined
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="numerical-derivative">
+<h1>Numerical derivative<a class="headerlink" href="#numerical-derivative" title="Link to this heading">#</a></h1>
+<p>Here we quickly walk through how we take derivatives numerically. This will come up every now and then.</p>
+<p>Let’s say we want to take the derivative of the function <span class="math notranslate nohighlight">\(y = x^{2}\)</span>. We know what this should look like: <span class="math notranslate nohighlight">\(dy/dx = 2 x\)</span>.</p>
+<p>We can also do this numerically using the numpy function <code class="docutils literal notranslate"><span class="pre">np.gradient</span></code>. Take a quick look below to see what it does. Pay particular attention to the examples.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">help</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">gradient</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Help on method descriptor gradient in module numpy:
+
+gradient(f, *varargs, axis=None, edge_order=1)
+    Return the gradient of an N-dimensional array.
+
+    The gradient is computed using second order accurate central differences
+    in the interior points and either first or second order accurate one-sides
+    (forward or backwards) differences at the boundaries.
+    The returned gradient hence has the same shape as the input array.
+
+    Parameters
+    ----------
+    f : array_like
+        An N-dimensional array containing samples of a scalar function.
+    varargs : list of scalar or array, optional
+        Spacing between f values. Default unitary spacing for all dimensions.
+        Spacing can be specified using:
+
+        1. Single scalar to specify a sample distance for all dimensions.
+        2. N scalars to specify a constant sample distance for each dimension.
+           i.e. `dx`, `dy`, `dz`, ...
+        3. N arrays to specify the coordinates of the values along each
+           dimension of F. The length of the array must match the size of
+           the corresponding dimension
+        4. Any combination of N scalars/arrays with the meaning of 2. and 3.
+
+        If `axis` is given, the number of varargs must equal the number of axes
+        specified in the axis parameter.
+        Default: 1. (see Examples below).
+
+    edge_order : {1, 2}, optional
+        Gradient is calculated using N-th order accurate differences
+        at the boundaries. Default: 1.
+    axis : None or int or tuple of ints, optional
+        Gradient is calculated only along the given axis or axes.
+        The default (axis = None) is to calculate the gradient for all the axes
+        of the input array. axis may be negative, in which case it counts from
+        the last to the first axis.
+
+    Returns
+    -------
+    gradient : ndarray or tuple of ndarray
+        A tuple of ndarrays (or a single ndarray if there is only one
+        dimension) corresponding to the derivatives of f with respect
+        to each dimension. Each derivative has the same shape as f.
+
+    Examples
+    --------
+    &gt;&gt;&gt; import numpy as np
+    &gt;&gt;&gt; f = np.array([1, 2, 4, 7, 11, 16])
+    &gt;&gt;&gt; np.gradient(f)
+    array([1. , 1.5, 2.5, 3.5, 4.5, 5. ])
+    &gt;&gt;&gt; np.gradient(f, 2)
+    array([0.5 ,  0.75,  1.25,  1.75,  2.25,  2.5 ])
+
+    Spacing can be also specified with an array that represents the coordinates
+    of the values F along the dimensions.
+    For instance a uniform spacing:
+
+    &gt;&gt;&gt; x = np.arange(f.size)
+    &gt;&gt;&gt; np.gradient(f, x)
+    array([1. ,  1.5,  2.5,  3.5,  4.5,  5. ])
+
+    Or a non uniform one:
+
+    &gt;&gt;&gt; x = np.array([0., 1., 1.5, 3.5, 4., 6.])
+    &gt;&gt;&gt; np.gradient(f, x)
+    array([1. ,  3. ,  3.5,  6.7,  6.9,  2.5])
+
+    For two dimensional arrays, the return will be two arrays ordered by
+    axis. In this example the first array stands for the gradient in
+    rows and the second one in columns direction:
+
+    &gt;&gt;&gt; np.gradient(np.array([[1, 2, 6], [3, 4, 5]]))
+    (array([[ 2.,  2., -1.],
+            [ 2.,  2., -1.]]),
+     array([[1. , 2.5, 4. ],
+            [1. , 1. , 1. ]]))
+
+    In this example the spacing is also specified:
+    uniform for axis=0 and non uniform for axis=1
+
+    &gt;&gt;&gt; dx = 2.
+    &gt;&gt;&gt; y = [1., 1.5, 3.5]
+    &gt;&gt;&gt; np.gradient(np.array([[1, 2, 6], [3, 4, 5]]), dx, y)
+    (array([[ 1. ,  1. , -0.5],
+            [ 1. ,  1. , -0.5]]),
+     array([[2. , 2. , 2. ],
+            [2. , 1.7, 0.5]]))
+
+    It is possible to specify how boundaries are treated using `edge_order`
+
+    &gt;&gt;&gt; x = np.array([0, 1, 2, 3, 4])
+    &gt;&gt;&gt; f = x**2
+    &gt;&gt;&gt; np.gradient(f, edge_order=1)
+    array([1.,  2.,  4.,  6.,  7.])
+    &gt;&gt;&gt; np.gradient(f, edge_order=2)
+    array([0., 2., 4., 6., 8.])
+
+    The `axis` keyword can be used to specify a subset of axes of which the
+    gradient is calculated
+
+    &gt;&gt;&gt; np.gradient(np.array([[1, 2, 6], [3, 4, 5]]), axis=0)
+    array([[ 2.,  2., -1.],
+           [ 2.,  2., -1.]])
+
+    The `varargs` argument defines the spacing between sample points in the
+    input array. It can take two forms:
+
+    1. An array, specifying coordinates, which may be unevenly spaced:
+
+    &gt;&gt;&gt; x = np.array([0., 2., 3., 6., 8.])
+    &gt;&gt;&gt; y = x ** 2
+    &gt;&gt;&gt; np.gradient(y, x, edge_order=2)
+    array([ 0.,  4.,  6., 12., 16.])
+
+    2. A scalar, representing the fixed sample distance:
+
+    &gt;&gt;&gt; dx = 2
+    &gt;&gt;&gt; x = np.array([0., 2., 4., 6., 8.])
+    &gt;&gt;&gt; y = x ** 2
+    &gt;&gt;&gt; np.gradient(y, dx, edge_order=2)
+    array([ 0.,  4.,  8., 12., 16.])
+
+    It&#39;s possible to provide different data for spacing along each dimension.
+    The number of arguments must match the number of dimensions in the input
+    data.
+
+    &gt;&gt;&gt; dx = 2
+    &gt;&gt;&gt; dy = 3
+    &gt;&gt;&gt; x = np.arange(0, 6, dx)
+    &gt;&gt;&gt; y = np.arange(0, 9, dy)
+    &gt;&gt;&gt; xs, ys = np.meshgrid(x, y)
+    &gt;&gt;&gt; zs = xs + 2 * ys
+    &gt;&gt;&gt; np.gradient(zs, dy, dx)  # Passing two scalars
+    (array([[2., 2., 2.],
+            [2., 2., 2.],
+            [2., 2., 2.]]),
+     array([[1., 1., 1.],
+            [1., 1., 1.],
+            [1., 1., 1.]]))
+
+    Mixing scalars and arrays is also allowed:
+
+    &gt;&gt;&gt; np.gradient(zs, y, dx)  # Passing one array and one scalar
+    (array([[2., 2., 2.],
+            [2., 2., 2.],
+            [2., 2., 2.]]),
+     array([[1., 1., 1.],
+            [1., 1., 1.],
+            [1., 1., 1.]]))
+
+    Notes
+    -----
+    Assuming that :math:`f\in C^{3}` (i.e., :math:`f` has at least 3 continuous
+    derivatives) and let :math:`h_{*}` be a non-homogeneous stepsize, we
+    minimize the &quot;consistency error&quot; :math:`\eta_{i}` between the true gradient
+    and its estimate from a linear combination of the neighboring grid-points:
+
+    .. math::
+
+        \eta_{i} = f_{i}^{\left(1\right)} -
+                    \left[ \alpha f\left(x_{i}\right) +
+                            \beta f\left(x_{i} + h_{d}\right) +
+                            \gamma f\left(x_{i}-h_{s}\right)
+                    \right]
+
+    By substituting :math:`f(x_{i} + h_{d})` and :math:`f(x_{i} - h_{s})`
+    with their Taylor series expansion, this translates into solving
+    the following the linear system:
+
+    .. math::
+
+        \left\{
+            \begin{array}{r}
+                \alpha+\beta+\gamma=0 \\
+                \beta h_{d}-\gamma h_{s}=1 \\
+                \beta h_{d}^{2}+\gamma h_{s}^{2}=0
+            \end{array}
+        \right.
+
+    The resulting approximation of :math:`f_{i}^{(1)}` is the following:
+
+    .. math::
+
+        \hat f_{i}^{(1)} =
+            \frac{
+                h_{s}^{2}f\left(x_{i} + h_{d}\right)
+                + \left(h_{d}^{2} - h_{s}^{2}\right)f\left(x_{i}\right)
+                - h_{d}^{2}f\left(x_{i}-h_{s}\right)}
+                { h_{s}h_{d}\left(h_{d} + h_{s}\right)}
+            + \mathcal{O}\left(\frac{h_{d}h_{s}^{2}
+                                + h_{s}h_{d}^{2}}{h_{d}
+                                + h_{s}}\right)
+
+    It is worth noting that if :math:`h_{s}=h_{d}`
+    (i.e., data are evenly spaced)
+    we find the standard second order approximation:
+
+    .. math::
+
+        \hat f_{i}^{(1)}=
+            \frac{f\left(x_{i+1}\right) - f\left(x_{i-1}\right)}{2h}
+            + \mathcal{O}\left(h^{2}\right)
+
+    With a similar procedure the forward/backward approximations used for
+    boundaries can be derived.
+
+    References
+    ----------
+    .. [1]  Quarteroni A., Sacco R., Saleri F. (2007) Numerical Mathematics
+            (Texts in Applied Mathematics). New York: Springer.
+    .. [2]  Durran D. R. (1999) Numerical Methods for Wave Equations
+            in Geophysical Fluid Dynamics. New York: Springer.
+    .. [3]  Fornberg B. (1988) Generation of Finite Difference Formulas on
+            Arbitrarily Spaced Grids,
+            Mathematics of Computation 51, no. 184 : 699-706.
+            `PDF &lt;https://www.ams.org/journals/mcom/1988-51-184/
+            S0025-5718-1988-0935077-0/S0025-5718-1988-0935077-0.pdf&gt;`_.
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we show how this works in practice:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">x</span><span class="o">*</span><span class="n">x</span>
+
+<span class="c1"># analytic derivative </span>
+<span class="n">dydx_analytic</span> <span class="o">=</span> <span class="mf">2.</span><span class="o">*</span><span class="n">x</span>
+
+<span class="c1"># numerical derivative</span>
+<span class="n">dydx_numerical</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="n">x</span><span class="p">)</span>
+
+<span class="c1"># plot the results</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">dydx_analytic</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;dydx = 2x&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">dydx_numerical</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;numerical&#39;</span><span class="p">,</span><span class="n">ls</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$x$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$dy/dx$&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;$dy/dx$&#39;)
+</pre></div>
+</div>
+<img alt="_images/1f646b38d142b0710fafc67a694ff791990efe70695c2d1af7d15c8706b11e14.png" src="_images/1f646b38d142b0710fafc67a694ff791990efe70695c2d1af7d15c8706b11e14.png" />
+</div>
+</div>
+<p>You will need this in the next part.</p>
+<section id="hydrostatic-balance">
+<h2>Hydrostatic Balance<a class="headerlink" href="#hydrostatic-balance" title="Link to this heading">#</a></h2>
+<p>We will take a look at the very last profile of your first run, once again. You can download this  here <a class="reference download internal" download="" href="_downloads/26da0b971356bd95004e5fdd6ffa265d/profile8.data"><code class="xref download docutils literal notranslate"><span class="pre">first_run/profile8.data</span></code></a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># load profile</span>
+<span class="n">myp</span> <span class="o">=</span> <span class="n">mr</span><span class="o">.</span><span class="n">MesaData</span><span class="p">(</span><span class="s1">&#39;first_run/profile8.data&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>As we showed last time, the pressure in a star is greatest at its center, and decreases towards the surface. This pressure gradient is what keeps a star from collapsing under its own gravity.</p>
+<p>Let’s check this for ourselves. For a star under hydrostatic balance, its structure satisfies the following equation:</p>
+<p><span class="math notranslate nohighlight">\(
+\Large
+\frac{dP}{dr} = - \frac{G m(r) \rho(r)}{r^{2}}
+\)</span></p>
+<p>The left hand side is the pressure gradient, how rapidly the pressure changes with radius.</p>
+<p>In the right hand side, <span class="math notranslate nohighlight">\(G\)</span> is the gravitational constant, <span class="math notranslate nohighlight">\(m(r)\)</span> is the mass enclosed in each shell, and <span class="math notranslate nohighlight">\(\rho(r)\)</span> is the density of each shell. The <span class="math notranslate nohighlight">\((r)\)</span> denotes that both the mass enclosed and the local density change with radius <span class="math notranslate nohighlight">\(r\)</span>.</p>
+<p>The pressure profile <span class="math notranslate nohighlight">\(P(r)\)</span>, mass enclosed <span class="math notranslate nohighlight">\(m(r)\)</span>, density <span class="math notranslate nohighlight">\(\rho(r)\)</span>, and radius itself <span class="math notranslate nohighlight">\(r\)</span>, are both available in the profile:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">myp</span><span class="o">.</span><span class="n">bulk_names</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&#39;zone&#39;,
+ &#39;mass&#39;,
+ &#39;logR&#39;,
+ &#39;logT&#39;,
+ &#39;logRho&#39;,
+ &#39;logP&#39;,
+ &#39;x_mass_fraction_H&#39;,
+ &#39;y_mass_fraction_He&#39;,
+ &#39;z_mass_fraction_metals&#39;,
+ &#39;pp&#39;,
+ &#39;cno&#39;,
+ &#39;tri_alpha&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<section id="your-task">
+<h3>Your task:<a class="headerlink" href="#your-task" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Compute <span class="math notranslate nohighlight">\(dP/dr\)</span> numerically using the <code class="docutils literal notranslate"><span class="pre">np.gradient</span></code> function, and plot <span class="math notranslate nohighlight">\(dP/dr\)</span> as a function of radius <span class="math notranslate nohighlight">\(r\)</span>.</p></li>
+<li><p>Compute <span class="math notranslate nohighlight">\(-G m(r) \rho(r) / r^{2}\)</span>, and plot it as a function of radius <span class="math notranslate nohighlight">\(r\)</span>, on the same plot as <span class="math notranslate nohighlight">\(dP/dr\)</span>.</p></li>
+<li><p>Show the plot in log scale on the <span class="math notranslate nohighlight">\(y\)</span>-axis, using <code class="docutils literal notranslate"><span class="pre">plt.semilogy()</span></code>.</p></li>
+<li><p>Compare the two and make sure that they agree with each other.</p></li>
+</ul>
+<p>Note:</p>
+<ul class="simple">
+<li><p>Everything that goes into <span class="math notranslate nohighlight">\(dP/dr\)</span> and <span class="math notranslate nohighlight">\(-G m(r) \rho(r) / r^{2}\)</span> should be in cgs units.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">logR</span></code> and <code class="docutils literal notranslate"><span class="pre">mass</span></code> quantities in the profile are given in solar units, so you would need a conversion using the astropy <code class="docutils literal notranslate"><span class="pre">constants</span></code> module.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># work here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We will go through the following in person.</p>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="derivation-of-equation-of-hydrostatic-equilibrium">
+<h1>Derivation of equation of hydrostatic equilibrium<a class="headerlink" href="#derivation-of-equation-of-hydrostatic-equilibrium" title="Link to this heading">#</a></h1>
+<p>Consider a shell that has an inner radius <span class="math notranslate nohighlight">\(r\)</span> and outer radius <span class="math notranslate nohighlight">\(r + dr\)</span> (such that its thickness is <span class="math notranslate nohighlight">\(dr\)</span>).</p>
+<p>The density of the shell is <span class="math notranslate nohighlight">\(\rho(r)\)</span> (“rho”), such that the mass of the shell is <span class="math notranslate nohighlight">\(dm = 4 \pi r^{2} \rho(r) dr\)</span>. And we denote the mass enclosed by the shell, <span class="math notranslate nohighlight">\(m(r)\)</span>. We note that both <span class="math notranslate nohighlight">\(\rho(r)\)</span> and <span class="math notranslate nohighlight">\(m(r)\)</span> are functions of radius/distance from center.</p>
+<p><br><br>
+There are pressure forces acting on this shell. If the pressure at the inner shell is <span class="math notranslate nohighlight">\(P\)</span>, and the pressure at the outer shell is <span class="math notranslate nohighlight">\(P + dP\)</span>, then the net pressure force acting on the shell is</p>
+<p><span class="math notranslate nohighlight">\(
+\Large
+F_{\rm pressure} = P \cdot A - (P + dP ) \cdot A = - dP \cdot A
+\)</span></p>
+<p>where <span class="math notranslate nohighlight">\(A = 4 \pi r^{2} \)</span> is the area of the shell
+(recall that pressure is force per area).</p>
+<p><br><br>
+Gravity also acts on the shell:</p>
+<p><span class="math notranslate nohighlight">\(
+\Large F_{\rm gravity} = - \frac{G m(r) dm}{r^{2}} .
+\)</span></p>
+<p><br><br>
+In equilibrium, the forces balance each other:</p>
+<p><span class="math notranslate nohighlight">\(
+\Large
+F_{\rm pressure} + F_{\rm gravity} = 0 \to 
+\)</span></p>
+<p><span class="math notranslate nohighlight">\(
+\Large - dP \cdot A - \frac{G m(r) dm}{r^{2}} = 0
+\)</span>
+<br><br></p>
+<p>If we write out <span class="math notranslate nohighlight">\(A = 4 \pi r^{2}\)</span>, and <span class="math notranslate nohighlight">\(dm = 4 \pi r^{2} \rho(r) dr\)</span>, then we have</p>
+<p><span class="math notranslate nohighlight">\(
+\Large - dP \cdot 4 \pi r^{2} - \frac{G m(r) 4 \pi r^{2} \rho(r) dr}{ r^{2} } = 0
+\)</span></p>
+<p><span class="math notranslate nohighlight">\(
+\Large - dP - \frac{G m(r) \rho(r) }{ r^{2} } dr = 0
+\)</span></p>
+<p><span class="math notranslate nohighlight">\(
+\Large \frac{dP}{dr} = - \frac{G m(r) \rho(r) }{ r^{2} }.
+\)</span></p>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="first_run_nb.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Day 3: Analyzing MESA Outputs</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="commands.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Useful Commands</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Day 4: Analyzing MESA Outputs II</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#astropy">Astropy</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#numerical-derivative">Numerical derivative</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hydrostatic-balance">Hydrostatic Balance</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#your-task">Your task:</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#derivation-of-equation-of-hydrostatic-equilibrium">Derivation of equation of hydrostatic equilibrium</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Sunny Wong
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026, Sunny Wong.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
