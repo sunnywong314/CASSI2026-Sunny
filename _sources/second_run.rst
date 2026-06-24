@@ -22,11 +22,11 @@ Start from a clean MESA work directory (see :doc:`first_run`), name your new wor
 
     * When MESA terminates at ZAMS, have it save the model as ``"zams_1.1Msun.mod"``. 
 
-Note: 
+.. note::
 
-- Not all of these are in the ``controls`` section of the inlist. Consult the MESA documentation. 
-- When you change the initial metallicity of the model, you also want to change the metallicity that the opacity uses. Look through the opacity documentation `here <https://docs.mesastar.org/en/26.4.1/reference/kap.html>`_ to see what you need to change. 
-- It is up to you whether you want to play around with pgstar. 
+    - Not all of these are in the ``controls`` section of the inlist. Consult the MESA documentation for `star_job <https://docs.mesastar.org/en/26.4.1/reference/star_job.html>`_ and `controls <https://docs.mesastar.org/en/26.4.1/reference/controls.html>`_. 
+    - When you change the initial metallicity of the model, you also want to change the metallicity that the opacity uses. Look through the opacity documentation (`kap <https://docs.mesastar.org/en/26.4.1/reference/kap.html>`_) to see what you need to change. 
+    - It is up to you whether you want to play around with pgstar. 
 
 **Profile quantities** wanted:
 

@@ -156,7 +156,6 @@
 <li class="toctree-l1"><a class="reference internal" href="first_run_nb.html">Day 3: Analyzing MESA Outputs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="first_run_nb2.html">Day 4: Analyzing MESA Outputs II</a></li>
 
-
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Day 4.5: Second MESA run</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Useful:</span></p>
@@ -416,12 +415,14 @@
 <li><p>When MESA terminates at ZAMS, have it save the model as <code class="docutils literal notranslate"><span class="pre">&quot;zams_1.1Msun.mod&quot;</span></code>.</p></li>
 </ul>
 </td></tr></table>
-<p>Note:</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <ul class="simple">
-<li><p>Not all of these are in the <code class="docutils literal notranslate"><span class="pre">controls</span></code> section of the inlist. Consult the MESA documentation.</p></li>
-<li><p>When you change the initial metallicity of the model, you also want to change the metallicity that the opacity uses. Look through the opacity documentation <a class="reference external" href="https://docs.mesastar.org/en/26.4.1/reference/kap.html">here</a> to see what you need to change.</p></li>
+<li><p>Not all of these are in the <code class="docutils literal notranslate"><span class="pre">controls</span></code> section of the inlist. Consult the MESA documentation for <a class="reference external" href="https://docs.mesastar.org/en/26.4.1/reference/star_job.html">star_job</a> and <a class="reference external" href="https://docs.mesastar.org/en/26.4.1/reference/controls.html">controls</a>.</p></li>
+<li><p>When you change the initial metallicity of the model, you also want to change the metallicity that the opacity uses. Look through the opacity documentation (<a class="reference external" href="https://docs.mesastar.org/en/26.4.1/reference/kap.html">kap</a>) to see what you need to change.</p></li>
 <li><p>It is up to you whether you want to play around with pgstar.</p></li>
 </ul>
+</div>
 <p><strong>Profile quantities</strong> wanted:</p>
 <p>Much like <code class="docutils literal notranslate"><span class="pre">history_columns.list</span></code>, MESA star also has a <code class="docutils literal notranslate"><span class="pre">profile_columns.list</span></code> which controls what
 quantities in the stellar structure get saved into the profiles.</p>
