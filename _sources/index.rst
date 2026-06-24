@@ -54,12 +54,17 @@ Some of the notebooks need data files.  These can be uploaded by selecting the
    first_run
 
 .. toctree::
-   :maxdepth: 3
-   :caption: Week 2:
+   :maxdepth: 4
+   :caption: Week 2 (star):
 
    first_run_nb.ipynb
    first_run_nb2.ipynb
    second_run
+   run_star_extras
+
+.. toctree::
+   :maxdepth: 3
+   :caption: Week 3 (binary):
 
 .. toctree::
    :maxdepth: 2
