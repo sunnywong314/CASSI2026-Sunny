@@ -46,8 +46,9 @@ In this example, ``T`` is an array of length 10 for double-precision float-point
 
 .. note:: 
 
-    The first element of a Fortran array is given by 1, i.e. ``T(1)`` is the first element 
-    of the ``T`` array. Python instead starts with 0. 
+    The first element of a Fortran array is given by 1, i.e. ``A(1)`` is the first element 
+    of the ``A`` array. Python instead starts with 0, i.e. ``B[0]`` is the first element of the 
+    ``B`` array. 
 
 3. If-Then-Else
 ===============
@@ -55,14 +56,14 @@ In this example, ``T`` is an array of length 10 for double-precision float-point
 .. code-block:: fortran
 
     if (mass >= 100d0) then
-        write(*,*) "mass greater than 100"
+        ...
     else if ((mass < 100d0) .and. (mass > 10d0)) then
-        write(*,*) "mass between 10 and 100"
+        ...
     else
-        write(*,*) "mass less than 10"
+        ...
     end if
 
-4. Miscellaneous
+4. Printing
 ================
 
 You can print values out on the terminal like this:
@@ -71,8 +72,35 @@ You can print values out on the terminal like this:
 
     write(*,*) "hello world"
 
+5. Do loops
+===========
+
+We can loop from some integer ``start`` to ``end`` (inclusive), every integer ``step``:
+
+.. code-block:: fortran
+
+    do i = start, end, step
+        ...
+    end do
+
+More specifically, 
+
+.. code-block:: fortran
+
+    do i = 1, 3, 1
+        write(*,*) i
+    end do
+
+will print out 
+
+.. code-block:: bash
     
-5. Quick Fortran program example
+    1
+    2
+    3
+
+    
+6. Quick Fortran program example
 ====================================
 
 In this example, we'll write a short Fortran program just as an . 
