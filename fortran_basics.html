@@ -391,8 +391,9 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comment">1. Comment</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#declaring-and-assigning-variables">2. Declaring and Assigning Variables</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#if-then-else">3. If-Then-Else</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#miscellaneous">4. Miscellaneous</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-fortran-program-example">5. Quick Fortran program example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#printing">4. Printing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#do-loops">5. Do loops</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-fortran-program-example">6. Quick Fortran program example</a></li>
 </ul>
             </nav>
         </div>
@@ -442,31 +443,53 @@ quantity but in double precision. In MESA, always use double precision.</p>
 <p>In this example, <code class="docutils literal notranslate"><span class="pre">T</span></code> is an array of length 10 for double-precision float-point numbers.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The first element of a Fortran array is given by 1, i.e. <code class="docutils literal notranslate"><span class="pre">T(1)</span></code> is the first element
-of the <code class="docutils literal notranslate"><span class="pre">T</span></code> array. Python instead starts with 0.</p>
+<p>The first element of a Fortran array is given by 1, i.e. <code class="docutils literal notranslate"><span class="pre">A(1)</span></code> is the first element
+of the <code class="docutils literal notranslate"><span class="pre">A</span></code> array. Python instead starts with 0, i.e. <code class="docutils literal notranslate"><span class="pre">B[0]</span></code> is the first element of the
+<code class="docutils literal notranslate"><span class="pre">B</span></code> array.</p>
 </div>
 </section>
 <section id="if-then-else">
 <h2>3. If-Then-Else<a class="headerlink" href="#if-then-else" title="Link to this heading">#</a></h2>
 <div class="highlight-fortran notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">mass</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">100</span><span class="n">d0</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
-<span class="k">    write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="s2">&quot;mass greater than 100&quot;</span>
+<span class="w">    </span><span class="p">...</span>
 <span class="k">else if</span><span class="w"> </span><span class="p">((</span><span class="n">mass</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">100</span><span class="n">d0</span><span class="p">)</span><span class="w"> </span><span class="p">.</span><span class="nb">and</span><span class="p">.</span><span class="w"> </span><span class="p">(</span><span class="n">mass</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">10</span><span class="n">d0</span><span class="p">))</span><span class="w"> </span><span class="k">then</span>
-<span class="k">    write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="s2">&quot;mass between 10 and 100&quot;</span>
+<span class="w">    </span><span class="p">...</span>
 <span class="k">else</span>
-<span class="k">    write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="s2">&quot;mass less than 10&quot;</span>
+<span class="w">    </span><span class="p">...</span>
 <span class="k">end if</span>
 </pre></div>
 </div>
 </section>
-<section id="miscellaneous">
-<h2>4. Miscellaneous<a class="headerlink" href="#miscellaneous" title="Link to this heading">#</a></h2>
+<section id="printing">
+<h2>4. Printing<a class="headerlink" href="#printing" title="Link to this heading">#</a></h2>
 <p>You can print values out on the terminal like this:</p>
 <div class="highlight-fortran notranslate"><div class="highlight"><pre><span></span><span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="s2">&quot;hello world&quot;</span>
 </pre></div>
 </div>
 </section>
+<section id="do-loops">
+<h2>5. Do loops<a class="headerlink" href="#do-loops" title="Link to this heading">#</a></h2>
+<p>We can loop from some integer <code class="docutils literal notranslate"><span class="pre">start</span></code> to <code class="docutils literal notranslate"><span class="pre">end</span></code> (inclusive), every integer <code class="docutils literal notranslate"><span class="pre">step</span></code>:</p>
+<div class="highlight-fortran notranslate"><div class="highlight"><pre><span></span><span class="k">do </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">start</span><span class="p">,</span><span class="w"> </span><span class="k">end</span><span class="p">,</span><span class="w"> </span><span class="n">step</span>
+<span class="w">    </span><span class="p">...</span>
+<span class="k">end do</span>
+</pre></div>
+</div>
+<p>More specifically,</p>
+<div class="highlight-fortran notranslate"><div class="highlight"><pre><span></span><span class="k">do </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">    </span><span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="n">i</span>
+<span class="k">end do</span>
+</pre></div>
+</div>
+<p>will print out</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="m">1</span>
+<span class="m">2</span>
+<span class="m">3</span>
+</pre></div>
+</div>
+</section>
 <section id="quick-fortran-program-example">
-<h2>5. Quick Fortran program example<a class="headerlink" href="#quick-fortran-program-example" title="Link to this heading">#</a></h2>
+<h2>6. Quick Fortran program example<a class="headerlink" href="#quick-fortran-program-example" title="Link to this heading">#</a></h2>
 <p>In this example, we’ll write a short Fortran program just as an .
 Using a text editor, create a file called <code class="docutils literal notranslate"><span class="pre">example.f90</span></code> and add the following:</p>
 <div class="highlight-fortran notranslate"><div class="highlight"><pre><span></span><span class="k">program </span><span class="n">example</span>
@@ -562,8 +585,9 @@ Now we’re ready to compile again:</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comment">1. Comment</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#declaring-and-assigning-variables">2. Declaring and Assigning Variables</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#if-then-else">3. If-Then-Else</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#miscellaneous">4. Miscellaneous</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-fortran-program-example">5. Quick Fortran program example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#printing">4. Printing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#do-loops">5. Do loops</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-fortran-program-example">6. Quick Fortran program example</a></li>
 </ul>
   </nav></div>
 
