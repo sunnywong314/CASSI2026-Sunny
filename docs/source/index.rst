@@ -48,11 +48,18 @@ Some of the notebooks need data files.  These can be uploaded by selecting the
 
 .. toctree::
    :maxdepth: 3
-   :caption: Progress:
+   :caption: Week 1:
 
    installing
    first_run
+
+.. toctree::
+   :maxdepth: 3
+   :caption: Week 2:
+
    first_run_nb.ipynb
+   first_run_nb2.ipynb
+   .. second_run
 
 .. toctree::
    :maxdepth: 2
