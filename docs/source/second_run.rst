@@ -16,7 +16,7 @@ Start from a clean MESA work directory (see :doc:`first_run`), name your new wor
 
     * Change the initial mass of the model to :math:`1.1 M_{\odot}`. 
 
-    * Change the initial metallicity of the star to $Z = 0.018$, and initial hydrogen mass fraction to $X=0.712$. 
+    * Change the initial metallicity of the star to $Z = 0.018$. 
 
     * Change the stopping conditions so that the model stops at the zero age main sequence (ZAMS). 
 
