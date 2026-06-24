@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>run_star_extras &#8212; CASSI-2026  documentation</title>
+    <title>Day 5: run_star_extras &#8212; CASSI-2026  documentation</title>
   
   
   
@@ -50,6 +50,8 @@
     <script src="_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
     <script src="_static/design-tabs.js?v=f930bc37"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'run_star_extras';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -376,7 +378,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>run_star_extras</h1>
+    <h1>Day 5: run_star_extras</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -388,6 +390,16 @@
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#intro-to-run-star-extras">1. Intro to run_star_extras</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started-with-run-star-extras">2. Getting started with run_star_extras</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mesa-flowchart">3. MESA Flowchart</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mesa-star-data">4. MESA star data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#accessing-star-data-quantities-in-run-star-extras">Accessing star data quantities in run_star_extras</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extra-history-columns">5. extra_history_columns</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1">Example 1</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2">Example 2</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -399,8 +411,8 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="run-star-extras">
-<h1>run_star_extras<a class="headerlink" href="#run-star-extras" title="Link to this heading">#</a></h1>
+  <section id="day-5-run-star-extras">
+<h1>Day 5: run_star_extras<a class="headerlink" href="#day-5-run-star-extras" title="Link to this heading">#</a></h1>
 <section id="intro-to-run-star-extras">
 <h2>1. Intro to run_star_extras<a class="headerlink" href="#intro-to-run-star-extras" title="Link to this heading">#</a></h2>
 <p>We have seen that we can change the runtime parameters using the inlists, and
@@ -409,14 +421,594 @@ the outputs using <code class="docutils literal notranslate"><span class="pre">h
 we want an output quantity that is not included in MESA’s preset list? This is where
 <cite>run_star_extras</cite> come in handy.</p>
 <p><cite>run_star_extras</cite> contains a set of Fortran subroutines and functions, that get called by MESA
-regularly. When they get called, they allow the user to specify
-- custom stopping conditions
-- custom history or profile quantities
-- custom physics</p>
+regularly. When they get called, they allow the user to specify</p>
+<ul class="simple">
+<li><p>custom stopping conditions</p></li>
+<li><p>custom history or profile quantities</p></li>
+<li><p>custom physics</p></li>
+</ul>
 <p>Here we will give some examples on how to implement our own history and profile quantities.</p>
 </section>
 <section id="getting-started-with-run-star-extras">
 <h2>2. Getting started with run_star_extras<a class="headerlink" href="#getting-started-with-run-star-extras" title="Link to this heading">#</a></h2>
+<p>In this example, we will use the <code class="docutils literal notranslate"><span class="pre">zams_model</span></code> work directory from <a class="reference internal" href="second_run.html"><span class="doc">Day 4.5: Second MESA run</span></a>.</p>
+<div class="admonition-task admonition">
+<p class="admonition-title">Task</p>
+<p>Using a text editor, open <code class="docutils literal notranslate"><span class="pre">src/run_star_extras.f90</span></code>.</p>
+</div>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">What do you see? (Click to expand)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<div class="highlight-fortran notranslate"><div class="highlight"><pre><span></span><span class="k">module </span><span class="n">run_star_extras</span>
+
+<span class="w">    </span><span class="k">use </span><span class="n">star_lib</span>
+<span class="w">    </span><span class="k">use </span><span class="n">star_def</span>
+<span class="w">    </span><span class="k">use </span><span class="n">const_def</span>
+<span class="w">    </span><span class="k">use </span><span class="n">math_lib</span>
+
+<span class="w">    </span><span class="k">implicit none</span>
+
+<span class="c">! these routines are called by the standard run_star check_model</span>
+<span class="k">contains</span>
+
+<span class="k">    include</span><span class="w"> </span><span class="s1">&#39;standard_run_star_extras.inc&#39;</span>
+
+<span class="k">end module </span><span class="n">run_star_extras</span>
+</pre></div>
+</div>
+<p class="sd-card-text">Here, <code class="docutils literal notranslate"><span class="pre">use</span> <span class="pre">star_lib</span></code> and <code class="docutils literal notranslate"><span class="pre">use</span> <span class="pre">math_lib</span></code> act kind of like Python’s <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">&lt;module&gt;</span></code>.
+It imports a set of useful subroutines and functions
+from MESA’s <code class="docutils literal notranslate"><span class="pre">star</span></code> and <code class="docutils literal notranslate"><span class="pre">math</span></code> modules, which you use anywhere within <cite>run_star_extras</cite>.
+So for example, you can use the function <code class="docutils literal notranslate"><span class="pre">safe_log10()</span></code> to take logarithms in base 10.</p>
+<p class="sd-card-text">Similarly, <code class="docutils literal notranslate"><span class="pre">use</span> <span class="pre">star_def</span></code> and <code class="docutils literal notranslate"><span class="pre">use</span> <span class="pre">const_def</span></code> import some variable definitions,
+so that you can safely use, say, a variable called <code class="docutils literal notranslate"><span class="pre">Msun</span></code>, whose value is something like <code class="docutils literal notranslate"><span class="pre">1.99d33</span></code>.</p>
+</div>
+</details><div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>In <cite>run_star_extras</cite>, there is a statement saying <code class="docutils literal notranslate"><span class="pre">include</span> <span class="pre">'standard_run_star_extras.inc'</span></code>.
+This imports a set of subroutines and functions from an external file called <code class="docutils literal notranslate"><span class="pre">'standard_run_star_extras.inc'</span></code>.
+If we want to modify our <cite>run_star_extras</cite>, we need to replace the <cite>include</cite> statement with our own set of
+subroutines and functions.</p>
+<div class="admonition-task admonition">
+<p class="admonition-title">Task</p>
+<p>Using a text editor, open <code class="docutils literal notranslate"><span class="pre">$MESA_DIR/include/standard_run_star_extras.inc</span></code>. Copy and paste
+the contents into your own <cite>run_star_extras</cite>, replacing the <code class="docutils literal notranslate"><span class="pre">include</span> <span class="pre">'standard_run_star_extras.inc'</span></code> line.</p>
+</div>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">What should your <cite>run_star_extras</cite> look like? (Click to expand)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">If you did this correctly, your <cite>run_star_extras</cite> should look like:</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">(Click to expand)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<div class="highlight-fortran notranslate"><div class="highlight"><pre><span></span><span class="k">module </span><span class="n">run_star_extras</span>
+
+<span class="w">    </span><span class="k">use </span><span class="n">star_lib</span>
+<span class="w">    </span><span class="k">use </span><span class="n">star_def</span>
+<span class="w">    </span><span class="k">use </span><span class="n">const_def</span>
+<span class="w">    </span><span class="k">use </span><span class="n">math_lib</span>
+
+<span class="w">    </span><span class="k">implicit none</span>
+
+<span class="c">! these routines are called by the standard run_star check_model</span>
+<span class="k">contains</span>
+
+<span class="k">    subroutine </span><span class="n">extras_controls</span><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">ierr</span><span class="p">)</span>
+<span class="w">        </span><span class="kt">integer</span><span class="p">,</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">id</span>
+<span class="w">        </span><span class="kt">integer</span><span class="p">,</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">out</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">ierr</span>
+<span class="w">        </span><span class="k">type</span><span class="w"> </span><span class="p">(</span><span class="n">star_info</span><span class="p">),</span><span class="w"> </span><span class="k">pointer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">s</span>
+<span class="w">        </span><span class="n">ierr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">        </span><span class="k">call </span><span class="n">star_ptr</span><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="n">ierr</span><span class="p">)</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ierr</span><span class="w"> </span><span class="o">/=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">return</span>
+
+<span class="w">        </span><span class="c">! this is the place to set any procedure pointers you want to change</span>
+<span class="w">        </span><span class="c">! e.g., other_wind, other_mixing, other_energy  (see star_data.inc)</span>
+
+
+<span class="w">        </span><span class="c">! the extras functions in this file will not be called</span>
+<span class="w">        </span><span class="c">! unless you set their function pointers as done below.</span>
+<span class="w">        </span><span class="c">! otherwise we use a null_ version which does nothing (except warn).</span>
+
+<span class="w">        </span><span class="n">s</span><span class="p">%</span><span class="w"> </span><span class="n">extras_startup</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">extras_startup</span>
+<span class="w">        </span><span class="n">s</span><span class="p">%</span><span class="w"> </span><span class="n">extras_start_step</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">extras_start_step</span>
+<span class="w">        </span><span class="n">s</span><span class="p">%</span><span class="w"> </span><span class="n">extras_check_model</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">extras_check_model</span>
+<span class="w">        </span><span class="n">s</span><span class="p">%</span><span class="w"> </span><span class="n">extras_finish_step</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">extras_finish_step</span>
+<span class="w">        </span><span class="n">s</span><span class="p">%</span><span class="w"> </span><span class="n">extras_after_evolve</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">extras_after_evolve</span>
+<span class="w">        </span><span class="n">s</span><span class="p">%</span><span class="w"> </span><span class="n">how_many_extra_history_columns</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">how_many_extra_history_columns</span>
+<span class="w">        </span><span class="n">s</span><span class="p">%</span><span class="w"> </span><span class="n">data_for_extra_history_columns</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">data_for_extra_history_columns</span>
+<span class="w">        </span><span class="n">s</span><span class="p">%</span><span class="w"> </span><span class="n">how_many_extra_profile_columns</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">how_many_extra_profile_columns</span>
+<span class="w">        </span><span class="n">s</span><span class="p">%</span><span class="w"> </span><span class="n">data_for_extra_profile_columns</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">data_for_extra_profile_columns</span>
+
+<span class="w">        </span><span class="n">s</span><span class="p">%</span><span class="w"> </span><span class="n">how_many_extra_history_header_items</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">how_many_extra_history_header_items</span>
+<span class="w">        </span><span class="n">s</span><span class="p">%</span><span class="w"> </span><span class="n">data_for_extra_history_header_items</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">data_for_extra_history_header_items</span>
+<span class="w">        </span><span class="n">s</span><span class="p">%</span><span class="w"> </span><span class="n">how_many_extra_profile_header_items</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">how_many_extra_profile_header_items</span>
+<span class="w">        </span><span class="n">s</span><span class="p">%</span><span class="w"> </span><span class="n">data_for_extra_profile_header_items</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">data_for_extra_profile_header_items</span>
+
+<span class="w">    </span><span class="k">end subroutine </span><span class="n">extras_controls</span>
+
+
+<span class="w">    </span><span class="k">subroutine </span><span class="n">extras_startup</span><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">restart</span><span class="p">,</span><span class="w"> </span><span class="n">ierr</span><span class="p">)</span>
+<span class="w">        </span><span class="kt">integer</span><span class="p">,</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">id</span>
+<span class="w">        </span><span class="kt">logical</span><span class="p">,</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">restart</span>
+<span class="w">        </span><span class="kt">integer</span><span class="p">,</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">out</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">ierr</span>
+<span class="w">        </span><span class="k">type</span><span class="w"> </span><span class="p">(</span><span class="n">star_info</span><span class="p">),</span><span class="w"> </span><span class="k">pointer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">s</span>
+<span class="w">        </span><span class="n">ierr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">        </span><span class="k">call </span><span class="n">star_ptr</span><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="n">ierr</span><span class="p">)</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ierr</span><span class="w"> </span><span class="o">/=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">return</span>
+<span class="k">    end subroutine </span><span class="n">extras_startup</span>
+
+
+<span class="w">    </span><span class="kt">integer </span><span class="k">function </span><span class="n">extras_start_step</span><span class="p">(</span><span class="n">id</span><span class="p">)</span>
+<span class="w">        </span><span class="kt">integer</span><span class="p">,</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">id</span>
+<span class="w">        </span><span class="kt">integer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">ierr</span>
+<span class="w">        </span><span class="k">type</span><span class="w"> </span><span class="p">(</span><span class="n">star_info</span><span class="p">),</span><span class="w"> </span><span class="k">pointer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">s</span>
+<span class="w">        </span><span class="n">ierr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">        </span><span class="k">call </span><span class="n">star_ptr</span><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="n">ierr</span><span class="p">)</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ierr</span><span class="w"> </span><span class="o">/=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">return</span>
+<span class="k">        </span><span class="n">extras_start_step</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">    </span><span class="k">end function </span><span class="n">extras_start_step</span>
+
+
+<span class="w">    </span><span class="c">! returns either keep_going, retry, or terminate.</span>
+<span class="w">    </span><span class="kt">integer </span><span class="k">function </span><span class="n">extras_check_model</span><span class="p">(</span><span class="n">id</span><span class="p">)</span>
+<span class="w">        </span><span class="kt">integer</span><span class="p">,</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">id</span>
+<span class="w">        </span><span class="kt">integer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">ierr</span>
+<span class="w">        </span><span class="k">type</span><span class="w"> </span><span class="p">(</span><span class="n">star_info</span><span class="p">),</span><span class="w"> </span><span class="k">pointer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">s</span>
+<span class="w">        </span><span class="n">ierr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">        </span><span class="k">call </span><span class="n">star_ptr</span><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="n">ierr</span><span class="p">)</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ierr</span><span class="w"> </span><span class="o">/=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">return</span>
+<span class="k">        </span><span class="n">extras_check_model</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">keep_going</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(.</span><span class="n">false</span><span class="p">.</span><span class="w"> </span><span class="p">.</span><span class="nb">and</span><span class="p">.</span><span class="w"> </span><span class="n">s</span><span class="p">%</span><span class="w"> </span><span class="n">star_mass_h1</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">0.35d0</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="w">            </span><span class="c">! stop when star hydrogen mass drops to specified level</span>
+<span class="w">            </span><span class="n">extras_check_model</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">terminate</span>
+<span class="w">            </span><span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="s1">&#39;have reached desired hydrogen mass&#39;</span>
+<span class="w">            </span><span class="k">return</span>
+<span class="k">        end if</span>
+
+
+<span class="w">        </span><span class="c">! if you want to check multiple conditions, it can be useful</span>
+<span class="w">        </span><span class="c">! to set a different termination code depending on which</span>
+<span class="w">        </span><span class="c">! condition was triggered.  MESA provides 9 customizable</span>
+<span class="w">        </span><span class="c">! termination codes, named t_xtra1 .. t_xtra9.  You can</span>
+<span class="w">        </span><span class="c">! customize the messages that will be printed upon exit by</span>
+<span class="w">        </span><span class="c">! setting the corresponding termination_code_str value.</span>
+<span class="w">        </span><span class="c">! termination_code_str(t_xtra1) = &#39;my termination condition&#39;</span>
+
+<span class="w">        </span><span class="c">! by default, indicate where (in the code) MESA terminated</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">extras_check_model</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">terminate</span><span class="p">)</span><span class="w"> </span><span class="n">s</span><span class="p">%</span><span class="w"> </span><span class="n">termination_code</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">t_extras_check_model</span>
+<span class="w">    </span><span class="k">end function </span><span class="n">extras_check_model</span>
+
+
+<span class="w">    </span><span class="kt">integer </span><span class="k">function </span><span class="n">how_many_extra_history_columns</span><span class="p">(</span><span class="n">id</span><span class="p">)</span>
+<span class="w">        </span><span class="kt">integer</span><span class="p">,</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">id</span>
+<span class="w">        </span><span class="kt">integer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">ierr</span>
+<span class="w">        </span><span class="k">type</span><span class="w"> </span><span class="p">(</span><span class="n">star_info</span><span class="p">),</span><span class="w"> </span><span class="k">pointer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">s</span>
+<span class="w">        </span><span class="n">ierr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">        </span><span class="k">call </span><span class="n">star_ptr</span><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="n">ierr</span><span class="p">)</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ierr</span><span class="w"> </span><span class="o">/=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">return</span>
+<span class="k">        </span><span class="n">how_many_extra_history_columns</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">    </span><span class="k">end function </span><span class="n">how_many_extra_history_columns</span>
+
+
+<span class="w">    </span><span class="k">subroutine </span><span class="n">data_for_extra_history_columns</span><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">names</span><span class="p">,</span><span class="w"> </span><span class="n">vals</span><span class="p">,</span><span class="w"> </span><span class="n">ierr</span><span class="p">)</span>
+<span class="w">        </span><span class="kt">integer</span><span class="p">,</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">n</span>
+<span class="w">        </span><span class="kt">character</span><span class="w"> </span><span class="p">(</span><span class="nb">len</span><span class="o">=</span><span class="n">maxlen_history_column_name</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">names</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="w">        </span><span class="kt">real</span><span class="p">(</span><span class="n">dp</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">vals</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="w">        </span><span class="kt">integer</span><span class="p">,</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">out</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">ierr</span>
+<span class="w">        </span><span class="k">type</span><span class="w"> </span><span class="p">(</span><span class="n">star_info</span><span class="p">),</span><span class="w"> </span><span class="k">pointer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">s</span>
+<span class="w">        </span><span class="n">ierr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">        </span><span class="k">call </span><span class="n">star_ptr</span><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="n">ierr</span><span class="p">)</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ierr</span><span class="w"> </span><span class="o">/=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">return</span>
+
+<span class="w">        </span><span class="c">! note: do NOT add the extras names to history_columns.list</span>
+<span class="w">        </span><span class="c">! the history_columns.list is only for the built-in history column options.</span>
+<span class="w">        </span><span class="c">! it must not include the new column names you are adding here.</span>
+
+
+<span class="w">    </span><span class="k">end subroutine </span><span class="n">data_for_extra_history_columns</span>
+
+
+<span class="w">    </span><span class="kt">integer </span><span class="k">function </span><span class="n">how_many_extra_profile_columns</span><span class="p">(</span><span class="n">id</span><span class="p">)</span>
+<span class="w">        </span><span class="kt">integer</span><span class="p">,</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">id</span>
+<span class="w">        </span><span class="kt">integer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">ierr</span>
+<span class="w">        </span><span class="k">type</span><span class="w"> </span><span class="p">(</span><span class="n">star_info</span><span class="p">),</span><span class="w"> </span><span class="k">pointer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">s</span>
+<span class="w">        </span><span class="n">ierr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">        </span><span class="k">call </span><span class="n">star_ptr</span><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="n">ierr</span><span class="p">)</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ierr</span><span class="w"> </span><span class="o">/=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">return</span>
+<span class="k">        </span><span class="n">how_many_extra_profile_columns</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">    </span><span class="k">end function </span><span class="n">how_many_extra_profile_columns</span>
+
+
+<span class="w">    </span><span class="k">subroutine </span><span class="n">data_for_extra_profile_columns</span><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">nz</span><span class="p">,</span><span class="w"> </span><span class="n">names</span><span class="p">,</span><span class="w"> </span><span class="n">vals</span><span class="p">,</span><span class="w"> </span><span class="n">ierr</span><span class="p">)</span>
+<span class="w">        </span><span class="kt">integer</span><span class="p">,</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">nz</span>
+<span class="w">        </span><span class="kt">character</span><span class="w"> </span><span class="p">(</span><span class="nb">len</span><span class="o">=</span><span class="n">maxlen_profile_column_name</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">names</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="w">        </span><span class="kt">real</span><span class="p">(</span><span class="n">dp</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">vals</span><span class="p">(</span><span class="n">nz</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
+<span class="w">        </span><span class="kt">integer</span><span class="p">,</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">out</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">ierr</span>
+<span class="w">        </span><span class="k">type</span><span class="w"> </span><span class="p">(</span><span class="n">star_info</span><span class="p">),</span><span class="w"> </span><span class="k">pointer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">s</span>
+<span class="w">        </span><span class="kt">integer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">k</span>
+<span class="w">        </span><span class="n">ierr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">        </span><span class="k">call </span><span class="n">star_ptr</span><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="n">ierr</span><span class="p">)</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ierr</span><span class="w"> </span><span class="o">/=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">return</span>
+
+<span class="w">        </span><span class="c">! note: do NOT add the extra names to profile_columns.list</span>
+<span class="w">        </span><span class="c">! the profile_columns.list is only for the built-in profile column options.</span>
+<span class="w">        </span><span class="c">! it must not include the new column names you are adding here.</span>
+
+<span class="w">        </span><span class="c">! here is an example for adding a profile column</span>
+<span class="w">        </span><span class="c">!if (n /= 1) stop &#39;data_for_extra_profile_columns&#39;</span>
+<span class="w">        </span><span class="c">!names(1) = &#39;beta&#39;</span>
+<span class="w">        </span><span class="c">!do k = 1, nz</span>
+<span class="w">        </span><span class="c">!   vals(k,1) = s% Pgas(k)/s% P(k)</span>
+<span class="w">        </span><span class="c">!end do</span>
+
+<span class="w">    </span><span class="k">end subroutine </span><span class="n">data_for_extra_profile_columns</span>
+
+
+<span class="w">    </span><span class="kt">integer </span><span class="k">function </span><span class="n">how_many_extra_history_header_items</span><span class="p">(</span><span class="n">id</span><span class="p">)</span>
+<span class="w">        </span><span class="kt">integer</span><span class="p">,</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">id</span>
+<span class="w">        </span><span class="kt">integer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">ierr</span>
+<span class="w">        </span><span class="k">type</span><span class="w"> </span><span class="p">(</span><span class="n">star_info</span><span class="p">),</span><span class="w"> </span><span class="k">pointer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">s</span>
+<span class="w">        </span><span class="n">ierr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">        </span><span class="k">call </span><span class="n">star_ptr</span><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="n">ierr</span><span class="p">)</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ierr</span><span class="w"> </span><span class="o">/=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">return</span>
+<span class="k">        </span><span class="n">how_many_extra_history_header_items</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">    </span><span class="k">end function </span><span class="n">how_many_extra_history_header_items</span>
+
+
+<span class="w">    </span><span class="k">subroutine </span><span class="n">data_for_extra_history_header_items</span><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">names</span><span class="p">,</span><span class="w"> </span><span class="n">vals</span><span class="p">,</span><span class="w"> </span><span class="n">ierr</span><span class="p">)</span>
+<span class="w">        </span><span class="kt">integer</span><span class="p">,</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">n</span>
+<span class="w">        </span><span class="kt">character</span><span class="w"> </span><span class="p">(</span><span class="nb">len</span><span class="o">=</span><span class="n">maxlen_history_column_name</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">names</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="w">        </span><span class="kt">real</span><span class="p">(</span><span class="n">dp</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">vals</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="w">        </span><span class="k">type</span><span class="p">(</span><span class="n">star_info</span><span class="p">),</span><span class="w"> </span><span class="k">pointer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">s</span>
+<span class="w">        </span><span class="kt">integer</span><span class="p">,</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">out</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">ierr</span>
+<span class="w">        </span><span class="n">ierr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">        </span><span class="k">call </span><span class="n">star_ptr</span><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="n">s</span><span class="p">,</span><span class="n">ierr</span><span class="p">)</span>
+<span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="n">ierr</span><span class="o">/=</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">return</span>
+
+<span class="w">        </span><span class="c">! here is an example for adding an extra history header item</span>
+<span class="w">        </span><span class="c">! also set how_many_extra_history_header_items</span>
+<span class="w">        </span><span class="c">! names(1) = &#39;mixing_length_alpha&#39;</span>
+<span class="w">        </span><span class="c">! vals(1) = s% mixing_length_alpha</span>
+
+<span class="w">    </span><span class="k">end subroutine </span><span class="n">data_for_extra_history_header_items</span>
+
+
+<span class="w">    </span><span class="kt">integer </span><span class="k">function </span><span class="n">how_many_extra_profile_header_items</span><span class="p">(</span><span class="n">id</span><span class="p">)</span>
+<span class="w">        </span><span class="kt">integer</span><span class="p">,</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">id</span>
+<span class="w">        </span><span class="kt">integer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">ierr</span>
+<span class="w">        </span><span class="k">type</span><span class="w"> </span><span class="p">(</span><span class="n">star_info</span><span class="p">),</span><span class="w"> </span><span class="k">pointer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">s</span>
+<span class="w">        </span><span class="n">ierr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">        </span><span class="k">call </span><span class="n">star_ptr</span><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="n">ierr</span><span class="p">)</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ierr</span><span class="w"> </span><span class="o">/=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">return</span>
+<span class="k">        </span><span class="n">how_many_extra_profile_header_items</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">    </span><span class="k">end function </span><span class="n">how_many_extra_profile_header_items</span>
+
+
+<span class="w">    </span><span class="k">subroutine </span><span class="n">data_for_extra_profile_header_items</span><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">names</span><span class="p">,</span><span class="w"> </span><span class="n">vals</span><span class="p">,</span><span class="w"> </span><span class="n">ierr</span><span class="p">)</span>
+<span class="w">        </span><span class="kt">integer</span><span class="p">,</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">n</span>
+<span class="w">        </span><span class="kt">character</span><span class="w"> </span><span class="p">(</span><span class="nb">len</span><span class="o">=</span><span class="n">maxlen_profile_column_name</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">names</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="w">        </span><span class="kt">real</span><span class="p">(</span><span class="n">dp</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">vals</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="w">        </span><span class="k">type</span><span class="p">(</span><span class="n">star_info</span><span class="p">),</span><span class="w"> </span><span class="k">pointer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">s</span>
+<span class="w">        </span><span class="kt">integer</span><span class="p">,</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">out</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">ierr</span>
+<span class="w">        </span><span class="n">ierr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">        </span><span class="k">call </span><span class="n">star_ptr</span><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="n">s</span><span class="p">,</span><span class="n">ierr</span><span class="p">)</span>
+<span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="n">ierr</span><span class="o">/=</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">return</span>
+
+<span class="w">        </span><span class="c">! here is an example for adding an extra profile header item</span>
+<span class="w">        </span><span class="c">! also set how_many_extra_profile_header_items</span>
+<span class="w">        </span><span class="c">! names(1) = &#39;mixing_length_alpha&#39;</span>
+<span class="w">        </span><span class="c">! vals(1) = s% mixing_length_alpha</span>
+
+<span class="w">    </span><span class="k">end subroutine </span><span class="n">data_for_extra_profile_header_items</span>
+
+
+<span class="w">    </span><span class="c">! returns either keep_going or terminate.</span>
+<span class="w">    </span><span class="c">! note: cannot request retry; extras_check_model can do that.</span>
+<span class="w">    </span><span class="kt">integer </span><span class="k">function </span><span class="n">extras_finish_step</span><span class="p">(</span><span class="n">id</span><span class="p">)</span>
+<span class="w">        </span><span class="kt">integer</span><span class="p">,</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">id</span>
+<span class="w">        </span><span class="kt">integer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">ierr</span>
+<span class="w">        </span><span class="k">type</span><span class="w"> </span><span class="p">(</span><span class="n">star_info</span><span class="p">),</span><span class="w"> </span><span class="k">pointer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">s</span>
+<span class="w">        </span><span class="n">ierr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">        </span><span class="k">call </span><span class="n">star_ptr</span><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="n">ierr</span><span class="p">)</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ierr</span><span class="w"> </span><span class="o">/=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">return</span>
+<span class="k">        </span><span class="n">extras_finish_step</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">keep_going</span>
+
+<span class="w">        </span><span class="c">! to save a profile,</span>
+<span class="w">            </span><span class="c">! s% need_to_save_profiles_now = .true.</span>
+<span class="w">        </span><span class="c">! to update the star log,</span>
+<span class="w">            </span><span class="c">! s% need_to_update_history_now = .true.</span>
+
+<span class="w">        </span><span class="c">! see extras_check_model for information about custom termination codes</span>
+<span class="w">        </span><span class="c">! by default, indicate where (in the code) MESA terminated</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">extras_finish_step</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">terminate</span><span class="p">)</span><span class="w"> </span><span class="n">s</span><span class="p">%</span><span class="w"> </span><span class="n">termination_code</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">t_extras_finish_step</span>
+<span class="w">    </span><span class="k">end function </span><span class="n">extras_finish_step</span>
+
+
+<span class="w">    </span><span class="k">subroutine </span><span class="n">extras_after_evolve</span><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">ierr</span><span class="p">)</span>
+<span class="w">        </span><span class="kt">integer</span><span class="p">,</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">id</span>
+<span class="w">        </span><span class="kt">integer</span><span class="p">,</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">out</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">ierr</span>
+<span class="w">        </span><span class="k">type</span><span class="w"> </span><span class="p">(</span><span class="n">star_info</span><span class="p">),</span><span class="w"> </span><span class="k">pointer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">s</span>
+<span class="w">        </span><span class="n">ierr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">        </span><span class="k">call </span><span class="n">star_ptr</span><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="n">ierr</span><span class="p">)</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ierr</span><span class="w"> </span><span class="o">/=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">return</span>
+<span class="k">    end subroutine </span><span class="n">extras_after_evolve</span>
+
+
+<span class="k">end module </span><span class="n">run_star_extras</span>
+</pre></div>
+</div>
+</div>
+</details></div>
+</details><div class="line-block">
+<div class="line"><br /></div>
+</div>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>Every time you edit <cite>run_star_extras</cite>, you need to <strong>recompile</strong>. Otherwise MESA won’t know
+the code you edited.</p>
+</div>
+<div class="admonition-task admonition">
+<p class="admonition-title">Task</p>
+<p>Recompile by running <code class="docutils literal notranslate"><span class="pre">./mk</span></code>.</p>
+</div>
+</section>
+<section id="mesa-flowchart">
+<h2>3. MESA Flowchart<a class="headerlink" href="#mesa-flowchart" title="Link to this heading">#</a></h2>
+<p>When MESA runs, it executes a flowchart like the following.</p>
+<object data="_static/flowchart.pdf" type="application/pdf" width="100%" height="600px">
+    <p>Your browser does not support PDFs.
+    <a href="_static/flowchart.pdf">Download the PDF</a> instead.</p>
+</object><p>There are many places where the subroutines and functions of <cite>run_star_extras</cite> get called.
+For example, at the end of each time step, MESA calls <code class="docutils literal notranslate"><span class="pre">extras_finish_step</span></code>.</p>
+</section>
+<section id="mesa-star-data">
+<h2>4. MESA star data<a class="headerlink" href="#mesa-star-data" title="Link to this heading">#</a></h2>
+<p>When MESA evolves a star, it saves many quantities of the stellar structure, both global and local.
+For example, it saves the effective temperature of the star (global), as well as the temperature
+structure of the star (local).
+These are all saved within the <code class="docutils literal notranslate"><span class="pre">star_data</span></code> structure.</p>
+<div class="admonition-task admonition">
+<p class="admonition-title">Task</p>
+<p>The quantities accessible to <cite>star_data</cite> live in <code class="docutils literal notranslate"><span class="pre">$MESA_DIR/star_data/public/</span></code>.</p>
+<p>Using a text editor, open <code class="docutils literal notranslate"><span class="pre">$MESA_DIR/star_data/public/star_data_step_input.inc</span></code> and
+<code class="docutils literal notranslate"><span class="pre">$MESA_DIR/star_data/public/star_data_step_work.inc</span></code>, to see what can be accessed.</p>
+</div>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">What do you see? (Click to expand)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">In <code class="docutils literal notranslate"><span class="pre">star_data_step_work.inc</span></code>, you can see things like</p>
+<div class="highlight-Fortran notranslate"><div class="highlight"><pre><span></span><span class="kt">real</span><span class="p">(</span><span class="n">dp</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">mstar_dot</span><span class="w"> </span><span class="c">! (gm/second)</span>
+</pre></div>
+</div>
+<p class="sd-card-text">This is the rate of change of the star’s mass, in grams per second.</p>
+<p class="sd-card-text">Unless otherwise specified,
+all quantities in <cite>star_data</cite> are in CGS units.</p>
+<p class="sd-card-text">You will also see</p>
+<div class="highlight-Fortran notranslate"><div class="highlight"><pre><span></span><span class="kt">real</span><span class="p">(</span><span class="n">dp</span><span class="p">),</span><span class="w"> </span><span class="k">pointer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">m</span><span class="p">(:)</span><span class="w"> </span><span class="c">! baryonic mass coord</span>
+<span class="w"> </span><span class="c">! m(k) is enclosed baryonic mass at outer edge of cell k</span>
+<span class="w"> </span><span class="c">! m(k) = s% M_center + s% q(k)*s% xmstar</span>
+</pre></div>
+</div>
+<p class="sd-card-text">This is the mass enclosed at the outer edge of each cell. You’ll notice that it has <code class="docutils literal notranslate"><span class="pre">(:)</span></code>,
+because it is an array. The <code class="docutils literal notranslate"><span class="pre">:</span></code> means that its length is not fixed –
+it is equal to the number of cells in the star, which changes from timestep to timestep.</p>
+</div>
+</details><div class="line-block">
+<div class="line"><br /></div>
+</div>
+<section id="accessing-star-data-quantities-in-run-star-extras">
+<h3>Accessing star data quantities in run_star_extras<a class="headerlink" href="#accessing-star-data-quantities-in-run-star-extras" title="Link to this heading">#</a></h3>
+<p>Here we give an example for how to access star data quantities in <cite>run_star_extras</cite>.</p>
+<div class="admonition-task admonition">
+<p class="admonition-title">Task</p>
+<p>Let’s edit the <code class="docutils literal notranslate"><span class="pre">extras_finish_step</span></code> function in <code class="docutils literal notranslate"><span class="pre">run_star_extras</span></code>,
+following the instructions below.</p>
+</div>
+<p>In <code class="docutils literal notranslate"><span class="pre">extras_finish_step</span></code>, you’ll see</p>
+<div class="highlight-Fortran notranslate"><div class="highlight"><pre><span></span><span class="k">type</span><span class="w"> </span><span class="p">(</span><span class="n">star_info</span><span class="p">),</span><span class="w"> </span><span class="k">pointer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">s</span>
+
+<span class="p">...</span>
+
+<span class="k">call </span><span class="n">star_ptr</span><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="n">ierr</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The first line declares the variable <code class="docutils literal notranslate"><span class="pre">s</span></code> as the MESA variable type <code class="docutils literal notranslate"><span class="pre">star_info</span></code>. As a reminder,
+all variables in Fortran need to be declared their types.</p>
+<p>The second line calls the <code class="docutils literal notranslate"><span class="pre">star_ptr</span></code> subroutine, and essentially points all <cite>star_data</cite> quantities
+to the <code class="docutils literal notranslate"><span class="pre">s</span></code> variable. With this, all <cite>star_data</cite> quantities are accessible through <code class="docutils literal notranslate"><span class="pre">s</span></code>.</p>
+<p>To access the <cite>star_data</cite> quantities, you use the <code class="docutils literal notranslate"><span class="pre">%</span></code> operator:</p>
+<div class="admonition-task admonition">
+<p class="admonition-title">Task</p>
+<p>Add the following line to <code class="docutils literal notranslate"><span class="pre">extras_finish_step</span></code>:</p>
+<div class="highlight-Fortran notranslate"><div class="highlight"><pre><span></span><span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="n">s</span><span class="p">%</span><span class="w"> </span><span class="n">mstar</span><span class="p">,</span><span class="w"> </span><span class="n">s</span><span class="p">%</span><span class="w"> </span><span class="n">m</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span><span class="w"> </span><span class="mf">1.1d0</span><span class="o">*</span><span class="n">Msun</span>
+</pre></div>
+</div>
+<p>anywhere between <code class="docutils literal notranslate"><span class="pre">extras_finish_step</span> <span class="pre">=</span> <span class="pre">keep_going</span></code> and <code class="docutils literal notranslate"><span class="pre">end</span> <span class="pre">function</span> <span class="pre">extras_finish_step</span></code>.</p>
+<p>Then recompile, and run MESA.</p>
+<p>Watch the terminal to see what comes out. You should see some addition
+terminal messages at each step, after the relaxation steps are done.</p>
+</div>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">What do you see? (Click to expand)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">You should see</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="m">2</span>.1872508577678557E+033<span class="w">   </span><span class="m">2</span>.1872508577678557E+033<span class="w">   </span><span class="m">2</span>.1872508577678557E+033
+</pre></div>
+</div>
+<p class="sd-card-text">This should give the star’s total mass in grams (hence the line <code class="docutils literal notranslate"><span class="pre">1.1d0*Msun</span></code>).</p>
+</div>
+</details><div class="line-block">
+<div class="line"><br /></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">%</span></code> operator in Fortran works very similarly to the <code class="docutils literal notranslate"><span class="pre">.</span></code> operator in python.
+For example, in python you get the value of pi from the <cite>numpy</cite> module using <code class="docutils literal notranslate"><span class="pre">np.pi</span></code>.
+Here we access the value of <code class="docutils literal notranslate"><span class="pre">mstar</span></code> from <code class="docutils literal notranslate"><span class="pre">s</span></code> using <code class="docutils literal notranslate"><span class="pre">s%</span> <span class="pre">mstar</span></code>.</p>
+</div>
+<p>In the example above, we showed two equivalent ways of obtaining the star’s total mass.
+We can access it readily from <code class="docutils literal notranslate"><span class="pre">s%</span> <span class="pre">mstar</span></code>. We can also use the enclosed mass at each shell
+k, <code class="docutils literal notranslate"><span class="pre">s%</span> <span class="pre">m(k)</span></code>. Zone 1 gives the surface, and zone <code class="docutils literal notranslate"><span class="pre">s%</span> <span class="pre">nz</span></code> gives the cell at the center.
+This means <code class="docutils literal notranslate"><span class="pre">s%</span> <span class="pre">m(1)</span></code> should give the mass enclosed at the surface zone, which is exactly the
+total mass of the star.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Fortran uses 1-indexing and parenthesis for arrays.
+This means the first element of some array <code class="docutils literal notranslate"><span class="pre">A</span></code> is given by <code class="docutils literal notranslate"><span class="pre">A(1)</span></code>,
+second by <code class="docutils literal notranslate"><span class="pre">A(2)</span></code>, and so on.</p>
+<p>Python uses 0-indexing and square brackets for arrays.
+This means the first element of some array <code class="docutils literal notranslate"><span class="pre">B</span></code> is given by <code class="docutils literal notranslate"><span class="pre">B[0]</span></code>,
+second by <code class="docutils literal notranslate"><span class="pre">B[1]</span></code>, and so on.</p>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>Now, some more practice:</p>
+<div class="admonition-task admonition">
+<p class="admonition-title">Task</p>
+<p>Have <code class="docutils literal notranslate"><span class="pre">extras_finish_step</span></code> print out the central temperature, and log10 of the
+central temperature</p>
+<p>Remember, every time you edit <cite>run_star_extras</cite>, recompile!</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>The math functions accessible in MESA are given in <code class="docutils literal notranslate"><span class="pre">$MESA_DIR/math/public/math_lib_crmath.f90</span></code>.</p>
+<p>Use a text editor to see what is available.</p>
+<p>For example, <code class="docutils literal notranslate"><span class="pre">exp10(x)</span></code> is equivalent to <span class="math notranslate nohighlight">\(10^{x}\)</span>. Note that it is different than <code class="docutils literal notranslate"><span class="pre">exp(x)</span></code>,
+which is in base <span class="math notranslate nohighlight">\(e\)</span>.</p>
+</div>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Solutions (Click to expand)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Add the following:</p>
+<div class="highlight-fortran notranslate"><div class="highlight"><pre><span></span><span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="n">s</span><span class="p">%</span><span class="w"> </span><span class="n">T</span><span class="p">(</span><span class="n">s</span><span class="p">%</span><span class="w"> </span><span class="n">nz</span><span class="p">),</span><span class="w"> </span><span class="n">safe_log10</span><span class="p">(</span><span class="n">s</span><span class="p">%</span><span class="w"> </span><span class="n">T</span><span class="p">(</span><span class="n">s</span><span class="p">%</span><span class="w"> </span><span class="n">nz</span><span class="p">))</span>
+</pre></div>
+</div>
+<p class="sd-card-text">Compile, and run.</p>
+</div>
+</details></section>
+</section>
+<section id="extra-history-columns">
+<h2>5. extra_history_columns<a class="headerlink" href="#extra-history-columns" title="Link to this heading">#</a></h2>
+<p>Here we will use <cite>run_star_extras</cite> to implement our own history output.</p>
+<div class="admonition-task admonition">
+<p class="admonition-title">Task</p>
+<p>First, look up the <code class="docutils literal notranslate"><span class="pre">how_many_extra_history_columns</span></code> function in <code class="docutils literal notranslate"><span class="pre">run_star_extras</span></code>.</p>
+<p>Set <code class="docutils literal notranslate"><span class="pre">how_many_extra_history_columns</span> <span class="pre">=</span> <span class="pre">2</span></code> within this function.</p>
+</div>
+<p>This tells MESA we
+want to have two extra history columns. Whenever you want an additional history column, you
+need to change this function.</p>
+<section id="example-1">
+<h3>Example 1<a class="headerlink" href="#example-1" title="Link to this heading">#</a></h3>
+<p>Next,</p>
+<div class="admonition-task admonition">
+<p class="admonition-title">Task</p>
+<p>Navigate to the <code class="docutils literal notranslate"><span class="pre">data_for_extra_history_columns</span></code> subroutine.</p>
+<p>Add the following line right before the subroutine ends:</p>
+<div class="highlight-Fortran notranslate"><div class="highlight"><pre><span></span><span class="n">names</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;my_total_mass&#39;</span>
+</pre></div>
+</div>
+</div>
+<p>This tells MESA that our first extra history column should be named <code class="docutils literal notranslate"><span class="pre">'my_total_mass'</span></code>.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>Now we’re ready to feed MESA the value for the total mass,
+for which we show yet another way to calculate.</p>
+<p>In MESA, the star is broken up into many individual zones. The mass of zone <code class="docutils literal notranslate"><span class="pre">k</span></code> is given by
+<code class="docutils literal notranslate"><span class="pre">s%</span> <span class="pre">dm(k)</span></code> (in grams). So if we sum up the <cite>dm</cite> of all the zones, we should recover the
+total mass of the star. This is done by the following <cite>do</cite> loop:</p>
+<div class="highlight-Fortran notranslate"><div class="highlight"><pre><span></span><span class="n">m_total</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="n">d0</span><span class="w"> </span><span class="c">! initialize the variable to 0</span>
+
+<span class="c">! loop from surface to center</span>
+<span class="k">do </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">s</span><span class="p">%</span><span class="w"> </span><span class="n">nz</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">    </span><span class="n">m_total</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">m_total</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">s</span><span class="p">%</span><span class="w"> </span><span class="n">dm</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+<span class="k">end do</span>
+
+<span class="c">! print out the value for sanity checks</span>
+<span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="s1">&#39;my_total_mass is:&#39;</span><span class="p">,</span><span class="w">  </span><span class="n">m_total</span>
+
+<span class="c">! Save the value to vals(1)</span>
+<span class="c">! vals(:) gives the values used by MESA for extra history columns</span>
+<span class="n">vals</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">m_total</span>
+</pre></div>
+</div>
+<p>The <cite>do</cite> loop in Fortran is essentially the <cite>for</cite> loop in python. In this example,
+we start from <cite>k=1</cite>, add one each time, until it reaches <cite>k=s% nz</cite> (inclusive).</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<div class="admonition-task admonition">
+<p class="admonition-title">Task</p>
+<p>Add the above code to your <code class="docutils literal notranslate"><span class="pre">data_for_extra_history_columns</span></code>.</p>
+<p>In addition, declare the variable types in the subroutine:</p>
+<div class="highlight-Fortran notranslate"><div class="highlight"><pre><span></span><span class="kt">real</span><span class="p">(</span><span class="n">dp</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">m_total</span>
+<span class="kt">integer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">k</span>
+</pre></div>
+</div>
+</div>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Solutions (Click to expand)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Your <code class="docutils literal notranslate"><span class="pre">data_for_extra_history_columns</span></code> should now look like:</p>
+<div class="highlight-Fortran notranslate"><div class="highlight"><pre><span></span><span class="k">subroutine </span><span class="n">data_for_extra_history_columns</span><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">names</span><span class="p">,</span><span class="w"> </span><span class="n">vals</span><span class="p">,</span><span class="w"> </span><span class="n">ierr</span><span class="p">)</span>
+<span class="w">    </span><span class="kt">integer</span><span class="p">,</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">n</span>
+<span class="w">    </span><span class="kt">character</span><span class="w"> </span><span class="p">(</span><span class="nb">len</span><span class="o">=</span><span class="n">maxlen_history_column_name</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">names</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="n">dp</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">vals</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="w">    </span><span class="kt">integer</span><span class="p">,</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">out</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">ierr</span>
+<span class="w">    </span><span class="k">type</span><span class="w"> </span><span class="p">(</span><span class="n">star_info</span><span class="p">),</span><span class="w"> </span><span class="k">pointer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">s</span>
+<span class="w">    </span><span class="c">! declare new variables</span>
+<span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="n">dp</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">m_total</span>
+<span class="w">    </span><span class="kt">integer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">k</span>
+
+<span class="w">    </span><span class="n">ierr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">    </span><span class="k">call </span><span class="n">star_ptr</span><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="n">ierr</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ierr</span><span class="w"> </span><span class="o">/=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">return</span>
+
+<span class="w">    </span><span class="c">! note: do NOT add the extras names to history_columns.list</span>
+<span class="w">    </span><span class="c">! the history_columns.list is only for the built-in history column options.</span>
+<span class="w">    </span><span class="c">! it must not include the new column names you are adding here.</span>
+
+<span class="w">    </span><span class="n">names</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;my_total_mass&#39;</span>
+
+<span class="w">    </span><span class="n">m_total</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="n">d0</span><span class="w"> </span><span class="c">! initialize the variable to 0</span>
+
+<span class="w">    </span><span class="c">! loop from surface to center</span>
+<span class="w">    </span><span class="k">do </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">s</span><span class="p">%</span><span class="w"> </span><span class="n">nz</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">        </span><span class="n">m_total</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">m_total</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">s</span><span class="p">%</span><span class="w"> </span><span class="n">dm</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+<span class="w">    </span><span class="k">end do</span>
+
+<span class="w">    </span><span class="c">! print out the value for sanity checks</span>
+<span class="w">    </span><span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="s1">&#39;my_total_mass is:&#39;</span><span class="p">,</span><span class="w">  </span><span class="n">m_total</span>
+
+<span class="w">    </span><span class="c">! Save the value to vals(1)</span>
+<span class="w">    </span><span class="c">! vals(:) gives the values used by MESA for extra history columns</span>
+<span class="w">    </span><span class="n">vals</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">m_total</span>
+
+
+<span class="k">end subroutine </span><span class="n">data_for_extra_history_columns</span>
+</pre></div>
+</div>
+</div>
+</details></section>
+<section id="example-2">
+<h3>Example 2<a class="headerlink" href="#example-2" title="Link to this heading">#</a></h3>
+<p>The example above shows how you can implement an extra history column, and how to do a <cite>do</cite> loop.
+Now you’re ready for something more complicated.</p>
+<p>In the following, we want to calculate the following quantity:</p>
+<div class="math notranslate nohighlight">
+\[t_{\rm th} = \frac{ \int^{M}_{0} c_{\rm p} T dm }{L}\]</div>
+<p>Now let’s break this down:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(c_{\rm p}\)</span> is the specific heat capacity of each cell (in this case, specific means per unit mass).</p></li>
+<li><p><span class="math notranslate nohighlight">\(c_{\rm p} T\)</span> gives the thermal content per unit mass of each cell.</p></li>
+<li><p>If you multiply that by <span class="math notranslate nohighlight">\(dm\)</span> of each cell, you get the thermal content of the cell.</p></li>
+<li><p>If you add up the thermal content of all the cells (hence the integral), you get the total thermal content of the star.</p></li>
+<li><p>Divide by the surface luminosity <span class="math notranslate nohighlight">\(L\)</span>, you get the star’s <cite>thermal timescale</cite>, how quickly the star adjusts its thermal content by radiating its energy away.</p></li>
+</ul>
+</section>
 </section>
 </section>
 
@@ -451,6 +1043,16 @@ regularly. When they get called, they allow the user to specify
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#intro-to-run-star-extras">1. Intro to run_star_extras</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started-with-run-star-extras">2. Getting started with run_star_extras</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mesa-flowchart">3. MESA Flowchart</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mesa-star-data">4. MESA star data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#accessing-star-data-quantities-in-run-star-extras">Accessing star data quantities in run_star_extras</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extra-history-columns">5. extra_history_columns</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1">Example 1</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2">Example 2</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 
