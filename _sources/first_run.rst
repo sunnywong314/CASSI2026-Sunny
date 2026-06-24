@@ -264,6 +264,7 @@ This opens up a new pgstar window, that shows the mass fractions of different is
 
 After running for a while, let's kill the run by doing ``ctrl+c`` on the terminal. 
 
+.. _history_columns:
 6. Changing pgstar and history_colunns
 ======================================
 
