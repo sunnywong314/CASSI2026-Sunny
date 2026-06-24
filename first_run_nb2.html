@@ -155,7 +155,6 @@
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="first_run_nb.html">Day 3: Analyzing MESA Outputs</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Day 4: Analyzing MESA Outputs II</a></li>
-
 <li class="toctree-l1"><a class="reference internal" href="second_run.html">Day 4.5: Second MESA run</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Useful:</span></p>
@@ -420,20 +419,14 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Day 4: Analyzing MESA Outputs II</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#astropy">Astropy</a></li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#numerical-derivative">Numerical derivative</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#numerical-derivative">Numerical derivative</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hydrostatic-balance">Hydrostatic Balance</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#your-task">Your task:</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#derivation-of-equation-of-hydrostatic-equilibrium">Derivation of equation of hydrostatic equilibrium</a></li>
 </ul>
-</li>
-</ul>
-
             </nav>
         </div>
     </div>
@@ -542,9 +535,8 @@
 </div>
 </div>
 </section>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="numerical-derivative">
-<h1>Numerical derivative<a class="headerlink" href="#numerical-derivative" title="Link to this heading">#</a></h1>
+<section id="numerical-derivative">
+<h2>Numerical derivative<a class="headerlink" href="#numerical-derivative" title="Link to this heading">#</a></h2>
 <p>Here we quickly walk through how we take derivatives numerically. This will come up every now and then.</p>
 <p>Let’s say we want to take the derivative of the function <span class="math notranslate nohighlight">\(y = x^{2}\)</span>. We know what this should look like: <span class="math notranslate nohighlight">\(dy/dx = 2 x\)</span>.</p>
 <p>We can also do this numerically using the numpy function <code class="docutils literal notranslate"><span class="pre">np.gradient</span></code>. Take a quick look below to see what it does. Pay particular attention to the examples.</p>
@@ -809,6 +801,7 @@ gradient(f, *varargs, axis=None, edge_order=1)
 </div>
 </div>
 <p>You will need this in the next part.</p>
+</section>
 <section id="hydrostatic-balance">
 <h2>Hydrostatic Balance<a class="headerlink" href="#hydrostatic-balance" title="Link to this heading">#</a></h2>
 <p>We will take a look at the very last profile of your first run, once again. You can download this  here <a class="reference download internal" download="" href="_downloads/26da0b971356bd95004e5fdd6ffa265d/profile8.data"><code class="xref download docutils literal notranslate"><span class="pre">first_run/profile8.data</span></code></a></p>
@@ -962,20 +955,14 @@ F_{\rm pressure} + F_{\rm gravity} = 0 \to
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Day 4: Analyzing MESA Outputs II</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#astropy">Astropy</a></li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#numerical-derivative">Numerical derivative</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#numerical-derivative">Numerical derivative</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hydrostatic-balance">Hydrostatic Balance</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#your-task">Your task:</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#derivation-of-equation-of-hydrostatic-equilibrium">Derivation of equation of hydrostatic equilibrium</a></li>
 </ul>
-</li>
-</ul>
-
   </nav></div>
 
 </div></div>
