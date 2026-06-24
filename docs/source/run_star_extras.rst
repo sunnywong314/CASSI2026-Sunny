@@ -640,6 +640,8 @@ In the following, we want to calculate the following quantity:
 
     t_{\rm th} = \frac{ \int^{M}_{0} c_{\rm p} T dm }{L}
 
+|
+
 Now let's break this down:
 
 - :math:`c_{\rm p}` is the specific heat capacity of each cell (in this case, specific means per unit mass). 
@@ -648,12 +650,76 @@ Now let's break this down:
 - If you add up the thermal content of all the cells (hence the integral), you get the total thermal content of the star. 
 - Divide by the surface luminosity :math:`L`, you get the star's `thermal timescale`, how quickly the star adjusts its thermal content by radiating its energy away. 
 
+|
+
+We are now ready to implement this. 
+
+.. admonition:: Task
+
+    Following the `do` loop example above, implement a variable called ``E_th``, which is 
+    given by :math:`\int^{M}_{0} c_{\rm p} T dm`. 
+    
+    In practice, calculate 
+    :math:`c_{\rm{p},k} \cdot T_{k} \cdot dm_{k}` of each cell :math:`k`, then sum up all the cells 
+    using a `do` loop. 
+
+    Divide ``E_th`` by the surface luminosity of the star, and call it ``t_th``. 
+
+    Finally, assign the new history column the value of ``t_th``, and give the new history column a name ``"t_th"``. Compile and run. 
+
+    Make sure to also declare any new variables. 
+
+.. dropdown:: Partial Hint: Pseudocode to get you started (Click to expand)
+
+    .. code-block:: Fortran
+
+        ! name your new history column quantity here
+        ...
+
+        ! initialize value to 0
+        E_th = 0d0
+
+        ! do loop to calculate Eth
+        do ...
+
+            E_th = E_th + s% ...  ! add the cp*T*dm of cell k
+
+        end do
+
+        ! divide by surface luminosity to get thermal time
+        t_th = E_th / ... 
+
+        ! assign value to your new history column
+        ... 
+
+        
+
+.. dropdown:: Partial Hint: Where to look up star data quantities? (Click to expand)
+
+    Go to ``$MESA_DIR/star_data/public``, and look up your quantity in either 
+    ``star_data_step_work.inc`` or ``star_data_step_input.inc``. 
+
+    The ``grep`` command may be useful on the terminal (see :doc:`commands`). 
+
+    Quantities you need: `cp`, `T`, `dm`, of each cell, and the surface luminosity (luminosity of surface cell). 
 
 
+.. dropdown:: Partial Hint: What is the surface luminosity of the star? (Click to expand)
 
+    You can access the surface luminosity through two ways:
 
+    - ``s% L(:)`` is an array containing the luminosity at outer edge of each cell. If we want the surface luminosity, we can access it by ``s% L(1)``. 
+    - Alternatively, we can also use ``s% L_phot``, which gives the photospehre luminosity in Lsun units. Because we want the luminosity in cgs units, we actually want ``s% L_phot * Lsun``. 
 
+.. Tip:: 
 
+    Printing your values to the terminal is a helpful way to check whether you did this correctly (just helpful in general). 
+    You should get a value that is about 1e14 - 1e15 seconds (1e7 years), to within a factor of a few. 
+
+|
+
+This was a lot of work, so great job getting here! 
+The thermal timescale will be useful for future runs, once we get to the binary runs. 
 
 
 
