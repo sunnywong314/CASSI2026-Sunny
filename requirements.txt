@@ -21,3 +21,4 @@ sympy
 myst-nb
 mesa-reader @ git+https://github.com/wmwolf/py_mesa_reader
 unyt
+astropy
