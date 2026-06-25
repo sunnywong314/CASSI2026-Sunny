@@ -1,0 +1,93 @@
+&pgstar
+
+   pgstar_interval = 1
+
+   !!! history panels 1
+
+   History_Panels1_win_flag = .false.
+   History_Panels1_win_width = 5
+   History_Panels1_win_aspect_ratio = 1.0 ! aspect_ratio = height/width
+
+   History_Panels1_title = 'Orbital evolution'
+   History_Panels1_num_panels = 2
+
+   History_Panels1_yaxis_name(1) = 'period_days'
+   History_Panels1_other_yaxis_name(1) = 'lg_mstar_dot_1' 
+   History_Panels1_yaxis_name(2) = 'Jdot' 
+   History_Panels1_other_yaxis_name(2) = 'star_2_mass' 
+
+   !!!! TRho profile
+
+   TRho_Profile_xmin = -8.1
+   TRho_Profile_xmax = 6.2
+   TRho_Profile_ymin = 2.6
+   TRho_Profile_ymax = 8.2
+
+   !!!!! abundance
+
+
+   Abundance_legend_txt_scale_factor = 1.5 !0.8
+
+   num_abundance_line_labels = 3
+   Abundance_line_txt_scale_factor = 1.2 ! 0.8
+
+   !!!!! text summary
+
+   Text_Summary1_num_rows = 4
+   Text_Summary1_num_cols = 6
+
+   Text_Summary1_txt_scale = 6 !4.5
+
+   Text_Summary1_name(1,1) = 'model_number'
+   Text_Summary1_name(2,1) = 'log_star_age'
+   Text_Summary1_name(3,1) = 'log_dt'
+   Text_Summary1_name(4,1) = 'star_mass'
+
+   Text_Summary1_name(1,2) = 'log_abs_mdot'
+   Text_Summary1_name(2,2) = 'he_core_mass'
+   Text_Summary1_name(3,2) = 'log_R'
+   Text_Summary1_name(4,2) = 'log_Teff'
+
+   Text_Summary1_name(1,3) = 'log_L'
+   Text_Summary1_name(2,3) = 'log_Lnuc'
+   Text_Summary1_name(3,3) = 'num_zones'
+   Text_Summary1_name(4,3) = 'num_retries'
+
+   Text_Summary1_name(1,4) = 'log_center_T'
+   Text_Summary1_name(2,4) = 'log_center_Rho'
+   Text_Summary1_name(3,4) = 'center h1'
+   Text_Summary1_name(4,4) = 'center he4'
+
+   Text_Summary1_name(1,5) = 'star_1_mass'
+   Text_Summary1_name(2,5) = 'star_2_mass'
+   Text_Summary1_name(3,5) = 'period_days'
+   Text_Summary1_name(4,5) = 'binary_separation'
+
+   Text_Summary1_name(1,6) = 'jdot_gr'
+   Text_Summary1_name(2,6) = 'jdot_mb'
+   Text_Summary1_name(3,6) = 'jdot_ml'
+   Text_Summary1_name(4,6) = 'Jdot'
+
+
+   !!!! grid2 
+
+   grid2_win_flag = .true.
+   grid2_win_width = 12
+   grid2_win_aspect_ratio = 0.5
+
+   grid2_num_cols = 6
+   grid2_num_plots = 6
+
+   Grid2_plot_name(4) = 'Text_Summary1'
+   Grid2_plot_colspan(4) = 6
+
+   grid2_plot_name(6) = 'History_Panels1'
+   grid2_plot_row(6) = 1
+   grid2_plot_rowspan(6) = 6
+   grid2_plot_col(6) = 5
+   grid2_plot_colspan(6) = 2
+   Grid2_plot_pad_left(6) = 0.08
+   Grid2_plot_pad_right(6) = 0.03
+
+      
+/ ! end of pgstar namelist
