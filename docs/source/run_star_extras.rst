@@ -1,5 +1,5 @@
 ************************************
-Day 5: run_star_extras (if possible)
+run_star_extras (if possible)
 ************************************
 
 1. Intro to run_star_extras
