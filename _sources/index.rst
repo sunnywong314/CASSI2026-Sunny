@@ -60,16 +60,19 @@ Some of the notebooks need data files.  These can be uploaded by selecting the
    first_run_nb.ipynb
    first_run_nb2.ipynb
    second_run
-   run_star_extras
+   first_binary
+   
 
 .. toctree::
    :maxdepth: 3
    :caption: Week 3 (binary):
 
+
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
    :caption: Useful:
 
    commands
    fortran_basics
+   run_star_extras
 

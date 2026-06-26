@@ -1,6 +1,6 @@
-************************
-Day 6: First Binary Run
-************************
+**************************************
+Day 5: First Binary Run (if possible)
+**************************************
 
 Congrats on making it this far! 
 Now we will take it further, and learn about binary runs in MESA. 
@@ -204,7 +204,7 @@ Let's also do some python plotting.
     Jdot here refers to the rate of orbital angular momentum loss from various sources. 
     It is a negative number, which is why in the above we are plotting its absolute value.
 
-    
+
 
 
 
