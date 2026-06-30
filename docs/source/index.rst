@@ -66,7 +66,8 @@ Some of the notebooks need data files.  These can be uploaded by selecting the
 .. toctree::
    :maxdepth: 3
    :caption: Week 3 (binary):
-
+   
+   second_binary
 
 .. toctree::
    :maxdepth: 3

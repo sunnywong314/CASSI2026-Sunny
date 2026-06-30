@@ -1,6 +1,6 @@
-**************************************
-Day 5: First Binary Run (if possible)
-**************************************
+*************************
+Day 5: First Binary Run 
+*************************
 
 Congrats on making it this far! 
 Now we will take it further, and learn about binary runs in MESA. 
