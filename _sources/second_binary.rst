@@ -56,7 +56,7 @@ making an AM CVn binary through the evolved CV channel.
     - Initial binary parameters: star 1 mass of 1.1 solar masses, star 2 mass of 0.75 solar mass, and orbital period of 1.5 days. 
     - Set ``limit_retention_by_mdot_edd = .false.``. By default, this option is on, meaning that star 2 will only accrete up to its Eddington limit, and the rest is lost from the system. While we still want to make the mass transfer non-conservative, we'll deploy another option (keep reading). 
     - Set ``mass_transfer_beta = 1.0d0``. This means that whatever the donor donates, will be lost from the accretor as a fast wind. The wind mass loss will carry the specific angular momentum of the accretor. 
-    - Set ``mdot_scheme = 'Kolb'``. This means MESA will calculate the mass transfer rate following Kolb et al. 1990, which varies with how much the donor is overfilling its Roche lobe and stellar conditions near the Roche lobe. 
+    .. - Set ``mdot_scheme = 'Kolb'``. This means MESA will calculate the mass transfer rate following Kolb et al. 1990, which varies with how much the donor is overfilling its Roche lobe and stellar conditions near the Roche lobe. 
 
     Consult `binary controls <https://docs.mesastar.org/en/26.4.1/reference/binary_controls.html>`_ if you are stuck.
 
