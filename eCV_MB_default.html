@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Day 6: Second Binary Run &#8212; CASSI-2026  documentation</title>
+    <title>Day 7: Improvements on Evolved CV Model &#8212; CASSI-2026  documentation</title>
   
   
   
@@ -50,13 +50,11 @@
     <script src="_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
     <script src="_static/design-tabs.js?v=f930bc37"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'second_binary';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'eCV_MB_default';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Day 7: Improvements on Evolved CV Model" href="eCV_MB_default.html" />
-    <link rel="prev" title="Day 5: First Binary Run" href="first_binary.html" />
+    <link rel="next" title="Useful Commands" href="commands.html" />
+    <link rel="prev" title="Day 6: Second Binary Run" href="second_binary.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -160,8 +158,8 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Week 3 (binary):</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Day 6: Second Binary Run</a></li>
-<li class="toctree-l1"><a class="reference internal" href="eCV_MB_default.html">Day 7: Improvements on Evolved CV Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="second_binary.html">Day 6: Second Binary Run</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Day 7: Improvements on Evolved CV Model</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Useful:</span></p>
 <ul class="nav bd-sidenav">
@@ -245,7 +243,7 @@
       
       
       
-      <li><a href="https://github.com/sunnywong314/CASSI2026-Sunny/blob/main/docs/source/second_binary.rst?plain=1" target="_blank"
+      <li><a href="https://github.com/sunnywong314/CASSI2026-Sunny/blob/main/docs/source/eCV_MB_default.rst?plain=1" target="_blank"
    class="btn btn-sm btn-source-file-button dropdown-item"
    title="Show source"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -262,7 +260,7 @@
       
       
       
-      <li><a href="https://github.com/sunnywong314/CASSI2026-Sunny/edit/main/docs/source/second_binary.rst" target="_blank"
+      <li><a href="https://github.com/sunnywong314/CASSI2026-Sunny/edit/main/docs/source/eCV_MB_default.rst" target="_blank"
    class="btn btn-sm btn-source-edit-button dropdown-item"
    title="Suggest edit"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -279,7 +277,7 @@
       
       
       
-      <li><a href="https://github.com/sunnywong314/CASSI2026-Sunny/issues/new?title=Issue%20on%20page%20%2Fsecond_binary.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/sunnywong314/CASSI2026-Sunny/issues/new?title=Issue%20on%20page%20%2FeCV_MB_default.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -309,7 +307,7 @@
       
       
       
-      <li><a href="_sources/second_binary.rst" target="_blank"
+      <li><a href="_sources/eCV_MB_default.rst" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -385,7 +383,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Day 6: Second Binary Run</h1>
+    <h1>Day 7: Improvements on Evolved CV Model</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -395,8 +393,8 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fully-conservative-mass-transfer-with-no-angular-momentum-loss">1. Fully Conservative Mass Transfer with No Angular Momentum Loss</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#on-the-way-to-making-an-evolved-cv">2. On the way to making an evolved CV</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#new-opacities">1. New Opacities</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inlist-changes">2. Inlist Changes</a></li>
 </ul>
             </nav>
         </div>
@@ -408,46 +406,56 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="day-6-second-binary-run">
-<h1>Day 6: Second Binary Run<a class="headerlink" href="#day-6-second-binary-run" title="Link to this heading">#</a></h1>
-<p>Now we will delve further into binary evolution.</p>
-<section id="fully-conservative-mass-transfer-with-no-angular-momentum-loss">
-<h2>1. Fully Conservative Mass Transfer with No Angular Momentum Loss<a class="headerlink" href="#fully-conservative-mass-transfer-with-no-angular-momentum-loss" title="Link to this heading">#</a></h2>
-<p>In this binary run, we will try to learn what happens to the binary orbit
-when there is no mass and angular momentum losses from the binary,
-particularly to the orbital period/ separation.</p>
+  <section id="day-7-improvements-on-evolved-cv-model">
+<h1>Day 7: Improvements on Evolved CV Model<a class="headerlink" href="#day-7-improvements-on-evolved-cv-model" title="Link to this heading">#</a></h1>
+<p>Here we will make a couple of changes to our evolved CV model.</p>
+<section id="new-opacities">
+<h2>1. New Opacities<a class="headerlink" href="#new-opacities" title="Link to this heading">#</a></h2>
+<p>First, the opacities that MESA uses at low temperatures do not extend to the high densities of our helium WD.
+We will implement a new opacity coming from the AESOPUS code. However, the MESA implementation does not allow
+extrapolation of this table beyond its range of validity. We will attempt to do this; while unphysical, it
+allows our model to continue evolving. The AESOPUS table itself extends to much higher densities, so the
+model will rarely run into this problem.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Changing the source code (Click to expand)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
 <div class="admonition-task admonition">
 <p class="admonition-title">Task</p>
-<p>Make a copy of your first binary run. Name it something new.</p>
-<p>Set the following:</p>
-<ul class="simple">
-<li><p>Initial binary parameters: star 1 mass of 1.4 solar masses, star 2 mass of 1.0 solar mass, and orbital period of 1 day.</p></li>
-<li><p>Set <code class="docutils literal notranslate"><span class="pre">do_jdot_*</span> <span class="pre">=</span> <span class="pre">.false.</span></code> , which turns off all the orbital angular momentum loss. The asterisk <code class="docutils literal notranslate"><span class="pre">*</span></code> here means that there are several options you need to use.</p></li>
-<li><p>Set <code class="docutils literal notranslate"><span class="pre">limit_retention_by_mdot_edd</span> <span class="pre">=</span> <span class="pre">.false.</span></code>. By default, this option is on, meaning that star 2 will only accrete up to its Eddington limit, and the rest is lost from the system. Here we want to model fully conservative mass transfer, so we want to turn this off.</p></li>
-</ul>
-<p>Consult <a class="reference external" href="https://docs.mesastar.org/en/26.4.1/reference/binary_controls.html">binary controls</a> if you are stuck.</p>
+<p class="sd-card-text">Download the following file <a class="reference download internal" download="" href="_downloads/e0fef93da77ee58e54a7d86866a5e309/kap_aesopus.f90"><code class="xref download docutils literal notranslate"><span class="pre">kap_aesopus.f90</span></code></a>.</p>
+<p class="sd-card-text">Then, on your terminal, go to :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span><span class="nv">$MESA_DIR</span>/kap
+
+cp<span class="w"> </span>~/Downloads/kap_aesopus.f90<span class="w"> </span>./private/
+</pre></div>
 </div>
-<p>Now you are ready to run. While it is running,</p>
-<div class="admonition-task admonition">
-<p class="admonition-title">Task</p>
-<p>Observe:</p>
-<ul class="simple">
-<li><p>What happens to the orbital period initially?</p></li>
-<li><p>The orbital period eventually reverses trend. At this point, what are the masses of star 1 and star 2?</p></li>
-<li><p>What is the peak mass transfer rate?</p></li>
-<li><p>Kill the run once it reaches model number 500. You can do this manually on the terminal with <code class="docutils literal notranslate"><span class="pre">ctrl+c</span></code>.</p></li>
-</ul>
+<p class="sd-card-text">Here I assume that your <code class="docutils literal notranslate"><span class="pre">kap_aesopus.f90</span></code> file is downloaded to the Downloads directory.
+Modify the path as necessary.</p>
+<p class="sd-card-text">Then,</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./mk
+
+./export
+</pre></div>
 </div>
-<p>Hopefully this gives your more intuition into what happens to the binary orbit
-depending on the mass ratio.</p>
-</section>
-<section id="on-the-way-to-making-an-evolved-cv">
-<h2>2. On the way to making an evolved CV<a class="headerlink" href="#on-the-way-to-making-an-evolved-cv" title="Link to this heading">#</a></h2>
+<p class="sd-card-text">This compiles the new code, and exports the new code to MESA’s libraries. If you did all this
+correctly, you should see
+the terminal message</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>COMPILE_CMD<span class="w"> </span>../private/kap_aesopus.f90
+LIB_TOOL_libkap.a
+</pre></div>
+</div>
+</div>
+<p class="sd-card-text">Because we made a change to MESA’s source code, all our new runs need to be recompiled.
+This will be included in our next step.</p>
+</div>
+</details></section>
+<section id="inlist-changes">
+<h2>2. Inlist Changes<a class="headerlink" href="#inlist-changes" title="Link to this heading">#</a></h2>
 <p>Now we’re ready to make more complicated runs in preparation for
 making an AM CVn binary through the evolved CV channel.</p>
 <div class="admonition-task admonition">
 <p class="admonition-title">Task</p>
-<p>Once again, make a copy of your first binary run. Name it something new.</p>
+<p>Make a copy of your evolved CV run from the end day 6. Name it something new.
+Then recompile the code.</p>
 <p>Change your inlists parameters according to the following.
 You will need to figure out to which inlist each goes.</p>
 </div>
@@ -456,55 +464,44 @@ You will need to figure out to which inlist each goes.</p>
 <span class="sd-summary-text">Binary options (Click to expand)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
 <ul class="simple">
 <li><p class="sd-card-text">Initial binary parameters: star 1 mass of 1.1 solar masses, star 2 mass of 0.75 solar mass, and orbital period of 1.5 days.</p></li>
-<li><p class="sd-card-text">Set <code class="docutils literal notranslate"><span class="pre">limit_retention_by_mdot_edd</span> <span class="pre">=</span> <span class="pre">.false.</span></code>. By default, this option is on, meaning that star 2 will only accrete up to its Eddington limit, and the rest is lost from the system. While we still want to make the mass transfer non-conservative, we’ll deploy another option (keep reading).</p></li>
-<li><p class="sd-card-text">Set <code class="docutils literal notranslate"><span class="pre">mass_transfer_beta</span> <span class="pre">=</span> <span class="pre">1.0d0</span></code>. This means that whatever the donor donates, will be lost from the accretor as a fast wind. The wind mass loss will carry the specific angular momentum of the accretor.</p></li>
+<li><p class="sd-card-text">Set <code class="docutils literal notranslate"><span class="pre">max_tries_to_achieve</span> <span class="pre">=</span> <span class="pre">30</span></code>. At each time step, MESA will iterate to solve for the mass transfer rate up to some number of times. If the mass transfer rate is not determined by then, MESA will retry and take a smaller timestep. We make this number slightly larger to avoid a retry.</p></li>
 </ul>
 <p class="sd-card-text">Consult <a class="reference external" href="https://docs.mesastar.org/en/26.4.1/reference/binary_controls.html">binary controls</a> if you are stuck.</p>
 </div>
 </details><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
 <summary class="sd-summary-title sd-card-header">
-<span class="sd-summary-text">Star options (Click to expand)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
-<p class="sd-card-text">The following inlist options will be in different sections of the inlist.
+<span class="sd-summary-text">Star options part 1 (Click to expand)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">The following inlist options will be in different sections of the inlist.</p>
+<p class="sd-card-text">First, we will have MESA use new opacities for both the low-temperature regime and at higher temperatures.
+Take a quick look at the MESA documenation for <a class="reference external" href="https://docs.mesastar.org/en/26.4.1/reference/kap.html">kap</a> and implement:</p>
+<ul class="simple">
+<li><p class="sd-card-text">Have MESA use AESOPUS for its low-temperature range, and load an AESOPUS file called <code class="docutils literal notranslate"><span class="pre">AESOPUS_eCV.h5</span></code>. Hint: this requires two kap inlist options.</p></li>
+<li><p class="sd-card-text">Have MESA use an opacity file with prefix <code class="docutils literal notranslate"><span class="pre">'oplib_gs98'</span></code>. This makes use of updated and more densely tabulated opacities from the OPLIB collaboration, implemented by Farag et al. 2024.</p></li>
+<li><p class="sd-card-text">Have MESA blend between the higher temperature and lower temperature tables at logT between 4.42 and 4.5.</p></li>
+<li><p class="sd-card-text">Have MESA do a cubic interpolation in X and Z.</p></li>
+<li><p class="sd-card-text">Finally, download this AESOPUS opacity file <a class="reference download internal" download="" href="_downloads/cdc1ef41ddc6d7762dc805cd324c1374/AESOPUS_eCV.h5"><code class="xref download docutils literal notranslate"><span class="pre">AESOPUS_eCV.h5</span></code></a> and put it in your work directory.</p></li>
+</ul>
+<p class="sd-card-text">We will also make some equation of state (EOS) changes.
+Take a quick look at the MESA documenation for <a class="reference external" href="https://docs.mesastar.org/en/26.4.1/reference/eos.html">eos</a> and implement:</p>
+<ul class="simple">
+<li><p class="sd-card-text"><code class="docutils literal notranslate"><span class="pre">use_simple_skye_blends</span> <span class="pre">=</span> <span class="pre">.true.</span></code></p></li>
+<li><p class="sd-card-text"><code class="docutils literal notranslate"><span class="pre">logT_min_for_any_skye</span> <span class="pre">=</span> <span class="pre">7.0d0</span></code></p></li>
+<li><p class="sd-card-text"><code class="docutils literal notranslate"><span class="pre">logT_min_for_all_skye</span> <span class="pre">=</span> <span class="pre">7.2d0</span></code></p></li>
+</ul>
+<p class="sd-card-text">MESA’s EOS is a blend between different tables. The above options change the blending region. Sometimes this is done for
+numerical reasons.</p>
+</div>
+</details><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Star options part 2 (Click to expand)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">The rest will be star_job and controls.
 Consult the MESA documentation for <a class="reference external" href="https://docs.mesastar.org/en/26.4.1/reference/star_job.html">star_job</a> and <a class="reference external" href="https://docs.mesastar.org/en/26.4.1/reference/controls.html">controls</a>.</p>
-<p class="sd-card-text">First,</p>
-<ul class="simple">
-<li><p class="sd-card-text">Have MESA load <code class="docutils literal notranslate"><span class="pre">zams_1.1Msun.mod</span></code> (from <a class="reference internal" href="second_run.html"><span class="doc">Day 4.5: Second MESA run</span></a>). You will need to make sure that MESA has the right path to this model.</p></li>
-<li><p class="sd-card-text">Set the initial model number to 0.</p></li>
-<li><p class="sd-card-text">Set the initial star age to 0.</p></li>
-</ul>
-<p class="sd-card-text">Hint: each of these three above requires two options. Of the two, one requires you setting some flag to true, and the other requires you setting some value.</p>
-<p class="sd-card-text">Then,</p>
-<ul class="simple">
-<li><p class="sd-card-text">Change the base metallicity for the opacity calculations (you did this in <a class="reference internal" href="second_run.html"><span class="doc">Day 4.5: Second MESA run</span></a> too), to <span class="math notranslate nohighlight">\(Z=0.018\)</span>.</p></li>
-</ul>
 <p class="sd-card-text">Finally,</p>
 <ul class="simple">
-<li><p class="sd-card-text">Set the profile output frequency to every 200 models.</p></li>
-<li><p class="sd-card-text">Set the history file output frequency to every 5 models.</p></li>
-<li><p class="sd-card-text">Set <code class="docutils literal notranslate"><span class="pre">energy_eqn_option</span> <span class="pre">=</span> <span class="pre">'eps_grav'</span></code>. By default, this option is <code class="docutils literal notranslate"><span class="pre">'dedt'</span></code>. Both are just different ways of rewriting the energy equation. <code class="docutils literal notranslate"><span class="pre">'dedt'</span></code> is great at numerical energy conservation, but is worse for temperature (technically, entropy) evolution under electron degeneracy. See the MESA VI paper for more discussion.</p></li>
-<li><p class="sd-card-text">Set <code class="docutils literal notranslate"><span class="pre">use_ledoux_criterion</span> <span class="pre">=</span> <span class="pre">.true.</span></code>. When determining whether a region is convective or radiative, the Ledoux criterion considers the stabilizing effect of a chemical gradient, in addition to the temperature gradient.</p></li>
-<li><p class="sd-card-text">Set <code class="docutils literal notranslate"><span class="pre">redo_limit</span></code> to some ridiculously large integer number. This prevents our model from stopping early from having too many redos.</p></li>
-<li><p class="sd-card-text">Set <code class="docutils literal notranslate"><span class="pre">atm_T_tau_opacity</span> <span class="pre">=</span> <span class="pre">'iterated'</span></code>. This changes how the opacity in the atmosphere is calculated.</p></li>
-<li><p class="sd-card-text">Set <code class="docutils literal notranslate"><span class="pre">limit_for_rel_error_in_energy_conservation</span> <span class="pre">=</span> <span class="pre">1d-2</span></code> and <code class="docutils literal notranslate"><span class="pre">hard_limit_for_rel_error_in_energy_conservation</span> <span class="pre">=</span> <span class="pre">1d-1</span></code>. MESA limits its timesteps based on numerical energy conservation. Here we relax the timesteps for convenience.</p></li>
-<li><p class="sd-card-text">Set:</p></li>
+<li><p class="sd-card-text">Set <code class="docutils literal notranslate"><span class="pre">prune_bad_cz_min_Hp_height</span> <span class="pre">=</span> <span class="pre">0.3d0</span></code> and <code class="docutils literal notranslate"><span class="pre">prune_bad_cz_min_log_eps_nuc</span> <span class="pre">=</span> <span class="pre">99d0</span></code>. These remove tiny convection zones that appear due to numerical errors, and avoid further numerical problems due to their appearance.</p></li>
+<li><p class="sd-card-text">Set <code class="docutils literal notranslate"><span class="pre">eps_mdot_leak_frac_factor</span> <span class="pre">=</span> <span class="pre">0d0</span></code>. This is a control that avoids numerical problems when MESA runs into high mass transfer rates and bad thermodynamic quantities from the EOS.</p></li>
 </ul>
-<div class="highlight-Fortran notranslate"><div class="highlight"><pre><span></span><span class="n">overshoot_scheme</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;exponential&#39;</span>
-<span class="n">overshoot_zone_type</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;nonburn&#39;</span>
-<span class="n">overshoot_zone_loc</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;shell&#39;</span>
-<span class="n">overshoot_bdy_loc</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;bottom&#39;</span>
-
-<span class="n">overshoot_f</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.01d0</span>
-<span class="n">overshoot_f0</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.005d0</span>
-</pre></div>
-</div>
-<p class="sd-card-text">Inside the convection zone, fluid elements have some acceleration and rise to the surface
-until they reach the convective boundary, where they have zero acceleration.
-However, this doesn’t mean they have zero velocity. They can still go beyond the convective boundary
-until they reach zero velocity. Convective overshooting considers this mechanical effect in
-mixing chemicals. In our case, this is in part a numerical convenience to mix the core materials
-into the envelope.</p>
-<p class="sd-card-text"><strong>History quantities</strong>: Find the history columns quantity that lets you output the
-surface abundance of all the isotopes present in the model.</p>
+<p class="sd-card-text">Once you are done, you might want to rearrange your the <cite>controls</cite> options into different groups for better book-keeping.</p>
 </div>
 </details><div class="admonition-task admonition">
 <p class="admonition-title">Task</p>
@@ -528,20 +525,20 @@ Do not change it by more than 1 day. And do not overwrite your binary run.</p>
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="first_binary.html"
+       href="second_binary.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Day 5: First Binary Run</p>
+        <p class="prev-next-title">Day 6: Second Binary Run</p>
       </div>
     </a>
     <a class="right-next"
-       href="eCV_MB_default.html"
+       href="commands.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Day 7: Improvements on Evolved CV Model</p>
+        <p class="prev-next-title">Useful Commands</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -563,8 +560,8 @@ Do not change it by more than 1 day. And do not overwrite your binary run.</p>
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fully-conservative-mass-transfer-with-no-angular-momentum-loss">1. Fully Conservative Mass Transfer with No Angular Momentum Loss</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#on-the-way-to-making-an-evolved-cv">2. On the way to making an evolved CV</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#new-opacities">1. New Opacities</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inlist-changes">2. Inlist Changes</a></li>
 </ul>
   </nav></div>
 
