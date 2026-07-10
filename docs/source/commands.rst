@@ -55,8 +55,12 @@ Text Editors
 
    * - Editors
      - Notes
-   * - ``emacs`` (may require installation)
-     - ``ctrl+x ctrl+s`` for saving, ``ctrl+x ctrl+c`` for quitting
+   * - ``emacs``
+     - ``ctrl+x ctrl+s`` for saving, ``ctrl+x ctrl+c`` for quitting. May require installation. 
+   * - ``gedit``
+     - Usually comes with Ubuntu. 
+   * - ``open``
+     - Useful for Macs. Add ``-e`` to force text editor. 
 
 
 **************************************
