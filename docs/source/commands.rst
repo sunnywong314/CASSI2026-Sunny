@@ -37,5 +37,28 @@ Occasionally Useful Commands
      - Explanation
    * - ``pwd``
      - Tells you your current path
-   * - ``blah``
-     - 
+   * - ``grep -rin`` <item> <destination>
+     - Searches for <item> in <destination>, recursively (``-r``), in a case insensitive manner (``-i``), and returns line number (``-n``). 
+   * - ``scp -r`` <item> <destination>
+     - Uploading <item> to <destination>. ``-r`` for directories. 
+   * - ``rsync -avz`` <optional> <item> <destination>
+     - Uploading <item> to <destination>, but faster than ``scp``. In <optional>, you can add ``--exclude={"LOGS*",'png','photos'}`` to exlucde things like LOGS folder, png folder, and photos folder, for example. The asterisk ``*`` is a wildcard character. 
+
+
+****************************
+Text Editors
+****************************
+
+.. list-table:: 
+   :widths: 20 50
+   :header-rows: 1
+
+   * - Editors
+     - Notes
+   * - ``emacs`` (may require installation)
+     - ``ctrl+x ctrl+s`` for saving, ``ctrl+x ctrl+c`` for quitting
+
+
+**************************************
+Useful Commands that need installation
+**************************************
