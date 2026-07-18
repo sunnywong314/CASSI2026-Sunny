@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Useful Commands &#8212; CASSI-2026  documentation</title>
+    <title>Day 8 : For accretor &#8212; CASSI-2026  documentation</title>
   
   
   
@@ -50,11 +50,11 @@
     <script src="_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
     <script src="_static/design-tabs.js?v=f930bc37"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'commands';</script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'for_accretor';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Fortran Basics" href="fortran_basics.html" />
-    <link rel="prev" title="Day 7: Improvements on Evolved CV Model" href="eCV_MB_default.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -105,6 +105,8 @@
     <div class="bd-container__inner bd-page-width">
       
       
+      
+        
       
       <dialog id="pst-primary-sidebar-modal"></dialog>
       <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
@@ -162,8 +164,8 @@
 <li class="toctree-l1"><a class="reference internal" href="eCV_MB_default.html">Day 7: Improvements on Evolved CV Model</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Useful:</span></p>
-<ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Useful Commands</a></li>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="commands.html">Useful Commands</a></li>
 
 
 
@@ -245,7 +247,7 @@
       
       
       
-      <li><a href="https://github.com/sunnywong314/CASSI2026-Sunny/blob/main/docs/source/commands.rst?plain=1" target="_blank"
+      <li><a href="https://github.com/sunnywong314/CASSI2026-Sunny/blob/main/docs/source/for_accretor.rst?plain=1" target="_blank"
    class="btn btn-sm btn-source-file-button dropdown-item"
    title="Show source"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -262,7 +264,7 @@
       
       
       
-      <li><a href="https://github.com/sunnywong314/CASSI2026-Sunny/edit/main/docs/source/commands.rst" target="_blank"
+      <li><a href="https://github.com/sunnywong314/CASSI2026-Sunny/edit/main/docs/source/for_accretor.rst" target="_blank"
    class="btn btn-sm btn-source-edit-button dropdown-item"
    title="Suggest edit"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -279,7 +281,7 @@
       
       
       
-      <li><a href="https://github.com/sunnywong314/CASSI2026-Sunny/issues/new?title=Issue%20on%20page%20%2Fcommands.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/sunnywong314/CASSI2026-Sunny/issues/new?title=Issue%20on%20page%20%2Ffor_accretor.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -309,7 +311,7 @@
       
       
       
-      <li><a href="_sources/commands.rst" target="_blank"
+      <li><a href="_sources/for_accretor.rst" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -385,7 +387,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Useful Commands</h1>
+    <h1>Day 8 : For accretor</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -395,12 +397,8 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Useful Commands</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#occasionally-useful-commands">Occasionally Useful Commands</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#text-editors">Text Editors</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#useful-commands-that-need-installation">Useful Commands that need installation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-data-file">Create data file</a></li>
 </ul>
-
             </nav>
         </div>
     </div>
@@ -411,99 +409,94 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="useful-commands">
-<h1>Useful Commands<a class="headerlink" href="#useful-commands" title="Link to this heading">#</a></h1>
-<p>Here is a list of useful commands that you may run into over and over.</p>
-<div class="pst-scrollable-table-container"><table class="table">
-<colgroup>
-<col style="width: 28.6%" />
-<col style="width: 71.4%" />
-</colgroup>
-<thead>
-<tr class="row-odd"><th class="head"><p>Commands</p></th>
-<th class="head"><p>Explanation</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">rm</span></code> &lt;item&gt;</p></td>
-<td><p>Remove &lt;item&gt; (add <code class="docutils literal notranslate"><span class="pre">-r</span></code> for directories)</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">cp</span></code> &lt;item&gt; &lt;destination&gt;</p></td>
-<td><p>Copy item from &lt;path&gt; to &lt;destination&gt; (add <code class="docutils literal notranslate"><span class="pre">-r</span></code> for directories)</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">mv</span></code> &lt;item&gt; &lt;destination&gt;</p></td>
-<td><p>Move item to &lt;destination&gt;</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ls</span></code> &lt;path&gt;</p></td>
-<td><p>List items in the directory at &lt;path&gt;. If you don’t specify &lt;path&gt;, the directory is taken to be the current one (add -ltr for list all files in reverse time order)</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">cd</span></code> &lt;path&gt;</p></td>
-<td><p>Change directory to the given &lt;path&gt; (<code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">..</span></code> to go up one level)</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">mkdir</span></code> &lt;name&gt;</p></td>
-<td><p>Creates a new directory called &lt;name&gt;</p></td>
-</tr>
-</tbody>
-</table>
+  <section id="day-8-for-accretor">
+<h1>Day 8 : For accretor<a class="headerlink" href="#day-8-for-accretor" title="Link to this heading">#</a></h1>
+<p>Now we will make our first attempt at evolving the accretor!</p>
+<p>Usually we would set <code class="docutils literal notranslate"><span class="pre">evolve_both_stars</span> <span class="pre">=</span> <span class="pre">.true.</span></code> in MESA binary.
+But we will actually do this in MESA single star. The idea is that we would read in the
+mass accretion rate from the history file from the binary run, then we would create a text file.
+When we run the accretor in single star, we would ask MESA to read in this text file, and change
+the accretion rate accordingly.</p>
+<p>The reason why we do this separation is to avoid having to grapple with MESA runtime troubles
+for <cite>both</cite> stars at the same time. That is, we deal with them separately, which makes things easier.
+Moreover, what happens to the accretor doesn’t affect the donor itself, nor the mass transfer rate,
+except for the fact that its mass is increasing (which MESA binary does anyways). In other words,
+we don’t need to know the detailed structure of the accretor to know what’s gonna happen to the binary.
+This is the key for why we can do this separation.</p>
+<section id="create-data-file">
+<h2>Create data file<a class="headerlink" href="#create-data-file" title="Link to this heading">#</a></h2>
+<p>First we will create a data file that takes the donor history file and writes out the mass accretion history for the accretor.
+This will be done in python.</p>
+<div class="admonition-task admonition">
+<p class="admonition-title">Task</p>
+<p>First read in the history file with MESA reader.</p>
+<p>We will then create a boolean array for the donor surface h1 <span class="math notranslate nohighlight">\(X &lt;= 0.1\)</span>.</p>
+<p>Then using this boolean array, we will create the following arrays that satisfy <span class="math notranslate nohighlight">\(X &lt;= 0.1\)</span>. Most of these quantities will have the same units as the history file, but a few may require a little bit of conversion.</p>
+<ul class="simple">
+<li><p>star age in yrs. Then subtract the entire star age array by its first element. Your new star age array should have 0 as its first element.</p></li>
+<li><p>orbital period in minutes (Note: you will need a unit conversion from days to minutes)</p></li>
+<li><p>binary separation in Rsun</p></li>
+<li><p>donor mass in Msun</p></li>
+<li><p>donor radius in Rsun</p></li>
+<li><p>log10 of donor mass loss rate in Msun/yr (Note: we want the log10)</p></li>
+<li><p>log10 of donor surface H1 (Note: we want the log10)</p></li>
+</ul>
 </div>
-</section>
-<section id="occasionally-useful-commands">
-<h1>Occasionally Useful Commands<a class="headerlink" href="#occasionally-useful-commands" title="Link to this heading">#</a></h1>
-<div class="pst-scrollable-table-container"><table class="table">
-<colgroup>
-<col style="width: 28.6%" />
-<col style="width: 71.4%" />
-</colgroup>
-<thead>
-<tr class="row-odd"><th class="head"><p>Commands</p></th>
-<th class="head"><p>Explanation</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">pwd</span></code></p></td>
-<td><p>Tells you your current path</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">grep</span> <span class="pre">-rin</span></code> &lt;item&gt; &lt;destination&gt;</p></td>
-<td><p>Searches for &lt;item&gt; in &lt;destination&gt;, recursively (<code class="docutils literal notranslate"><span class="pre">-r</span></code>), in a case insensitive manner (<code class="docutils literal notranslate"><span class="pre">-i</span></code>), and returns line number (<code class="docutils literal notranslate"><span class="pre">-n</span></code>).</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">scp</span> <span class="pre">-r</span></code> &lt;item&gt; &lt;destination&gt;</p></td>
-<td><p>Uploading &lt;item&gt; to &lt;destination&gt;. <code class="docutils literal notranslate"><span class="pre">-r</span></code> for directories.</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">rsync</span> <span class="pre">-avz</span></code> &lt;optional&gt; &lt;item&gt; &lt;destination&gt;</p></td>
-<td><p>Uploading &lt;item&gt; to &lt;destination&gt;, but faster than <code class="docutils literal notranslate"><span class="pre">scp</span></code>. In &lt;optional&gt;, you can add <code class="docutils literal notranslate"><span class="pre">--exclude={&quot;LOGS*&quot;,'png','photos'}</span></code> to exclude things like LOGS folder, png folder, and photos folder, for example. The asterisk <code class="docutils literal notranslate"><span class="pre">*</span></code> is a wildcard character.</p></td>
-</tr>
-</tbody>
-</table>
+<p>We will then try to write our data to a text file.</p>
+<div class="admonition-task admonition">
+<p class="admonition-title">Task</p>
+<p>Write out the above data to a text file called <code class="docutils literal notranslate"><span class="pre">for_accretor.data</span></code>.</p>
+<p>The rows should be in the format:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">length</span> <span class="n">of</span> <span class="n">column</span><span class="o">&gt;</span>
+
+<span class="n">age</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="n">period</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="n">separation</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="n">mass</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="n">radius</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="n">logMdot</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="n">logH1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="n">age</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">period</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">separation</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">mass</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">radius</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">logMdot</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">logH1</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="o">...</span>
+</pre></div>
 </div>
-</section>
-<section id="text-editors">
-<h1>Text Editors<a class="headerlink" href="#text-editors" title="Link to this heading">#</a></h1>
-<div class="pst-scrollable-table-container"><table class="table">
-<colgroup>
-<col style="width: 28.6%" />
-<col style="width: 71.4%" />
-</colgroup>
-<thead>
-<tr class="row-odd"><th class="head"><p>Editors</p></th>
-<th class="head"><p>Notes</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">emacs</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">ctrl+x</span> <span class="pre">ctrl+s</span></code> for saving, <code class="docutils literal notranslate"><span class="pre">ctrl+x</span> <span class="pre">ctrl+c</span></code> for quitting. May require installation.</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">gedit</span></code></p></td>
-<td><p>Usually comes with Ubuntu.</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">open</span></code></p></td>
-<td><p>Useful for Macs. Add <code class="docutils literal notranslate"><span class="pre">-e</span></code> to force text editor.</p></td>
-</tr>
-</tbody>
-</table>
+<p>The first row should be the length of the array. And each column should be separated by white space.</p>
 </div>
-</section>
-<section id="useful-commands-that-need-installation">
-<h1>Useful Commands that need installation<a class="headerlink" href="#useful-commands-that-need-installation" title="Link to this heading">#</a></h1>
+<p>Below is a hint for how you can write things out into a text file in python:</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Hint: how to write things out to a file in python? (Click to expand)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;myfile.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="c1"># &#39;w&#39; for write</span>
+
+<span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;blah </span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span> <span class="c1"># \n for new line</span>
+
+<span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span> <span class="c1"># always remember to close it</span>
+</pre></div>
+</div>
+<p class="sd-card-text">To get the numbers printed out in a nice format, try <code class="docutils literal notranslate"><span class="pre">'%15.8g'%(number)</span></code>.
+The 15 means we want to give it 15 character slots, and <code class="docutils literal notranslate"><span class="pre">.8g</span></code> means you let
+python choose the cleanest way to express the number with 8 significant numbers.</p>
+</div>
+</details><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Hint: for loops (Click to expand)</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Let’s say we have two arrays:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">=</span><span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">]</span>
+<span class="n">b</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">]</span>
+</pre></div>
+</div>
+<p class="sd-card-text">If we want to print out the elements of <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code> together, we do:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)):</span>
+
+    <span class="nb">print</span><span class="p">(</span> <span class="n">i</span><span class="p">,</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="p">)</span>
+</pre></div>
+</div>
+<p class="sd-card-text">which should give you</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="mi">0</span> <span class="mf">0.1</span> <span class="mi">0</span>
+<span class="mi">1</span> <span class="mf">0.2</span> <span class="mi">5</span>
+<span class="mi">2</span> <span class="mf">0.3</span> <span class="mi">8</span>
+</pre></div>
+</div>
+<p class="sd-card-text">We do this to get the indices of all the <code class="docutils literal notranslate"><span class="pre">a</span></code> or <code class="docutils literal notranslate"><span class="pre">b</span></code> lists, and then
+use the index to access the element of the list.</p>
+</div>
+</details></section>
 </section>
 
 
@@ -517,24 +510,6 @@
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="eCV_MB_default.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Day 7: Improvements on Evolved CV Model</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="fortran_basics.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Fortran Basics</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
 </div>
                 </footer>
               
@@ -553,12 +528,8 @@
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Useful Commands</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#occasionally-useful-commands">Occasionally Useful Commands</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#text-editors">Text Editors</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#useful-commands-that-need-installation">Useful Commands that need installation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-data-file">Create data file</a></li>
 </ul>
-
   </nav></div>
 
 </div></div>
