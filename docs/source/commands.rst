@@ -42,7 +42,7 @@ Occasionally Useful Commands
    * - ``scp -r`` <item> <destination>
      - Uploading <item> to <destination>. ``-r`` for directories. 
    * - ``rsync -avz`` <optional> <item> <destination>
-     - Uploading <item> to <destination>, but faster than ``scp``. In <optional>, you can add ``--exclude={"LOGS*",'png','photos'}`` to exlucde things like LOGS folder, png folder, and photos folder, for example. The asterisk ``*`` is a wildcard character. 
+     - Uploading <item> to <destination>, but faster than ``scp``. In <optional>, you can add ``--exclude={"LOGS*",'png','photos'}`` to exclude things like LOGS folder, png folder, and photos folder, for example. The asterisk ``*`` is a wildcard character. 
 
 
 ****************************
