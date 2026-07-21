@@ -73,6 +73,12 @@ Some of the notebooks need data files.  These can be uploaded by selecting the
 
 .. toctree::
    :maxdepth: 3
+   :caption: Week 5:
+
+   for_accretor
+
+.. toctree::
+   :maxdepth: 3
    :caption: Useful:
 
    commands
